@@ -110,7 +110,7 @@
 
 | <a href=https://github.com/minhoshin11><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@minhoshin11</b></sub></a><br/> | <a href=https://github.com/choitoady><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@choitoady</b></sub></a><br/> | <a href=https://github.com/chaayee0123><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@chaayee0123</b></sub></a><br/> |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|                                                                               김00                                                                               |                                                                             강00                                                                             |                                                                               송00                                                                               |
+|                                                                              신민호                                                                              |                                                                            최오늘                                                                            |                                                                              한채원                                                                              |
 
 ### BE
 
@@ -176,8 +176,9 @@
 
 ### Code Convention
 
-<!--
 > BE
+
+<!--
 >
 > - 패키지명 전체 소문자
 > - 클래스명, 인터페이스명 CamelCase
@@ -186,8 +187,11 @@
 > - Controller, Service, Dto, Repository, mapper 앞에 접미사로 통일(ex. MemberController)
 > - service 계층 메서드명 create, update, find, delete로 CRUD 통일(ex. createMember)
 > - Test 클래스는 접미사로 Test 사용(ex. memberFindTest)
+-->
 
 > FE
+
+<!--
 >
 > - styled-Component 변수명 S + 변수명 (ex. Swrap)
 > - styled-Component는 return문 위에 작성
@@ -217,5 +221,3 @@
 ### Interactive API Documentation
 
 ### ERD
-
-
