@@ -1,3 +1,26 @@
 
 ### Frontend ###
 
+# IDE/에디터 설정 파일
+.vscode/
+.idea/
+
+# 의존성 관리 도구에서 생성되는 디렉토리
+node_modules/
+yarn.lock
+package-lock.json
+
+# 빌드/컴파일된 파일
+/build/
+/dist/
+/out/
+
+# Next.js에서 생성되는 .next 디렉토리
+.next/
+
+# React에서 생성되는 .cache 및 build 디렉토리
+.cache/
+build/
+
+# Zustand에서 생성되는 .store 디렉토리
+.store/
