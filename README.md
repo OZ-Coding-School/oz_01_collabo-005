@@ -52,7 +52,7 @@
 
 ### :wrench: System Architecture
 
-<img src="https://user-images.githubusercontent.com/90237119/215304129-d8006105-cf1c-49c7-a819-4f819dfac523.png"/>
+<!-- <img src="https://user-images.githubusercontent.com/90237119/215304129-d8006105-cf1c-49c7-a819-4f819dfac523.png"/> -->
 
 ### FE
 
@@ -102,9 +102,9 @@
 
 ### BD
 
-| <a href=""><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b></b></sub></a><br/> |
-| :----------------------------------------------------------------------------------------------------------------------: |
-|                                                          이상훈                                                          |
+| <a href="https://github.com/Lemaduho"><img src="https://avatars.githubusercontent.com/u/93540726?v=4" width=100px/><br/><sub><b>@Lemaduho</b></sub></a><br/> |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                                                            이상훈                                                                            |
 
 ### FE
 
