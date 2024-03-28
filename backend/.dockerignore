@@ -1,0 +1,22 @@
+# Python
+__pycache__
+*.pyc
+.mypy_cache
+.coverage
+.venv
+.python-version
+test.sh
+
+# Git
+.gitignore
+.git/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+
+# DB
+db.sqlite3
+
