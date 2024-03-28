@@ -49,6 +49,7 @@ CUSTOM_USER_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_extensions",
+    "drf_spectacular",
     "users.apps.UsersConfig",
 
 ]
@@ -145,6 +146,16 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Landing",
+    "DESCRIPTION": "Project Description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 LOGGING = {
     "version": 1,
