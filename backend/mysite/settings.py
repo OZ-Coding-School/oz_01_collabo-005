@@ -36,18 +36,24 @@ ALLOWED_HOSTS: List[str] = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_SYSTEM_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+CUSTOM_USER_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_extensions",
+    "users.apps.UsersConfig",
+
 ]
 
+INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
