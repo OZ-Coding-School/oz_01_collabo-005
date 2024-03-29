@@ -50,7 +50,7 @@ CUSTOM_USER_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
-    "users.apps.UsersConfig",
+    "app.users.apps.UsersConfig",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
