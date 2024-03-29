@@ -14,8 +14,11 @@ COPY pyproject.toml poetry.lock* ./
 RUN poetry config virtualenvs.create false \
   && poetry install --no-dev --no-interaction --no-ansi
 
-COPY ./ ./
-COPY .env ./
+COPY ./manage.py ./manage.py
+COPY ./mysite ./mysite
+COPY ./app ./app
+COPY ./.env ./.env
+
 RUN export $(cat .env | xargs)
 
 COPY ./entrypoint.sh ./entrypoint.sh

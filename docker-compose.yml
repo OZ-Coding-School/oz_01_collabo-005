@@ -6,9 +6,13 @@ services:
     container_name: mysql830
     ports:
       - "33306:3306"
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
     volumes:
-      - ./mysql/conf.d:/etc/mysql/conf.d
-      - ./mysql/data:/var/lib/mysql
+      - ./db/mysql/conf.d:/etc/mysql/conf.d
+      - ./db/mysql/data:/var/lib/mysql
+      - ./db/mysql/init:/docker-entrypoint-initdb.d
+    env_file:
+      - ./backend/.env
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
@@ -17,17 +21,19 @@ services:
 
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: backend
     env_file:
-      - .env
+      - ./backend/.env
     environment:
       - DB_HOST=${MYSQL_HOST}
     volumes:
-      - ./:/app
+      - ./backend:/backend
     expose:
       - "8000"
+    depends_on:
+      - db
 
 
   nginx:
@@ -36,6 +42,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./backend/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - backend
+
