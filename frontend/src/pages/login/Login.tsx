@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function login() {
   return (
@@ -6,4 +6,4 @@ function login() {
   )
 }
 
-export default login
+export default login;
