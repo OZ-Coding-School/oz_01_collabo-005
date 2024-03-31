@@ -52,6 +52,9 @@ CUSTOM_USER_APPS = [
     "drf_spectacular",
     "app.users.apps.UsersConfig",
     "rest_framework_simplejwt",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
@@ -85,6 +88,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_METHODS = [
+    "allauth.account.auth_backends.AuthenticationBackend"
 ]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
