@@ -51,6 +51,7 @@ CUSTOM_USER_APPS = [
     "django_extensions",
     "drf_spectacular",
     "app.users.apps.UsersConfig",
+    "rest_framework_simplejwt",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
@@ -147,7 +148,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"}
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": (
+        "drf_spectacular.openapi.AutoSchema",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Landing",
