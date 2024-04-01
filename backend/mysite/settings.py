@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 from typing import List
 
@@ -171,16 +172,22 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated"
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
     )
 }
 
-SPECTACULAR_SETTINGS = {
-    "TITLE": "Landing",
-    "DESCRIPTION": "Project Description",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,  # True - 새로운 리프레시 토큰이 발급될 때마다 이전의 리프레시 토큰이 만료됨
+    "BLACKLIST_AFTER_ROTATION": True,  # 리프레시 토큰이 새로 발급되면 이전의 리프레시 토큰을 블랙리스트에 추가하는 옵션
+    "UPDATE_LAST_LOGIN": True,  # True - 마지막 로그인 시간을 업데이트
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
+    "USER_ID_FIELD": "username",  # user 모델에서 사용자 식별하는 필드
+    "USER_ID_CLAIM": "username",
+    "TOKEN_USER_CLASS": "users.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -203,16 +210,24 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SITE_ID = 1
 
-SOCIALACCOUNT_LOGIN_ON_GET = True
+# SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
 # ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_ON_GET = True
+LOGOUT_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_ON_GET = True
 
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Landing",
+    "DESCRIPTION": "Project Description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 LOGGING = {
     "version": 1,
