@@ -178,7 +178,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,  # True - 새로운 리프레시 토큰이 발급될 때마다 이전의 리프레시 토큰이 만료됨
     "BLACKLIST_AFTER_ROTATION": True,  # 리프레시 토큰이 새로 발급되면 이전의 리프레시 토큰을 블랙리스트에 추가하는 옵션
@@ -186,8 +186,12 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
     "USER_ID_FIELD": "username",  # user 모델에서 사용자 식별하는 필드
-    "USER_ID_CLAIM": "nickname",
-    "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정
+    "USER_ID_CLAIM": "id",
+    # "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정  # debug
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",  # debug
+    # "SLIDING_TOKEN_REFRESH_EXP_CLAIN": "refresh_exp",
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1)
 }
 
 AUTHENTICATION_BACKENDS = [
