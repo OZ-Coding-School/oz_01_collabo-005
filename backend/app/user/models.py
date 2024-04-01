@@ -1,6 +1,6 @@
 from __future__ import annotations, unicode_literals
 
-from typing import Any, TypeVar
+from typing import Any
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -50,7 +50,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email_address"), max_length=255, unique=True)
-    nickname = models.CharField(_("nickname"), max_length=10, unique=True)
+    # nickname = models.CharField(_("nickname"), max_length=10, unique=True)
+    nickname = models.CharField(_("nickname"), max_length=10)
     # password = models.CharField(_("password"), max_length=50)
     nationality = models.CharField(_("nationality"), max_length=50)
     first_name = models.CharField(_("first name"), max_length=10)
@@ -67,6 +68,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     objects = UserManager()
+
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(
+    #             fields=["email", "nickname"],
+    #             name="unique user"
+    #         )
+    #     ]
 
     def __str__(self):
         return self.email
