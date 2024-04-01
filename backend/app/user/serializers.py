@@ -1,6 +1,10 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from app.user.models import User
+# from app.user.models import User
+
+
+User = get_user_model()
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -17,3 +21,10 @@ class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
+
+
+# class UserSerializer(serializers.ModelSerializer):
+#     # users = serializers.SerializerMethodField()
+#     class Meta:
+#         model = User
+#         fields = "__all__"

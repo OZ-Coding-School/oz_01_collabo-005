@@ -8,7 +8,11 @@ from app.user.models import User
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ("email", "nickname", "is_staff", "is_active")
+    list_display = ("email", "nickname", "is_staff", "is_active", "is_superuser")
+    list_filter = ("is_staff", "is_active", "is_superuser", "nationality")
+    search_fields = ("email", "nickname")
+    ordering = ("email", "nickname", "is_staff", "is_active")
+    readonly_fields = ("date_joined",)
     fieldsets = (
         (None, {"fields": ("email", "nickname", "is_staff", "is_active", "date_joined")}),
         ("Personal Info", {"fields": ("first_name", "last_name", "phone", "nationality", "date_of_birth", "profession")})
@@ -19,4 +23,3 @@ class CustomUserAdmin(UserAdmin):
             "fields": ("email", "nickname", "first_name", "last_name", "phone", "nationality", "date_of_birth", "profession"),
         }),
     )
-    ordering = ("email", "nickname", "is_staff", "is_active")
