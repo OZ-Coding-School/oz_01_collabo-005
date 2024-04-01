@@ -5,6 +5,7 @@ import "./Nav.css";
 
 function Nav() {
   return (
+
     <div className="Nav-container">
       <div className="header-box">
         <div className="Logo">LOGO</div>
