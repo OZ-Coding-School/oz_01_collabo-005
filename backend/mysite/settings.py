@@ -53,7 +53,7 @@ CUSTOM_USER_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
-    "app.users.apps.UsersConfig",
+    "app.user.apps.UsersConfig",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",  # debug
     "allauth",
@@ -162,7 +162,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "user.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": (
@@ -186,8 +186,8 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
     "USER_ID_FIELD": "username",  # user 모델에서 사용자 식별하는 필드
-    "USER_ID_CLAIM": "username",
-    "TOKEN_USER_CLASS": "users.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정
+    "USER_ID_CLAIM": "nickname",
+    "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -212,7 +212,7 @@ SITE_ID = 1
 
 # SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
-# ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
+# ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("user:login")
 LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_LOGOUT_ON_GET = True
