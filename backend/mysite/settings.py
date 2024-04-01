@@ -59,14 +59,12 @@ CUSTOM_USER_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-    "allauth.socialaccount.providers.kakao",
-    "allauth.socialaccount.providers.naver",
+    # "allauth.socialaccount.providers.kakao",
+    # "allauth.socialaccount.providers.naver",
     # "allauth.socialaccount.providers.github",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -196,17 +194,25 @@ AUTHENTICATION_BACKENDS = [
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "",
-            "secret": "",
+            "client_id": env("SOCIAL_AUTH_GOOGLE_CLIENT_ID"),
+            "secret": env("SOCIAL_AUTH_GOOGLE_SECRET"),
             "key": ""
         }
     }
 }
 
+SITE_ID = 1
+
 SOCIALACCOUNT_LOGIN_ON_GET = True
 LOGIN_REDIRECT_URL = "/"
-ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
+# ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = True
+
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = "email"
 
 LOGGING = {
     "version": 1,
