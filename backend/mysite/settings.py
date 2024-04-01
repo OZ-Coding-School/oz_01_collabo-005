@@ -238,7 +238,10 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 REST_AUTH = {
     "USE_JWT": True,
-    "JWT_AUTH_HTTPONLY": False,
+    "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
+    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
+    "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
+    "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
 }
 
 SPECTACULAR_SETTINGS = {
