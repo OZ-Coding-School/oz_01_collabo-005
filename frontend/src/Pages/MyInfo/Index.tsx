@@ -2,7 +2,9 @@ import React from 'react'
 
 function MyInfo() {
   return (
-    <div>MyInfo</div>
+    <div>
+      마이인포
+    </div>
   )
 }
 
