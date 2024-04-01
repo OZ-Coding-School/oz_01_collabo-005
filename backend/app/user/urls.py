@@ -13,7 +13,8 @@ router = DefaultRouter()
 router.register(r"", UserViewSet, basename='user')
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("google", views.GoogleLogin.as_view(), name="google-login")
     # path("sign-up/", UserRegisterAPIView.as_view(), name="sign-up"),
     # path("sign-in/", UserLoginAPIView.as_view(), name="sign-in"),
     # path("refresh/", TokenRefreshView.as_view(), name="refresh"),

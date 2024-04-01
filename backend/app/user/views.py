@@ -1,3 +1,7 @@
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.serializers import SocialLoginSerializer
+from dj_rest_auth.registration.views import SocialLoginView
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -11,10 +15,20 @@ from app.user.models import User
 from app.user.serializers import UserSerializer
 # from app.user.serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
 
+BASE_URL = "http://localhost:8000/accout/rest-auth/"
+GOOGLE_CALLBACK_URI = BASE_URL + "google/callback/"
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = GOOGLE_CALLBACK_URI
+    client_class = OAuth2Client
+    serializer_class = SocialLoginSerializer
 
 
 # class UserRegisterAPIView(APIView):
