@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 from typing import List
 
 import environ
+from rest_framework.reverse import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ DJANGO_SYSTEM_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites"
 ]
 
 CUSTOM_USER_APPS = [
@@ -50,7 +53,20 @@ CUSTOM_USER_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
-    "app.users.apps.UsersConfig",
+    # "app.user.apps.UsersConfig",
+    "app.user",
+    "rest_framework.authtoken",
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # "allauth.socialaccount.providers.google",
+    # "allauth.socialaccount.providers.kakao",
+    # "allauth.socialaccount.providers.naver",
+    # "allauth.socialaccount.providers.github",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
@@ -64,6 +80,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 INTERNAL_IPS = ["127.0.0.1"]
@@ -84,6 +101,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_METHODS = [
+    "allauth.account.auth_backends.AuthenticationBackend"
 ]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
@@ -145,9 +166,83 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "user.User"
 
-REST_FRAMEWORK = {"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"}
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+        # "rest_framework.permissions.IsAdminUser"
+    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,  # True - 새로운 리프레시 토큰이 발급될 때마다 이전의 리프레시 토큰이 만료됨
+    "BLACKLIST_AFTER_ROTATION": True,  # 리프레시 토큰이 새로 발급되면 이전의 리프레시 토큰을 블랙리스트에 추가하는 옵션
+    "UPDATE_LAST_LOGIN": True,  # True - 마지막 로그인 시간을 업데이트
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
+    "USER_ID_FIELD": "email",  # user 모델에서 사용자 식별하는 필드
+    # "USER_ID_CLAIM": "email",
+    # "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정  # debug
+    # "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",  # debug
+    # "SLIDING_TOKEN_REFRESH_EXP_CLAIN": "refresh_exp",
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1)
+}
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     "google": {
+#         "APP": {
+#             "client_id": env("SOCIAL_AUTH_GOOGLE_CLIENT_ID"),
+#             "secret": env("SOCIAL_AUTH_GOOGLE_SECRET"),
+#             "key": ""
+#         }
+#     }
+# }
+
+SITE_ID = 1
+
+# SOCIALACCOUNT_LOGIN_ON_GET = True
+# LOGIN_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("user:login")
+# LOGOUT_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+# ACCOUNT_LOGOUT_ON_GET = True
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # username 필드 사용 x
+ACCOUNT_EMAIL_REQUIRED = True  # email 필드 사용 o
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# REST_USE_JWT = True  # debug
+
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
+    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
+    "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
+    "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
+}
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Landing",
