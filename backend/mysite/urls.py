@@ -36,8 +36,8 @@ urlpatterns = [
     path("api/schema/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     # path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     # path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("api/account1/", include("dj_rest_auth.urls")),
-    path("api/account2/", include("dj_rest_auth.registration.urls")),
-    path("api/account3/", include("allauth.urls")),  # debug 왜 필요한지 잘 모르겠음
+    path("api/account/", include("dj_rest_auth.urls")),
+    path("api/account/", include("dj_rest_auth.registration.urls")),
+    path("api/account/", include("allauth.urls")),  # debug 왜 필요한지 잘 모르겠음
     path("api/account/", include("app.user.urls"))
 ]

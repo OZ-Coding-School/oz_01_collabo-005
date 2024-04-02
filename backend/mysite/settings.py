@@ -63,7 +63,7 @@ CUSTOM_USER_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
+    # "allauth.socialaccount.providers.google",
     # "allauth.socialaccount.providers.kakao",
     # "allauth.socialaccount.providers.naver",
     # "allauth.socialaccount.providers.github",
@@ -189,7 +189,7 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,  # True - 마지막 로그인 시간을 업데이트
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
-    # "USER_ID_FIELD": "email",  # user 모델에서 사용자 식별하는 필드
+    "USER_ID_FIELD": "email",  # user 모델에서 사용자 식별하는 필드
     # "USER_ID_CLAIM": "email",
     # "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정  # debug
     # "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",  # debug
@@ -206,15 +206,15 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "APP": {
-            "client_id": env("SOCIAL_AUTH_GOOGLE_CLIENT_ID"),
-            "secret": env("SOCIAL_AUTH_GOOGLE_SECRET"),
-            "key": ""
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     "google": {
+#         "APP": {
+#             "client_id": env("SOCIAL_AUTH_GOOGLE_CLIENT_ID"),
+#             "secret": env("SOCIAL_AUTH_GOOGLE_SECRET"),
+#             "key": ""
+#         }
+#     }
+# }
 
 SITE_ID = 1
 
