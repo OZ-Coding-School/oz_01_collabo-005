@@ -9,10 +9,10 @@ RUN pip install --upgrade pip \
 
 WORKDIR /backend
 
-COPY pyproject.toml poetry.lock* ./
+COPY ./pyproject.toml ./poetry.lock* ./
 
 RUN poetry config virtualenvs.create false \
-  && poetry install --no-dev --no-interaction --no-ansi
+  && poetry install --without dev --no-interaction --no-ansi
 
 COPY ./manage.py ./manage.py
 COPY ./mysite ./mysite

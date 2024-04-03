@@ -13,8 +13,7 @@ djangorestframework = ">=3.14,<4.0"
 django-debug-toolbar = "^4.3.0"
 django-extensions = "^3.2.3"
 mysqlclient = "^2.2.4"
-drf-spectacular = "^0.27.1"
-gunicorn = "^21.2.0"
+drf-spectacular = "^0.27.2"
 dj-rest-auth = "^5.1.0"
 djangorestframework-simplejwt = "^5.3.1"
 django-allauth = "^0.61.1"
@@ -25,7 +24,7 @@ black = "^24.3.0"
 isort = "^5.13.2"
 mypy = "^1.9.0"
 django-stubs = "^4.2.7"
-ipython = "^8.22.2"
+ipython = "^8.23.0"
 
 [build-system]
 requires = ["poetry-core"]
