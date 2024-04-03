@@ -53,8 +53,6 @@ CUSTOM_USER_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
-    # "app.user.apps.UsersConfig",
-    "app.user",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
@@ -67,6 +65,10 @@ CUSTOM_USER_APPS = [
     # "allauth.socialaccount.providers.kakao",
     # "allauth.socialaccount.providers.naver",
     # "allauth.socialaccount.providers.github",
+    # "app.user.apps.UsersConfig",
+    "app.user",
+    "app.club",
+    "app.board",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
