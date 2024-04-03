@@ -1,0 +1,69 @@
+.loginContainer {
+  display: flex;
+  margin: 200px 15%;
+  background: #fefaef;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+.loginSmallContainer {
+  display: flex;
+  margin-top: 10%;
+  width: 400px;
+  align-items: center;
+}
+
+#loginForm {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#loginForm input {
+  height: 40px;
+  padding: 5px;
+}
+#loginForm input[type='password'] {
+  margin-bottom: 4px;
+}
+
+#loginForm input[type='submit'] {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  background-color: #b22222;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.loginSmallContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.loginSmallContainer {
+  text-align: center;
+}
+
+.inGoogle {
+  width: 20%;
+  height: 45px;
+  margin: 0 20%;
+  border-radius: 5px;
+  color: white;
+  background-color: #b22222;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.enterJoin {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.enterJoin a {
+  margin: 8px 0;
+  text-decoration: none;
+  color: black;
+}

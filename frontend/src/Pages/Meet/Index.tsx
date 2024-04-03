@@ -1,11 +1,9 @@
-import React from 'react'
-
 function Meet() {
   return (
     <div>
-      미트
+      <div>미트임</div>
     </div>
-  )
+  );
 }
 
-export default Meet
+export default Meet;

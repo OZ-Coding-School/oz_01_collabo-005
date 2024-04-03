@@ -1,0 +1,85 @@
+.NavContainer {
+  width: 70%;
+  height: 48px;
+  background-color: green;
+  /* background-color: #fffdf8; */
+  padding-bottom: 50px;
+  margin: 0 15%;
+}
+.Logo {
+  width: 71px;
+  height: 30px;
+  font-weight: 800;
+  color: #b22222;
+  font-size: 24px;
+}
+.header-box {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar-button-box {
+  box-sizing: border-box;
+  position: relative;
+  right: 10px;
+  width: 400px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: -webkit-grab;
+}
+.search-button {
+  all: unset;
+  margin-right: 10px;
+}
+
+label {
+  position: relative;
+}
+
+.inScreen-search {
+  position: absolute;
+  bottom: 4px;
+  right: 7px;
+  font-size: 13px;
+  border: 0;
+  color: rgb(202, 202, 202);
+  background-color: white;
+  width: 20px;
+  border-radius: 16px;
+}
+.search-screen {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 100%;
+}
+
+.searchInput {
+  height: 1.8rem;
+  width: 280px;
+  border-radius: 0.7rem;
+  position: relative;
+  padding-left: 10px; /*입력필드 커서 이동 */
+  border: 1px solid black;
+}
+
+.searchInput::placeholder {
+  color: #b22222;
+  font-size: 16px;
+  font-weight: 250;
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  padding-left: 10px;
+}
+
+.icon-container {
+  width: 69px;
+  display: flex;
+  justify-content: space-between;
+}
