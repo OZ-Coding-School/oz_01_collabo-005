@@ -1,6 +1,8 @@
+import "./index.css";
+
 function Meet() {
   return (
-    <div>
+    <div className="meet">
       <div>미트임</div>
     </div>
   );

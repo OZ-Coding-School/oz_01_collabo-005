@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.css';
+import React from "react";
+import "./index.css";
 
 function Main() {
   return (
@@ -15,24 +15,24 @@ function NewPost() {
   const posts = [
     {
       id: 1,
-      title: '첫번쨰 포스트',
-      content: '이것은 첫번쨰 포스트',
-      date: '2024-04-01',
-      img: '/public/pictures/main/ex.jpeg',
+      title: "첫번쨰 포스트",
+      content: "이것은 첫번쨰 포스트",
+      date: "2024-04-01",
+      img: "/public/pictures/main/ex.jpeg",
     },
     {
       id: 2,
-      title: '두번쨰 포스트',
-      content: '이것은 두번쨰 포스트',
-      date: '2024-04-02',
-      img: '/public/pictures/main/ex.jpeg',
+      title: "두번쨰 포스트",
+      content: "이것은 두번쨰 포스트",
+      date: "2024-04-02",
+      img: "/public/pictures/main/ex.jpeg",
     },
     {
       id: 3,
-      title: '세번쨰 포스트',
-      content: '이것은 세번쨰 포스트',
-      date: '2024-04-32',
-      img: '/public/pictures/main/ex.jpeg',
+      title: "세번쨰 포스트",
+      content: "이것은 세번쨰 포스트",
+      date: "2024-04-32",
+      img: "/public/pictures/main/ex.jpeg",
     },
   ];
   return (

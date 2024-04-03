@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { BsPersonCircle } from 'react-icons/bs';
-import { FiSearch } from 'react-icons/fi';
-import { RxCross1 } from 'react-icons/rx';
-import './Topnav.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { BsPersonCircle } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
+import { RxCross1 } from "react-icons/rx";
+import "./Topnav.css";
 
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
