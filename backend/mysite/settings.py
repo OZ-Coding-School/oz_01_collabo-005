@@ -61,14 +61,9 @@ CUSTOM_USER_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # "allauth.socialaccount.providers.google",
-    # "allauth.socialaccount.providers.kakao",
-    # "allauth.socialaccount.providers.naver",
-    # "allauth.socialaccount.providers.github",
-    # "app.user.apps.UsersConfig",
-    "app.user",
-    "app.club",
-    "app.board",
+    "app.user.apps.UsersConfig",
+    "app.club.apps.ClubConfig",
+    "app.board.apps.BoardConfig",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
