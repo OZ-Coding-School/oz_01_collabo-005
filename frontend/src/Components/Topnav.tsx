@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsPersonCircle } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";

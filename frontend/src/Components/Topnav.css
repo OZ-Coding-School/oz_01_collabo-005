@@ -1,36 +1,36 @@
 .NavContainer {
   width: 70%;
   height: 48px;
-  /* background-color: green; */
-  /* background-color: #fffdf8; */
-  padding-bottom: 50px;
+  background-color: #fffdf8;
   margin: 0 15%;
+  display: flex;
 }
 .Logo {
   width: 71px;
-  height: 30px;
-  font-weight: 800;
+  height: 37px;
+  font-weight: 900;
   color: #b22222;
-  font-size: 24px;
+  font-size: 26px;
 }
 .header-box {
-  position: relative;
   width: 100%;
-  height: 48px;
-  padding: 12px 20px;
+  height: 100%;
+  padding: 0 12px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .navbar-button-box {
   box-sizing: border-box;
   position: relative;
   right: 10px;
   width: 400px;
-  height: 100%;
+  height: 48px;
   display: flex;
   justify-content: flex-end;
   cursor: -webkit-grab;
+  align-items: center;
 }
 .search-button {
   all: unset;
@@ -43,8 +43,8 @@ label {
 
 .inScreen-search {
   position: absolute;
-  bottom: 4px;
-  right: 7px;
+  bottom: 5px;
+  right: 8px;
   font-size: 13px;
   border: 0;
   color: rgb(202, 202, 202);
@@ -53,16 +53,17 @@ label {
   border-radius: 16px;
 }
 .search-screen {
+  position: relative;
   display: flex;
   align-items: center;
   width: 300px;
-  height: 100%;
+  height: 2.4rem;
 }
 
 .searchInput {
   height: 1.8rem;
   width: 280px;
-  border-radius: 0.7rem;
+  border-radius: 1rem;
   position: relative;
   padding-left: 10px; /*입력필드 커서 이동 */
   border: 1px solid black;
@@ -74,14 +75,16 @@ label {
   font-weight: 250;
   position: absolute;
   left: 6px;
-  top: 3px;
+  top: 2px;
   padding-left: 10px;
 }
 
 .icon-container {
   width: 69px;
+  height: 2.6rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 @media screen and (max-width: 1024px) {
