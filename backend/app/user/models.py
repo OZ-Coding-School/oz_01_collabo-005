@@ -9,6 +9,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from app.common.models import BaseModel
+
 
 class UserManager(BaseUserManager):
     """
@@ -48,7 +50,7 @@ class UserManager(BaseUserManager):
         # return user
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     email = models.EmailField(_("email_address"), max_length=255, unique=True)
     # nickname = models.CharField(_("nickname"), max_length=10, unique=True)
     nickname = models.CharField(_("nickname"), max_length=10)
@@ -60,6 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
     profession = models.CharField(_("profession"), max_length=10)
+    profile_image = models.ImageField(_("profile image"), upload_to="user/", editable=True, null=True, blank=True)
     is_staff = models.BooleanField(
         _("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site.")
     )
@@ -98,3 +101,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Nationality(BaseModel):
+    nationality = models.CharField(_("nationality"), max_length=30)
+    continent = models.CharField(_("continent"), max_length=15)
+    flag_icon = models.ImageField(_("flag icon"), upload_to="nationality/", editable=True)
