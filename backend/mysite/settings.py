@@ -53,6 +53,8 @@ CUSTOM_USER_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
+    # "app.user.apps.UsersConfig",
+    "app.user",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
@@ -61,13 +63,10 @@ CUSTOM_USER_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "app.activity.apps.ActivityConfig",
-    "app.album",
-    "app.board",
-    "app.category",
-    "app.club",
-    "app.comment",
-    "app.user",
+    # "allauth.socialaccount.providers.google",
+    # "allauth.socialaccount.providers.kakao",
+    # "allauth.socialaccount.providers.naver",
+    # "allauth.socialaccount.providers.github",
 ]
 
 INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
@@ -244,35 +243,6 @@ REST_AUTH = {
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
 }
-
-# STORAGES = {
-#     "default": {
-#         "BACKEND": "storages.backends.s3.S3Storage",
-#         "OPTION": {
-#             "session_profile": env("STORAGE_SESSION_PROFILE"),
-#             "access_key": env("AWS_ACCESS_KEY_ID"),
-#             "secret_key": env("AWS_SECRET_ACCESS_KEY"),
-#             "bucket_name": env("AWS_STORAGE_BUCKET_NAME"),
-#         }
-#     },
-#     "staticfiles": {
-#         "BACKEND": "storages.backends.s3.S3Storage",
-#         "OPTION": {
-#
-#         }
-#     }
-# }
-
-STATICFILES_STORAGE = env("STATICFILES_STORAGE")
-# DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
-# AWS_S3_SESSION_PROFILE = env("STORAGE_SESSION_PROFILE")
-AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
-AWS_REGION_NAME = env("AWS_REGION_NAME")
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-# AWS_DEFAULT_ACL = env("AWS_DEFAULT_ACL")
-# AWS_QUERYSTRING_AUTH = False
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Landing",
