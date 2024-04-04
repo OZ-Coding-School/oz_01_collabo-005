@@ -1,7 +1,8 @@
 .NavContainer {
   width: 70%;
   height: 48px;
-  background-color: #fffdf8;
+  background-color: green;
+  /* background-color: #fffdf8; */
   padding-bottom: 50px;
   margin: 0 15%;
 }
