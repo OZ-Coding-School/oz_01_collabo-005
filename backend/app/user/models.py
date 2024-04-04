@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
     profession = models.CharField(_("profession"), max_length=10)
-    profile_image = models.ImageField(_("profile image"), upload_to="user/", editable=True, null=True, blank=True)
+    profile_image = models.ImageField(_("profile image"), upload_to="images/user/", editable=True, null=True, blank=True)
     is_staff = models.BooleanField(
         _("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site.")
     )
@@ -106,4 +106,4 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 class Nationality(BaseModel):
     nationality = models.CharField(_("nationality"), max_length=30)
     continent = models.CharField(_("continent"), max_length=15)
-    flag_icon = models.ImageField(_("flag icon"), upload_to="nationality/", editable=True)
+    flag_icon = models.ImageField(_("flag icon"), upload_to="images/nationality/", editable=True)

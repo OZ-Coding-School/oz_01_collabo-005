@@ -9,5 +9,5 @@ class Album(BaseModel):
 
 class Photo(BaseModel):
     title = models.CharField(max_length=30)
-    photo = models.ImageField(upload_to='album/')
+    photo = models.ImageField(upload_to='images/album/')
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='photo')
