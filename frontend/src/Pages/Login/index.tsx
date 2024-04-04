@@ -18,8 +18,8 @@ function Login() {
           <a href="아직모름">이메일 회원가입</a>
           <a href="아직모름">로그인 수단 찾기</a>
         </div>
-        <div>or</div>
-        <div className="inGoogle">google</div>
+        {/* <div>or</div>
+        <div className='inGoogle'>google</div> */}
       </div>
     </div>
   );
