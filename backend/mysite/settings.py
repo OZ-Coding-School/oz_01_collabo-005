@@ -61,7 +61,7 @@ CUSTOM_USER_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "app.activity.apps.ActivityConfig",
+    "app.activity",
     "app.album",
     "app.board",
     "app.category",
@@ -263,8 +263,8 @@ REST_AUTH = {
 #     }
 # }
 
+DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
 STATICFILES_STORAGE = env("STATICFILES_STORAGE")
-# DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
 # AWS_S3_SESSION_PROFILE = env("STORAGE_SESSION_PROFILE")
 AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
