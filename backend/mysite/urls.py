@@ -41,4 +41,5 @@ urlpatterns = [
     path("api/accounts3/", include("allauth.urls")),  # debug 왜 필요한지 잘 모르겠음
     path("api/accounts/", include("app.user.urls")),
     path("api/categories/", include("app.category.urls")),
+    path("api/clubs/", include("app.club.urls"))
 ]
