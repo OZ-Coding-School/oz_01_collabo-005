@@ -46,6 +46,7 @@ profile = "black"
 plugins = ["mypy_django_plugin.main"]
 python_version = 3.12
 strict = true
+ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "*.migrations.*"

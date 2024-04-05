@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from app.common.models import BaseModel
 
 
-class UserManager(BaseUserManager[str]):
+class UserManager(BaseUserManager["User"]):
     """
     Create and save a User with the given email and password.
     """
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager[str]):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email: str, password: str, **extra_fields: dict[str, Any]) -> Any:
+    def create_superuser(self, email: str, password: str, **extra_fields: Any) -> Any:
         """
         Create and save a superuser with the given email and password.
         """

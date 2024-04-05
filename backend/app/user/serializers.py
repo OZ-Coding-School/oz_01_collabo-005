@@ -25,4 +25,16 @@ from app.user.models import User
 class UserSerializer(serializers.ModelSerializer[User]):
     class Meta:
         model = User
-        fields = ["id", "email", "nickname", "nationality", "password", "first_name", "last_name", "phone", "date_of_birth", "profession", "profile_image"]
+        fields = [
+            "id",
+            "email",
+            "nickname",
+            "nationality",
+            "password",
+            "first_name",
+            "last_name",
+            "phone",
+            "date_of_birth",
+            "profession",
+            "profile_image",
+        ]
