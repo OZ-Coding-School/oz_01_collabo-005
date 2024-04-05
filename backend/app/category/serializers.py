@@ -19,7 +19,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["url", "name", "picture", "club_set"]
+        fields = ["id", "url", "name", "picture", "club_set"]
         # fields = ["url", "name", "picture", "clubs", "club_set"]
 
 

@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 
 from app.category.models import Category
-from app.category.permissions import IsAdminOrReadOnly
 from app.category.serializers import CategorySerializer
 
 
