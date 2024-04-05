@@ -4,7 +4,6 @@ from app.category.models import Category
 from app.club.models import Club
 from app.club.serializers import ClubSerializer
 
-
 # class CategorySerializer(serializers.ModelSerializer):
 #     club_set = ClubSerializer(many=True, read_only=True)
 #
@@ -26,5 +25,3 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 # class CategorySerializer(serializers.ModelSerializer):
 # clubs = serializers.PrimaryKeyRelatedField(many=True, queryset=Club.objects.all())
 # club_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-

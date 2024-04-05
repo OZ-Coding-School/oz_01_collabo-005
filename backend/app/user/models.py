@@ -12,23 +12,24 @@ from django.utils.translation import gettext_lazy as _
 from app.common.models import BaseModel
 
 
-class UserManager(BaseUserManager):
+class UserManager(BaseUserManager[str]):
     """
     Create and save a User with the given email and password.
     """
+
     def create_user(self, email: str, password: str, **extra_fields: dict[str, Any]) -> Any:
         """
         Create and save a User with the given email and password.
         """
         if not email:
-            raise ValueError("Users must have an email address")
+            raise ValueError(_("Users must have an email address"))
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email: str, password: str, **extra_fields: dict[str, Any]) -> User:
+    def create_superuser(self, email: str, password: str, **extra_fields: dict[str, Any]) -> Any:
         """
         Create and save a superuser with the given email and password.
         """
@@ -36,9 +37,9 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
 
-        if extra_fields.get("is_staff") is not True:
+        if not extra_fields.get("is_staff"):
             raise ValueError(_("Superuser must have is_staff=True."))
-        if extra_fields.get("is_superuser") is not True:
+        if not extra_fields.get("is_superuser"):
             raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)
 
@@ -62,7 +63,9 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
     profession = models.CharField(_("profession"), max_length=10)
-    profile_image = models.ImageField(_("profile image"), upload_to="images/user/", editable=True, null=True, blank=True)
+    profile_image = models.ImageField(
+        _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
+    )
     is_staff = models.BooleanField(
         _("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site.")
     )
@@ -80,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     #         )
     #     ]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.email
 
     def get_full_name(self) -> str:
@@ -90,17 +93,17 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
 
-    def get_short_name(self) -> str:
-        """
-        Returns the short name for the user.
-        """
-        return self.first_name
+    # def get_short_name(self) -> str:
+    #     """
+    #     Returns the short name for the user.
+    #     """
+    #     return self.first_name
 
-    def email_user(self, subject: str, message: str, from_email: str | None = None, **kwargs: dict[str, Any]) -> None:
-        """
-        Sends an email to this User.
-        """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+    # def email_user(self, subject: str, message: str, from_email: str | None = None, **kwargs: dict[str, Any]) -> None:
+    #     """
+    #     Sends an email to this User.
+    #     """
+    #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Nationality(BaseModel):

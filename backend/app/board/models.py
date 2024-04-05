@@ -6,10 +6,7 @@ from app.common.models import BaseModel
 class Board(BaseModel):
     club = models.ForeignKey("club.Club", on_delete=models.CASCADE, related_name="board")
 
-    TYPE_CHOICES = (
-        (0, "General"),
-        (1, "Plan")
-    )
+    TYPE_CHOICES = ((0, "General"), (1, "Plan"))
     type = models.IntegerField(choices=TYPE_CHOICES, default=0)
 
 

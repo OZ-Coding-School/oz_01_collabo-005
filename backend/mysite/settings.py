@@ -45,7 +45,7 @@ DJANGO_SYSTEM_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites"
+    "django.contrib.sites",
 ]
 
 CUSTOM_USER_APPS = [
@@ -104,9 +104,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_METHODS = [
-    "allauth.account.auth_backends.AuthenticationBackend"
-]
+AUTHENTICATION_METHODS = ["allauth.account.auth_backends.AuthenticationBackend"]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
@@ -201,10 +199,9 @@ SIMPLE_JWT = {
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
+    "django.contrib.auth.backends.ModelBackend",
     # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 # SOCIALACCOUNT_PROVIDERS = {
@@ -263,8 +260,8 @@ REST_AUTH = {
 #     }
 # }
 
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
 # STATICFILES_STORAGE = env("STATICFILES_STORAGE")
