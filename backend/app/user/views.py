@@ -1,11 +1,11 @@
 from json import JSONDecodeError
 
 import requests
-from allauth.socialaccount.models import SocialAccount
-from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from dj_rest_auth.registration.serializers import SocialLoginSerializer
-from dj_rest_auth.registration.views import SocialLoginView
+# from allauth.socialaccount.models import SocialAccount
+# from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+# from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+# from dj_rest_auth.registration.serializers import SocialLoginSerializer
+# from dj_rest_auth.registration.views import SocialLoginView
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from rest_framework import viewsets
@@ -18,20 +18,23 @@ from rest_framework_simplejwt.tokens import Token
 
 from app.user.models import User
 from app.user.serializers import UserSerializer
-from mysite.settings import env
 
 # from app.user.serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
+
+
+
+
+
+class UserViewSet(viewsets.ModelViewSet[User]):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 # BASE_URL = "http://localhost:8000/api/account/"
 # GOOGLE_CALLBACK_URI = BASE_URL
 # GOOGLE_CALLBACK_URI = BASE_URL + "google/callback/"
 # GOOGLE_CALLBACK_URI = BASE_URL + "google/callback/"
 # state = env("STATE")
-
-
-class UserViewSet(viewsets.ModelViewSet[User]):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 # class GoogleLogin(SocialLoginView):
@@ -125,14 +128,3 @@ class UserViewSet(viewsets.ModelViewSet[User]):
 #                 status=status.HTTP_200_OK
 #             )
 #         return Response(token_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class UserView(viewsets.ReadOnlyModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-# class PingAPIView(APIView):
-#     permission_classes = [IsAuthenticated]
-#
-#     def get(self, request: Request):
-#         return Response(status=status.HTTP_200_OK)
