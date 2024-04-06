@@ -2,4 +2,5 @@
 ### Backend ###
 migrations/
 static/
+images/
 *diff*.txt
