@@ -22,11 +22,7 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -41,5 +37,5 @@ urlpatterns = [
     path("api/accounts3/", include("allauth.urls")),  # debug 왜 필요한지 잘 모르겠음
     path("api/accounts/", include("app.user.urls")),
     path("api/categories/", include("app.category.urls")),
-    path("api/clubs/", include("app.club.urls"))
+    path("api/clubs/", include("app.club.urls")),
 ]
