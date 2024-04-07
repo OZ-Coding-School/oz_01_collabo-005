@@ -44,7 +44,7 @@ function TopNav(): JSX.Element {
               <NavDropdown.Item href="#action/3.2">나의 정보</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">나의 모임</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">모임 관리</NavDropdown.Item>
+
               <NavDropdown.Item href="#action/3.5">모임 개설</NavDropdown.Item>
             </NavDropdown>
           </div>

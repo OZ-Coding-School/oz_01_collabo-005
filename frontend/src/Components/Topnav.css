@@ -4,6 +4,8 @@
   background-color: #fffdf8;
   margin: 0 15%;
   display: flex;
+  padding-bottom: 50px;
+  box-sizing: content-box;
 }
 .Logo {
   width: 71px;
