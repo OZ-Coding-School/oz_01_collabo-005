@@ -4,6 +4,7 @@ from app.club.models import Club
 
 
 class ClubSerializer(serializers.HyperlinkedModelSerializer):
+    leader = serializers.SlugRelatedField(read_only=True, slug_field="nickname")
 
     class Meta:
         model = Club
