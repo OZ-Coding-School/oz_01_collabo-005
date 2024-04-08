@@ -19,7 +19,7 @@ function TopNav(): JSX.Element {
         <div className="Logo">LANDING</div>
         <div className="navbar-button-box">
           {showSearch && (
-            <form className="search-screen">
+            <form className="search-button">
               <label>
                 <input
                   className="searchInput"
@@ -40,9 +40,9 @@ function TopNav(): JSX.Element {
               title={<BsPersonCircle size={27} />}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item href="#action/3.1">로그인 </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">나의 정보</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">나의 모임</NavDropdown.Item>
+              <NavDropdown.Item href="login">로그인 </NavDropdown.Item>
+              <NavDropdown.Item href="myInfo">나의 정보</NavDropdown.Item>
+              <NavDropdown.Item href="meet">나의 모임</NavDropdown.Item>
               <NavDropdown.Divider />
 
               <NavDropdown.Item href="#action/3.5">모임 개설</NavDropdown.Item>

@@ -1,4 +1,3 @@
-import React from "react";
 import "./index.css";
 import NewPost from "./newpost";
 import MoveImages from "./Moveimages";
