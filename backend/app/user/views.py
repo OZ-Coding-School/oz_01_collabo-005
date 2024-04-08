@@ -1,5 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
+from requests import Request
+
 # from allauth.socialaccount.models import SocialAccount
 # from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 # from allauth.socialaccount.providers.oauth2.client import OAuth2Client
@@ -12,10 +14,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from app.club.permissions import IsOwnerOrReadOnly
 from app.user.models import User
-from app.user.serializers import UserSerializer, SignupSerializer
-
-
-
+from app.user.serializers import SignupSerializer, UserSerializer
 
 # class SignupView(APIView):
 #     def post(self, request):
@@ -46,50 +45,42 @@ from app.user.serializers import UserSerializer, SignupSerializer
 #     serializer_class = SignupSerializer
 
 
-class LoginView(APIView):
-    def post(self, request):
-        email = request.data["email"]
-        password = request.data["password"]
-
-        user = User.objects.get(email=email)
-        if user is None:
-            return Response({"message": "not exists"}, status=status.HTTP_400_BAD_REQUEST)
-
-        if not check_password(password, user.password):
-            return Response({"message": "wrong password"}, status=status.HTTP_400_BAD_REQUEST)
-
-        token = TokenObtainPairSerializer.get_token(user)
-        refresh_token = str(token)
-        access_token = str(token.access_token)
-        response = Response(
-            {
-                "message": "login success",
-                "token": {
-                    "access": access_token,
-                    "refresh": refresh_token
-                }
-            },
-            status=status.HTTP_200_OK
-        )
-        response.set_cookie("access", access_token, httponly=True)
-        response.set_cookie("refresh", refresh_token, httponly=True)
-        return response
-
-
-class LogoutView(APIView):
-    def delete(self, request):
-        response = Response(status=status.HTTP_204_NO_CONTENT)
-        response.delete_cookie("access")
-        response.delete_cookie("refresh")
-        return response
+# class LoginView(APIView):
+#     def post(self, request: Request):
+#         email = request.data["email"]
+#         password = request.data["password"]
+#
+#         user = User.objects.get(email=email)
+#         if user is None:
+#             return Response({"message": "not exists"}, status=status.HTTP_400_BAD_REQUEST)
+#
+#         if not check_password(password, user.password):
+#             return Response({"message": "wrong password"}, status=status.HTTP_400_BAD_REQUEST)
+#
+#         token = TokenObtainPairSerializer.get_token(user)
+#         refresh_token = str(token)
+#         access_token = str(token.access_token)
+#         response = Response(
+#             {"message": "login success", "token": {"access": access_token, "refresh": refresh_token}},
+#             status=status.HTTP_200_OK,
+#         )
+#         response.set_cookie("access", access_token, httponly=True)
+#         response.set_cookie("refresh", refresh_token, httponly=True)
+#         return response
+#
+#
+# class LogoutView(APIView):
+#     def delete(self, request):
+#         response = Response(status=status.HTTP_204_NO_CONTENT)
+#         response.delete_cookie("access")
+#         response.delete_cookie("refresh")
+#         return response
 
 
-class UserView(generics.RetrieveUpdateDestroyAPIView):
+class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
-
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 # class UserViewSet(viewsets.ModelViewSet[User]):

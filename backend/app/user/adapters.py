@@ -1,9 +1,12 @@
+from typing import Any
+
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.utils import user_field
+from requests import Request
 
 
-class CustomAccountAdapter(DefaultAccountAdapter):
-    def save_user(self, request, user, form, commit=False):
+class CustomAccountAdapter(DefaultAccountAdapter):  # type: ignore
+    def save_user(self, request: Request, user: Any, form: Any, commit: bool = False) -> Any:
         user = super().save_user(request, user, form, commit)
         data = form.cleaned_data
         user_field(user, "nickname", data.get("nickname"))

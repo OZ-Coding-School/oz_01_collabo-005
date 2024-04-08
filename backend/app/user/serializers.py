@@ -1,3 +1,5 @@
+from typing import Any
+
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
@@ -9,7 +11,7 @@ from rest_framework_simplejwt.settings import api_settings
 from app.user.models import User
 
 
-class SignupSerializer(RegisterSerializer):
+class SignupSerializer(RegisterSerializer):  # type: ignore
     nickname = serializers.CharField()
     nationality = serializers.CharField()
     first_name = serializers.CharField()
@@ -23,7 +25,7 @@ class SignupSerializer(RegisterSerializer):
     #     # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
     #     fields = ("email", "nickname", "password", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
 
-    def get_cleaned_data(self):
+    def get_cleaned_data(self) -> Any:
         # return {
         #     "nickname": self.validated_data.get("nickname", ""),
         #     "nationality": self.validated_data.get("nationality", ""),
