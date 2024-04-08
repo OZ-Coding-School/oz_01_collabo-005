@@ -1,33 +1,89 @@
-from json import JSONDecodeError
-
-import requests
+from django.contrib.auth import authenticate
 # from allauth.socialaccount.models import SocialAccount
 # from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 # from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 # from dj_rest_auth.registration.serializers import SocialLoginSerializer
 # from dj_rest_auth.registration.views import SocialLoginView
-from django.http import JsonResponse
-from django.shortcuts import redirect, render
-from rest_framework import viewsets
-from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.request import Request
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import Token
 
+from app.club.permissions import IsOwnerOrReadOnly
 from app.user.models import User
-from app.user.serializers import UserSerializer
-
-# from app.user.serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
+from app.user.serializers import UserSerializer, SignupSerializer, LoginSerializer
 
 
+class SignupView(APIView):
+    def post(self, request):
+        serializer = SignupSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            # token = RefreshToken.for_user(user)
+            token = TokenObtainPairSerializer.get_token(user)
+            refresh_token = str(token)
+            access_token = str(token.access_token)
+            # return Response(serializer.data, status=status.HTTP_201_CREATED)
+            response = Response({
+                "user": serializer.data,
+                "token": {
+                    "access": access_token,
+                    "refresh": refresh_token,
+                }
+            }, status=status.HTTP_201_CREATED)
+            response.set_cookie("access", access_token, httponly=True)
+            response.set_cookie("refresh", refresh_token, httponly=True)
+            return response
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# class SignupView(generics.CreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = SignupSerializer
 
-class UserViewSet(viewsets.ModelViewSet[User]):
+
+class LoginView(APIView):
+    def post(self, request):
+        user = authenticate(email=request.data.get('email'), password=request.data.get('password'))
+        if user is not None:
+            serializer = LoginSerializer(user)
+            token = TokenObtainPairSerializer.get_token(user)
+            refresh_token = str(token)
+            access_token = str(token.access_token)
+            response = Response({
+                "user": serializer.data,
+                "token": {
+                    "access": access_token,
+                    "refresh": refresh_token,
+                }
+            }, status=status.HTTP_200_OK)
+            response.set_cookie("access", access_token, httponly=True)
+            response.set_cookie("token", refresh_token, httponly=True)
+            return response
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(APIView):
+    def delete(self, request):
+        response = Response(status=status.HTTP_204_NO_CONTENT)
+        response.delete_cookie("access")
+        response.delete_cookie("refresh")
+        return response
+
+
+class UserView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
+
+
+
+# class UserViewSet(viewsets.ModelViewSet[User]):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
 
 # BASE_URL = "http://localhost:8000/api/account/"
