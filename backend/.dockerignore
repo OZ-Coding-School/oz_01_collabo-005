@@ -20,3 +20,9 @@ test.sh
 # DB
 db.sqlite3
 
+# other
+env_for_sharing
+diff*
+images/
+static/
+
