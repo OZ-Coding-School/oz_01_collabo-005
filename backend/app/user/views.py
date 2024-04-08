@@ -15,28 +15,30 @@ from app.user.models import User
 from app.user.serializers import UserSerializer, SignupSerializer
 
 
-class SignupView(APIView):
-    def post(self, request):
-        serializer = SignupSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            # token = RefreshToken.for_user(user)
-            token = TokenObtainPairSerializer.get_token(user)
-            refresh_token = str(token)
-            access_token = str(token.access_token)
-            # return Response(serializer.data, status=status.HTTP_201_CREATED)
-            response = Response({
-                "user": serializer.data,
-                "token": {
-                    "access": access_token,
-                    "refresh": refresh_token,
-                }
-            }, status=status.HTTP_201_CREATED)
-            response.set_cookie("access", access_token, httponly=True)
-            response.set_cookie("refresh", refresh_token, httponly=True)
-            return response
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class SignupView(APIView):
+#     def post(self, request):
+#         serializer = SignupSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             # token = RefreshToken.for_user(user)
+#             token = TokenObtainPairSerializer.get_token(user)
+#             refresh_token = str(token)
+#             access_token = str(token.access_token)
+#             # return Response(serializer.data, status=status.HTTP_201_CREATED)
+#             response = Response({
+#                 "user": serializer.data,
+#                 "token": {
+#                     "access": access_token,
+#                     "refresh": refresh_token,
+#                 }
+#             }, status=status.HTTP_201_CREATED)
+#             response.set_cookie("access", access_token, httponly=True)
+#             response.set_cookie("refresh", refresh_token, httponly=True)
+#             return response
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # class SignupView(generics.CreateAPIView):

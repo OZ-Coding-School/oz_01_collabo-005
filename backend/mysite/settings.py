@@ -55,11 +55,11 @@ CUSTOM_USER_APPS = [
     "drf_spectacular",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
-    # "rest_framework_simplejwt.token_blacklist",
-    # "dj_rest_auth",
-    # "dj_rest_auth.registration",
-    # "allauth",
-    # "allauth.account",
+    "rest_framework_simplejwt.token_blacklist",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "allauth",
+    "allauth.account",
     # "allauth.socialaccount",
     "app.activity",
     "app.album",
@@ -81,7 +81,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "allauth.account.middleware.AccountMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 INTERNAL_IPS = ["127.0.0.1"]
@@ -170,14 +170,14 @@ AUTH_USER_MODEL = "user.User"
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PERMISSION_CLASSES": (
-        # "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.IsAuthenticated",
         # "rest_framework.permissions.IsAdminUser",
-        "rest_framework.permissions.AllowAny",
+        # "rest_framework.permissions.AllowAny",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        # "rest_framework.authentication.SessionAuthentication",
-        # "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
 }
 
@@ -247,23 +247,29 @@ SITE_ID = 1
 # ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_LOGOUT_ON_GET = True
 
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # username 필드 사용 x
-# ACCOUNT_EMAIL_REQUIRED = True  # email 필드 사용 o
-# ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = "email"
-# ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # username 필드 사용 x
+ACCOUNT_EMAIL_REQUIRED = True  # email 필드 사용 o
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_ADAPTER = 'app.user.adapters.CustomAccountAdapter'
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # ?
 
 # REST_USE_JWT = True  # debug
 
-# REST_AUTH = {
-#     "USE_JWT": True,
-#     "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
-#     "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
-#     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
-#     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
+    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
+    "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
+    "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
+    "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
+}
+
+# REST_AUTH_REGISTER_SERIALIZER = {
+#     "REGISTER_SERIALIZER": "user.serializers.SignupSerializer",
 # }
 
 # STORAGES = {
