@@ -3,6 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.settings import api_settings
 
 from app.user.models import User
 
@@ -32,10 +33,10 @@ class SignupSerializer(serializers.ModelSerializer):
         return user
 
 
-class LoginSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ("email", "password")
+# class LoginSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ("email", "password")
 
 
 class UserSerializer(serializers.ModelSerializer[User]):

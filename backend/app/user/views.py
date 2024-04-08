@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
 # from allauth.socialaccount.models import SocialAccount
 # from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 # from allauth.socialaccount.providers.oauth2.client import OAuth2Client
@@ -11,7 +12,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from app.club.permissions import IsOwnerOrReadOnly
 from app.user.models import User
-from app.user.serializers import UserSerializer, SignupSerializer, LoginSerializer
+from app.user.serializers import UserSerializer, SignupSerializer
 
 
 class SignupView(APIView):
@@ -45,24 +46,32 @@ class SignupView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-        user = authenticate(email=request.data.get('email'), password=request.data.get('password'))
-        if user is not None:
-            serializer = LoginSerializer(user)
-            token = TokenObtainPairSerializer.get_token(user)
-            refresh_token = str(token)
-            access_token = str(token.access_token)
-            response = Response({
-                "user": serializer.data,
+        email = request.data["email"]
+        password = request.data["password"]
+
+        user = User.objects.get(email=email)
+        if user is None:
+            return Response({"message": "not exists"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not check_password(password, user.password):
+            return Response({"message": "wrong password"}, status=status.HTTP_400_BAD_REQUEST)
+
+        token = TokenObtainPairSerializer.get_token(user)
+        refresh_token = str(token)
+        access_token = str(token.access_token)
+        response = Response(
+            {
+                "message": "login success",
                 "token": {
                     "access": access_token,
-                    "refresh": refresh_token,
+                    "refresh": refresh_token
                 }
-            }, status=status.HTTP_200_OK)
-            response.set_cookie("access", access_token, httponly=True)
-            response.set_cookie("token", refresh_token, httponly=True)
-            return response
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            },
+            status=status.HTTP_200_OK
+        )
+        response.set_cookie("access", access_token, httponly=True)
+        response.set_cookie("refresh", refresh_token, httponly=True)
+        return response
 
 
 class LogoutView(APIView):
