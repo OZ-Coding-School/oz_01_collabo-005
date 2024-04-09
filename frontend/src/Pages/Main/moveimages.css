@@ -1,0 +1,84 @@
+.carouselBox {
+  background-color: green;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.imageCarousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.imageBox {
+  display: flex;
+  width: 20vw;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.imageCarousel img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  margin: 0;
+  padding: 10px;
+}
+
+.review {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* 기본적으로 숨김 */
+  transition: opacity 0.3s ease;
+  font-size: 2.3rem;
+  color: white;
+}
+
+.imageBox:hover img {
+  filter: brightness(0.3); /* 이미지 어둡게 처리 */
+}
+
+.imageBox:hover .review {
+  opacity: 1; /* 호버 시 표시 */
+}
+
+/* 버튼 */
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  z-index: 999;
+  cursor: pointer;
+  opacity: 0; /* 버튼 숨김 */
+  transition: opacity 0.3s ease; /* 페이드 인/아웃 효과 */
+}
+
+.imageCarousel:hover .prev-button,
+.imageCarousel:hover .next-button {
+  opacity: 1; /* 이미지에 호버 시 버튼 표시 */
+}
+
+.prev-button {
+  left: 0; /* 왼쪽에 배치 */
+}
+
+.next-button {
+  right: 0; /* 오른쪽에 배치 */
+}
+
+.review :hover {
+  color: white;
+}

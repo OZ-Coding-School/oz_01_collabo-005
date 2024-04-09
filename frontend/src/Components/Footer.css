@@ -1,0 +1,12 @@
+.footerContainer {
+  width: 70%;
+  margin: 0 15%;
+  background-color: whitesmoke;
+}
+
+@media screen and (max-width: 768px) {
+  .footerContainer {
+    width: 100%;
+    margin: 0;
+  }
+}
