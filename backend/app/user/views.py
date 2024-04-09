@@ -12,8 +12,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from app.club.permissions import IsOwnerOrReadOnly
 from app.user.models import User
+from app.user.permissions import IsUserOrReadOnly
 from app.user.serializers import SignupSerializer, UserSerializer
 
 # class SignupView(APIView):
@@ -80,7 +80,7 @@ from app.user.serializers import SignupSerializer, UserSerializer
 class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
 
 # class UserViewSet(viewsets.ModelViewSet[User]):
