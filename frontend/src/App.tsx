@@ -6,6 +6,7 @@ import MyInfo from "./Pages/Myinfo";
 import SignUp from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Meet from "./Pages/Meet";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="login" element={<Login />}></Route>
         <Route path="*" element={<div> 없는 페이지임</div>}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 }
