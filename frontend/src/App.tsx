@@ -4,8 +4,8 @@ import Footer from "./Components/Footer";
 import TopNav from "./Components/Topnav";
 import Login from "./Pages/Login";
 import Main from "./Pages/Main";
-import Meet from "./Pages/Meet";
 import MyInfo from "./Pages/Myinfo";
+import Meet from "./Pages/Myinfo/Mymeet";
 import SignUp from "./Pages/Signup";
 
 function App() {

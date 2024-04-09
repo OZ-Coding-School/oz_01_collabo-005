@@ -48,8 +48,18 @@ function TopNav(): JSX.Element {
                   로그인
                 </Link>{" "}
               </NavDropdown.Item>
-              <NavDropdown.Item href="myInfo">나의 정보</NavDropdown.Item>
-              <NavDropdown.Item href="meet">나의 모임</NavDropdown.Item>
+              <NavDropdown.Item>
+                {" "}
+                <Link to={"/myinfo"} style={{ textDecoration: "none" }}>
+                  나의 정보
+                </Link>{" "}
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {" "}
+                <Link to={"/meet"} style={{ textDecoration: "none" }}>
+                  나의 모임
+                </Link>{" "}
+              </NavDropdown.Item>
               <NavDropdown.Divider />
 
               <NavDropdown.Item href="#action/3.5">모임 개설</NavDropdown.Item>
