@@ -99,7 +99,7 @@ function ShowMySchedule(): JSX.Element {
     </>
   );
 }
-function Meet() {
+function MyMeet() {
   const [selectedTab, setSelectedTab] = useState<string>("일정"); // 추가
 
   function handleClick(selectedButton: string) {
@@ -132,4 +132,4 @@ function Meet() {
   );
 }
 
-export default Meet;
+export default MyMeet;

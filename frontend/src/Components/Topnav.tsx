@@ -6,6 +6,7 @@ import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import "./Topnav.css";
+
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
 
@@ -56,7 +57,7 @@ function TopNav(): JSX.Element {
               </NavDropdown.Item>
               <NavDropdown.Item>
                 {" "}
-                <Link to={"/meet"} style={{ textDecoration: "none" }}>
+                <Link to={"myMeet"} style={{ textDecoration: "none" }}>
                   나의 모임
                 </Link>{" "}
               </NavDropdown.Item>
