@@ -3,5 +3,3 @@
 migrations/
 static/
 images/
-*diff*.txt
-*env*
