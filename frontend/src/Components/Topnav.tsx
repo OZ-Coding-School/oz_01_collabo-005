@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsPersonCircle } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import "./Topnav.css";
 
 function TopNav(): JSX.Element {
@@ -16,10 +17,13 @@ function TopNav(): JSX.Element {
   return (
     <div className="NavContainer">
       <div className="header-box">
-        <div className="Logo">LANDING</div>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          {" "}
+          <div className="Logo">LANDING</div>{" "}
+        </Link>
         <div className="navbar-button-box">
           {showSearch && (
-            <form className="search-screen">
+            <form className="search-button">
               <label>
                 <input
                   className="searchInput"
@@ -40,11 +44,25 @@ function TopNav(): JSX.Element {
               title={<BsPersonCircle size={27} />}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item href="#action/3.1">로그인 </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">나의 정보</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">나의 모임</NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to={"/login"} style={{ textDecoration: "none" }}>
+                  로그인
+                </Link>{" "}
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {" "}
+                <Link to={"/myinfo"} style={{ textDecoration: "none" }}>
+                  나의 정보
+                </Link>{" "}
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                {" "}
+                <Link to={"myMeet"} style={{ textDecoration: "none" }}>
+                  나의 모임
+                </Link>{" "}
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">모임 관리</NavDropdown.Item>
+
               <NavDropdown.Item href="#action/3.5">모임 개설</NavDropdown.Item>
             </NavDropdown>
           </div>

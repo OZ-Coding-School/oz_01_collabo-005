@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Footer from "./Components/Footer";
 import TopNav from "./Components/Topnav";
+import Login from "./Pages/Login";
 import Main from "./Pages/Main";
 import MyInfo from "./Pages/Myinfo";
+
+import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
-import Login from "./Pages/Login";
-import Meet from "./Pages/Meet";
-import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/meet" element={<Meet />}></Route>
+        <Route path="/myMeet" element={<MyMeet />}></Route>
         <Route path="/myInfo" element={<MyInfo />}></Route>
         <Route path="signUp" element={<SignUp />}></Route>
         <Route path="login" element={<Login />}></Route>
