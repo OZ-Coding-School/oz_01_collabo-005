@@ -1,27 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { Options } from "./Option";
+import SelectBox from "../../Components/Selectbox";
 import "./index.css";
-
-interface SelectboxProps {
-  defaultValue: string;
-}
-
-function SelectBox({ defaultValue }: SelectboxProps) {
-  return (
-    <Select required>
-      {Options.map((option) => (
-        <option
-          key={option.value}
-          value={option.value}
-          selected={defaultValue === option.value ? true : false}
-        >
-          {option.name}
-        </option>
-      ))}
-    </Select>
-  );
-}
 
 function SignUp() {
   //초기값세팅
@@ -179,7 +159,7 @@ function SignUp() {
 
   return (
     <div className="signup">
-      <h1>회원가입</h1>
+      <h1 className="signupTitle">회원가입</h1>
       <form className="signupForm">
         <div className="signupInputDiv">
           <div className="signupDiv">이용자 이름(닉네임)</div>
@@ -321,18 +301,6 @@ function SignUp() {
 }
 
 export default SignUp;
-
-const Select = styled.select`
-  margin-top: 13.5px;
-  width: 173px;
-  height: 30px;
-  display: block;
-  border-radius: 5px;
-  text-align: center;
-  font-size: inherit;
-  border: 1px solid;
-  font-size: 1rem;
-`;
 
 const Message = styled.p`
   color: ${(props) => props.color};
