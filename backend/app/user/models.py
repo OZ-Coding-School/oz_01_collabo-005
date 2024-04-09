@@ -3,7 +3,7 @@ from __future__ import annotations, unicode_literals
 from typing import Any
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
@@ -52,7 +52,7 @@ class UserManager(BaseUserManager["User"]):
 
 
 class User(AbstractBaseUser, PermissionsMixin, BaseModel):
-    email = models.EmailField(_("email_address"), max_length=255, unique=True)
+    email = models.EmailField(_("email_address"), max_length=255, unique=True, null=False, blank=False)
     # nickname = models.CharField(_("nickname"), max_length=10, unique=True)
     nickname = models.CharField(_("nickname"), max_length=10)
     # password = models.CharField(_("password"), max_length=50)
@@ -67,9 +67,10 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
     )
     is_staff = models.BooleanField(
-        _("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site.")
+        _("staff status"), default=False, help_text=_("whether the user can log into this admin site.")
     )
     is_active = models.BooleanField(_("active"), default=True)
+    is_superuser = models.BooleanField(default=True)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     USERNAME_FIELD = "email"

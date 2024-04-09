@@ -60,7 +60,7 @@ CUSTOM_USER_APPS = [
     "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
+    # "allauth.socialaccount",
     "app.activity",
     "app.album",
     "app.board",
@@ -104,7 +104,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_METHODS = ["allauth.account.auth_backends.AuthenticationBackend"]
+# AUTHENTICATION_METHODS = ["allauth.account.auth_backends.AuthenticationBackend"]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
@@ -171,7 +171,8 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
-        # "rest_framework.permissions.IsAdminUser"
+        # "rest_framework.permissions.IsAdminUser",
+        # "rest_framework.permissions.AllowAny",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         # "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -181,28 +182,45 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-    "ROTATE_REFRESH_TOKENS": True,  # True - 새로운 리프레시 토큰이 발급될 때마다 이전의 리프레시 토큰이 만료됨
-    "BLACKLIST_AFTER_ROTATION": True,  # 리프레시 토큰이 새로 발급되면 이전의 리프레시 토큰을 블랙리스트에 추가하는 옵션
+    "ROTATE_REFRESH_TOKENS": False,  # True - 새로운 리프레시 토큰이 발급될 때마다 이전의 리프레시 토큰이 만료됨
+    "BLACKLIST_AFTER_ROTATION": False,  # True - 리프레시 토큰이 새로 발급되면 이전의 리프레시 토큰을 블랙리스트에 추가하는 옵션
     "UPDATE_LAST_LOGIN": True,  # True - 마지막 로그인 시간을 업데이트
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,  # SECRET_KEY를 이용해 JWT 서명에 사용되는 비밀키 지정
-    "USER_ID_FIELD": "email",  # user 모델에서 사용자 식별하는 필드
-    # "USER_ID_CLAIM": "email",
-    # "TOKEN_USER_CLASS": "user.User",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정  # debug
-    # "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",  # debug
-    # "SLIDING_TOKEN_REFRESH_EXP_CLAIN": "refresh_exp",
-    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
-    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1)
+    "VERIFYING_KEY": "",
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JSON_ENCODER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "USER_ID_FIELD": "id",  # user 모델에서 사용자 식별하는 필드
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",  # JWT 토큰에 저장되는 사용자 정보의 클래스 지정
+    "JTI_CLAIM": "jti",
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    # "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    # "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    # "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    # "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    # "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    # "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by email
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
+# AUTHENTICATION_BACKENDS = [
+#    # Needed to login by username in Django admin, regardless of `allauth`
+#    "django.contrib.auth.backends.ModelBackend",
+#    # `allauth` specific authentication methods, such as login by email
+#    "allauth.account.auth_backends.AuthenticationBackend",
+# ]
 
 # SOCIALACCOUNT_PROVIDERS = {
 #     "google": {
@@ -229,8 +247,9 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_ADAPTER = "app.user.adapters.CustomAccountAdapter"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # ?
 
 # REST_USE_JWT = True  # debug
 
@@ -240,7 +259,12 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
+    "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
 }
+
+# REST_AUTH_REGISTER_SERIALIZER = {
+#     "REGISTER_SERIALIZER": "user.serializers.SignupSerializer",
+# }
 
 # STORAGES = {
 #     "default": {

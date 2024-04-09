@@ -1,8 +1,3 @@
-from typing import TypeVar
-
-from django.db.models import Model
-from django.shortcuts import render
-from django.views.generic import ListView
 from rest_framework import permissions, viewsets
 from rest_framework.serializers import BaseSerializer
 
