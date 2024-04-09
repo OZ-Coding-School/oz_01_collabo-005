@@ -4,8 +4,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsPersonCircle } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import "./Topnav.css";
-
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
 
@@ -16,7 +16,10 @@ function TopNav(): JSX.Element {
   return (
     <div className="NavContainer">
       <div className="header-box">
-        <div className="Logo">LANDING</div>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          {" "}
+          <div className="Logo">LANDING</div>{" "}
+        </Link>
         <div className="navbar-button-box">
           {showSearch && (
             <form className="search-button">
@@ -40,7 +43,11 @@ function TopNav(): JSX.Element {
               title={<BsPersonCircle size={27} />}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item href="login">로그인 </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to={"/login"} style={{ textDecoration: "none" }}>
+                  로그인
+                </Link>{" "}
+              </NavDropdown.Item>
               <NavDropdown.Item href="myInfo">나의 정보</NavDropdown.Item>
               <NavDropdown.Item href="meet">나의 모임</NavDropdown.Item>
               <NavDropdown.Divider />

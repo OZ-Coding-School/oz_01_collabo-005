@@ -8,7 +8,7 @@
   box-sizing: content-box;
 }
 .Logo {
-  width: 71px;
+  width: 120px;
   height: 37px;
   font-weight: 900;
   color: #b22222;
@@ -94,4 +94,12 @@ label {
     width: 100%;
     margin: 0;
   }
+}
+.dd:hover {
+  background-color: rgb(
+    207,
+    87,
+    18
+  ); /* 호버 시 배경색을 원하는 색상으로 변경 */
+  border-radius: 8px;
 }
