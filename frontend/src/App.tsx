@@ -5,7 +5,6 @@ import TopNav from "./Components/Topnav";
 import Login from "./Pages/Login";
 import Main from "./Pages/Main";
 import MyInfo from "./Pages/Myinfo";
-
 import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
 
@@ -18,8 +17,9 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/myMeet" element={<MyMeet />}></Route>
         <Route path="/myInfo" element={<MyInfo />}></Route>
-        <Route path="signUp" element={<SignUp />}></Route>
-        <Route path="login" element={<Login />}></Route>
+        <Route path="/signUp" element={<SignUp />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        {/* <Route path="/meetHome" element={<MeetHome />}></Route> */}
         <Route path="*" element={<div> 없는 페이지임</div>}></Route>
       </Routes>
       <Footer />

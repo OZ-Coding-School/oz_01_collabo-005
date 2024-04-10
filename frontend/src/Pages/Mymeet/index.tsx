@@ -1,4 +1,5 @@
-import { useState } from "react"; // 추가
+import axios from "axios";
+import { useEffect, useState } from "react"; // 추가
 import { HiUsers } from "react-icons/hi";
 import { MdRemoveRedEye } from "react-icons/md";
 import dummy from "./dummy.json";
@@ -26,6 +27,15 @@ function TabButton({ title, onSelect }: TabButtonProps): JSX.Element {
 }
 
 function ShowMyMeet(): JSX.Element {
+  useEffect(() => {
+    console.log("에러!!");
+    axios({})
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <>
       {dummy.img.map((item: DummyItem, index: number) => (
