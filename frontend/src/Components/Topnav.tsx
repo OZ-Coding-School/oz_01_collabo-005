@@ -57,7 +57,7 @@ function TopNav(): JSX.Element {
               </NavDropdown.Item>
               <NavDropdown.Item>
                 {" "}
-                <Link to={"myMeet"} style={{ textDecoration: "none" }}>
+                <Link to={"/myMeet"} style={{ textDecoration: "none" }}>
                   나의 모임
                 </Link>{" "}
               </NavDropdown.Item>
