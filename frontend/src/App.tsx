@@ -8,6 +8,7 @@ import MyInfo from "./Pages/Myinfo";
 
 import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
+import CreateMeet from "./Pages/Createmeet";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/myInfo" element={<MyInfo />}></Route>
         <Route path="signUp" element={<SignUp />}></Route>
         <Route path="login" element={<Login />}></Route>
+        <Route path="createMeet" element={<CreateMeet />}></Route>
+
         <Route path="*" element={<div> 없는 페이지임</div>}></Route>
       </Routes>
       <Footer />
