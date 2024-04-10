@@ -218,3 +218,4 @@
 ### Interactive API Documentation
 
 ### ERD
+![ozteam5_db](https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/03520be9-a563-47ba-bddb-15440ebe7457)

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./index.css";
-import axios from "axios";
 
 function CreateMeet() {
   const categories = [
