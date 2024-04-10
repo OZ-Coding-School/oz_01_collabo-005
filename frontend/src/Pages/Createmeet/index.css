@@ -1,0 +1,100 @@
+.CreateMeetContainer {
+  width: 70%;
+  height: auto;
+  margin: 0 15%;
+  padding: 3% 0;
+  background-color: silver;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.formContainer {
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  margin-top: 35px;
+  gap: 30px;
+}
+.contentBox {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+  height: 100px;
+  gap: 10px;
+}
+
+.catBox {
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: white;
+  display: flex;
+  width: 100%;
+  height: auto;
+  font-size: 2rem;
+  justify-content: center;
+  position: relative;
+}
+
+.selected {
+  background-color: #b22222;
+  color: white;
+}
+.catBox div {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.catBox:hover {
+  /* 마우스 호버 시 스타일 */
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+  transition: 0.3s;
+}
+
+.namePlaceBox {
+  display: flex;
+  padding: 2% 2%;
+}
+
+.namePlaceBox div {
+  gap: 20px;
+  font-size: 2rem;
+  width: 100%;
+  padding-bottom: 2%;
+}
+
+.namePlaceBox input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 0 15px;
+}
+
+.namePlaceBox textarea {
+  width: 99%;
+  margin-top: 5px;
+}
+
+.meetPlace {
+  margin-left: 2%;
+}
+
+.meetIntro {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+  width: 100%;
+  gap: 20px;
+  font-size: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .CreateMeetContainer {
+    width: 100%;
+    margin: 0;
+  }
+}
