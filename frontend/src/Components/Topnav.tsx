@@ -62,8 +62,7 @@ function TopNav(): JSX.Element {
                 </Link>{" "}
               </NavDropdown.Item>
               <NavDropdown.Divider />
-
-              <NavDropdown.Item href="#action/3.5">모임 개설</NavDropdown.Item>
+              <NavDropdown.Item href="createMeet">모임 개설</NavDropdown.Item>
             </NavDropdown>
           </div>
         </div>
