@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from app.album.models import Album
+
+
+class AlbumView(viewsets.ModelViewSet):
+    queryset = Album.objects.all()
+    serializer_class =
