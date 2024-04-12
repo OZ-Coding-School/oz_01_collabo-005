@@ -1,8 +1,11 @@
 .carouselBox {
-  background-color: green;
+  background-color: #fffdf8;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
 }
 
 .imageCarousel {

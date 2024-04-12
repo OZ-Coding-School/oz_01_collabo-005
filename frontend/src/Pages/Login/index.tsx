@@ -17,7 +17,10 @@ function Login() {
 
     // 서버로 POST 요청 보내기
     axios
-      .post("/login", loginData)
+      .post(
+        "http://ec2-43-201-73-9.ap-northeast-2.compute.amazonaws.com:8000/api/accounts/login",
+        loginData,
+      )
       .then((response) => {
         console.log("로그인 성공:", response.data); // 서버로부터 받은 응답 데이터 출력
         const { accessToken } = response.data;
@@ -32,11 +35,14 @@ function Login() {
   // 서버 요청 시에 Access 토큰을 함께 보내는 함수
   const fetchDataWithToken = () => {
     axios
-      .get("/api/data", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Access 토큰을 헤더에 포함하여 보냅니다.
+      .get(
+        "http://ec2-43-201-73-9.ap-northeast-2.compute.amazonaws.com:8000/api/accounts/login",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Access 토큰을 헤더에 포함하여 보냅니다.
+          },
         },
-      })
+      )
       .then((response) => {
         console.log("데이터 요청 성공:", response.data);
         // 데이터를 처리하는 로직을 추가합니다.
@@ -53,12 +59,12 @@ function Login() {
         <form
           method="post"
           name="login-form"
-          action="/login"
+          action="http://ec2-43-201-73-9.ap-northeast-2.compute.amazonaws.com:8000/api/accounts/login"
           id="loginForm"
           onSubmit={handleSubmit}
         >
           <input
-            name="userId"
+            name="email"
             type="text"
             placeholder="ID"
             value={id}
@@ -67,7 +73,7 @@ function Login() {
             }}
           />
           <input
-            name="userPassword"
+            name="password"
             type="password"
             placeholder="Password"
             value={password}

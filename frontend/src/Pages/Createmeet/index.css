@@ -3,7 +3,7 @@
   height: auto;
   margin: 0 15%;
   padding: 3% 0;
-  background-color: silver;
+  background-color: #fffdf8;
 }
 
 input[type="checkbox"] {
@@ -49,29 +49,25 @@ input[type="checkbox"] {
   transform: translateY(-50%);
 }
 
-.catBox:hover {
-  /* 마우스 호버 시 스타일 */
-  transform: scale(1.1); /* 살짝 커지는 효과 */
-  transition: 0.3s;
-}
-
 .namePlaceBox {
   display: flex;
   padding: 2% 2%;
+  gap: 20px;
 }
 
 .namePlaceBox div {
   gap: 20px;
   font-size: 2rem;
   width: 100%;
-  padding-bottom: 2%;
+  padding-bottom: 4%;
+  padding-left: 10px;
 }
 
 .namePlaceBox input {
   width: 100%;
   box-sizing: border-box;
   border-radius: 10px;
-  padding: 0 15px;
+  padding: 3px 15px;
 }
 
 .namePlaceBox textarea {
@@ -88,8 +84,70 @@ input[type="checkbox"] {
   flex-direction: column;
   padding: 0 2%;
   width: 100%;
-  gap: 20px;
+  gap: 10px;
   font-size: 2rem;
+}
+
+.photoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+  width: 100%;
+  gap: 10px;
+  font-size: 2rem;
+}
+
+.photoContainer h4 {
+  font-size: 1.8rem;
+  color: gray;
+  width: 50%;
+}
+
+.photoTextBox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.photoTextBox input {
+  width: 50%;
+  color: gray;
+}
+
+.photoContainer img {
+  display: flex;
+  width: 800px;
+  height: 500px;
+}
+
+.imgBox {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.subBox {
+  display: flex;
+  justify-content: center;
+}
+
+.submit {
+  background-color: #b22222;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 200px;
+  height: 60px;
+  font-weight: bold;
+}
+
+.catBox:hover {
+  /* 마우스 호버 시 스타일 */
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+  transition: 0.3s;
+}
+.submit:hover {
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+  transition: 0.3s;
 }
 
 @media (max-width: 1024px) {

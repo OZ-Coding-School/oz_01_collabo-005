@@ -1,0 +1,152 @@
+.writeBoardContainer {
+  width: 70%;
+  height: auto;
+  margin: 0 15%;
+  padding: 3% 2%;
+  background-color: #fffdf8;
+  justify-content: center;
+}
+
+.beforeText {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 20%;
+}
+
+.writeBoardImgBox img {
+  width: 130px;
+  height: 110px;
+}
+
+.textBox {
+  font-size: 2rem;
+}
+.userName {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.ToggleButtonBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.writeToggleButton {
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: white;
+  background-color: #b22222;
+  margin-top: 15px;
+  margin-right: 10px;
+  width: 150px;
+  height: 35px;
+}
+
+.imgBox {
+  display: flex;
+  justify-content: center;
+}
+
+.imgBox img {
+  width: 400px;
+  height: 300px;
+}
+
+.writeToggleButton:hover {
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+  transition: 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .writeBoardContainer {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.pleaseWriteTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  color: gray;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.textareaBox {
+  display: flex;
+  justify-content: center;
+}
+
+.OnClickBoardContainer form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.boardTitle {
+  width: 350px;
+  height: 50px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.textareaBox textarea {
+  width: 700px;
+  font-size: 2rem;
+}
+
+.submitBox {
+  position: relative;
+  display: flex;
+  width: 700px;
+  margin-top: 30px;
+  gap: 250px;
+}
+
+.submitBox input {
+  font-size: 2rem;
+}
+
+.submitBox input[type="submit"] {
+  background-color: #b22222;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 150px;
+  height: 50px;
+  font-weight: bold;
+  align-items: center;
+}
+
+.submitBox input[type="submit"]:hover {
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .boardTitle {
+    width: 50%;
+  }
+  .textareaBox textarea {
+    width: 80%;
+    height: 50%;
+  }
+  .submitBox {
+    width: 60%;
+    flex-direction: column;
+    height: auto;
+    gap: 30px;
+  }
+  .submitBox input {
+    font-size: 2rem;
+  }
+}
