@@ -28,3 +28,10 @@
   left: 59%;
   top: 34.5%;
 }
+
+@media screen and (max-width: 1024px) {
+  .myinfo {
+    width: 100%;
+    margin: 0;
+  }
+}

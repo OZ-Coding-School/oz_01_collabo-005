@@ -1,5 +1,5 @@
 import { MdEdit } from "react-icons/md";
-import SelectBox from "../../Components/Selectbox";
+import SelectBox from "../../Components/Nationoption/Selectbox";
 import "./index.css";
 
 function MyInfo() {
