@@ -10,6 +10,7 @@ class Club(BaseModel):
     image = models.ImageField(upload_to="images/club/", blank=True, null=True)
     leader = models.ForeignKey("user.User", on_delete=models.SET_NULL, null=True)
     max_members = models.IntegerField(default=100)
-    place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
-    # frequent_place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
-    # age_group = models.ManyToManyField()
+    # place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
+    frequent_place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
+    age_group = models.ManyToManyField()
+    
