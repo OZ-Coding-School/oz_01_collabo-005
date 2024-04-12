@@ -10,7 +10,7 @@ class ClubSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Club
-        fields = ("id", "url", "name", "description", "category", "image", "leader", "max_members", "place")
+        fields = ("id", "url", "name", "description", "category", "image", "leader", "max_members", "frequent_place")
 
 
 # class ClubSerializer(serializers.ModelSerializer):

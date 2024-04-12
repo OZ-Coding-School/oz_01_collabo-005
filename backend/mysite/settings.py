@@ -152,7 +152,7 @@ TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -232,7 +232,6 @@ SIMPLE_JWT = {
 #     }
 # }
 
-SITE_ID = 1
 
 # SOCIALACCOUNT_LOGIN_ON_GET = True
 # LOGIN_REDIRECT_URL = "/"
@@ -241,22 +240,24 @@ SITE_ID = 1
 # ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 # ACCOUNT_LOGOUT_ON_GET = True
 
+# 필수
+SITE_ID = 1
+REST_USE_JWT = True  # debug
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # username 필드 사용 x
 ACCOUNT_EMAIL_REQUIRED = True  # email 필드 사용 o
-ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "none"
+# 필수 아님
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_ADAPTER = "app.user.adapters.CustomAccountAdapter"
-
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # ?
-
-# REST_USE_JWT = True  # debug
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # ?
 
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
-    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",  # refresh token 담을 쿠키 이름
+    "JWT_AUTH_COOKIE": "access",
+    "JWT_AUTH_REFRESH_COOKIE": "refresh",  # refresh token 담을 쿠키 이름
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
     "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",

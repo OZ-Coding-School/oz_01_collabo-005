@@ -62,7 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     phone = models.CharField(_("phone"), max_length=30)
     # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
-    profession = models.CharField(_("profession"), max_length=10)
+    profession = models.CharField(_("profession"), max_length=10, null=True, blank=True)
     profile_image = models.ImageField(
         _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
     )
@@ -111,3 +111,9 @@ class Nationality(BaseModel):
     nationality = models.CharField(_("nationality"), max_length=30)
     continent = models.CharField(_("continent"), max_length=15)
     flag_icon = models.ImageField(_("flag icon"), upload_to="images/nationality/", editable=True)
+
+
+class AgeGroup(BaseModel):
+    group = models.CharField(max_length=10, unique=True)
+    max_age = models.IntegerField()
+    min_age = models.IntegerField()

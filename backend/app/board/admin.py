@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from app.board.models import Post, Schedule
+
+# admin.site.register(Board)
+admin.site.register(Post)
+admin.site.register(Schedule)
