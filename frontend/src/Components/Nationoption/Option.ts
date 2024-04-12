@@ -1,4 +1,4 @@
-export const Options = [
+export const Option = [
   { value: "Afghanistan", name: "Afghanistan" },
   { value: "Åland Islands", name: "Åland Islands" },
   { value: "Albania", name: "Albania" },

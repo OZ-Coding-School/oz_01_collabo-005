@@ -1,6 +1,8 @@
 .signup {
   width: 70%;
+  height: auto;
   margin: 0 15%;
+  padding-top: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,12 +14,14 @@
   align-items: center;
   width: 70%;
 }
+.signupTitle {
+  margin: 0 0 10% 0;
+}
 .signupInputDiv {
   display: flex;
   width: 100%;
   flex-direction: row;
   font-weight: 700;
-  position: relative;
   justify-content: space-evenly;
 }
 .signupDiv {
@@ -30,6 +34,18 @@
 .signupInput {
   margin-top: 13.5px;
   min-width: 150px;
+  max-width: 220px;
+  height: 30px;
+  display: block;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 5px;
+  font-size: inherit;
+  border: 1px solid;
+}
+#birth.signupInput {
+  margin-top: 13.5px;
+  min-width: 176px;
   max-width: 220px;
   height: 30px;
   display: block;
@@ -56,7 +72,7 @@
   align-items: center;
   justify-content: center;
   height: 50px;
-  width: 60%;
+  width: 250px;
 }
 .signupBtn {
   width: 70%;
@@ -69,4 +85,10 @@
   cursor: pointer;
   background-color: #b22222;
   color: white;
+}
+@media screen and (max-width: 1024px) {
+  .signup {
+    width: 100%;
+    margin: 0;
+  }
 }
