@@ -3,7 +3,7 @@
   height: auto;
   margin: 0 15%;
   padding: 3% 3%;
-  background-color: silver;
+  background-color: #fffdf8;
 }
 
 .newPostContainer {
@@ -19,6 +19,9 @@
   max-height: 150px;
   overflow-y: hidden;
   margin-bottom: 40px;
+  box-sizing: border-box;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
 }
 
 .newPostBox img {

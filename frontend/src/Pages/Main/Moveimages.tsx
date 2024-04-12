@@ -63,8 +63,16 @@ function MoveImages() {
               </a>
             </div>
           ))}
-          <GrPrevious className="prev-button" onClick={prevSlide} />
-          <GrNext className="next-button" onClick={nextSlide} />
+          <GrPrevious
+            style={{ width: "20px", height: "60px" }}
+            className="prev-button"
+            onClick={prevSlide}
+          />
+          <GrNext
+            style={{ width: "20px", height: "60px" }}
+            className="next-button"
+            onClick={nextSlide}
+          />
         </div>
       </div>
     </div>

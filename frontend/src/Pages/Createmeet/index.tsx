@@ -12,11 +12,10 @@ function CreateMeet() {
     "책/인문학",
     "운동",
   ];
-  const ages = ["10", "20", "30", "40", "50", "60", "70"];
-
-  const [selectCategory, setSelectCategory] = useState("");
-  //   const [checked, setChecked] = useState(false)
-  const [selectAges, setSelectAges] = useState("");
+  const ages: string[] = ["10", "20", "30", "40", "50", "60", "70"];
+  const [selectCategory, setSelectCategory] = useState<string>("");
+  const [selectAges, setSelectAges] = useState<string>("");
+  const [postImg, setPostImg] = useState<string | null>(null);
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -30,15 +29,17 @@ function CreateMeet() {
       setSelectAges(value);
     }
   };
-  // const handleSubmit =async (e) => {
-  //   e.preventDefault();
-  //   try{
-  //       const formDataToSend = new FormData();
-  //       formDataToSend.append('category' , formData.category)
-  //       formDataToSend.append('')
-  //       formDataToSend.append()
-  //   }
-  // }
+
+  const handleImgChange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        setPostImg(reader.result as any);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="CreateMeetContainer">
@@ -96,9 +97,22 @@ function CreateMeet() {
             placeholder="활동 중심으로 모임을 소개해주세요.   (모임설정에서 언제든지 바꿀 수 있어요)"
           ></textarea>
         </div>
+        <div className="photoContainer">
+          <div className="titles">대표사진</div>
+          <div className="photoTextBox">
+            <h4>모임을 대표할 수 있는 사진을 만들어주세요</h4>
+            <input type="file" onChange={handleImgChange} />
+          </div>
+          <div className="imgBox">
+            {postImg && <img src={postImg} alt="미리보기" />}
+          </div>
+          <div className="subBox">
+            <input type="submit" className="submit" value={"모임 개설"} />
+          </div>
+        </div>
+        <div className="pick">선택된 카테고리 : {selectCategory}</div>
+        <div className="pick">선택된 나이 : {selectAges}대</div>
       </form>
-      <div>선택된 카테고리 : {selectCategory}</div>
-      <div>선택된 나이 : {selectAges}</div>
     </div>
   );
 }
