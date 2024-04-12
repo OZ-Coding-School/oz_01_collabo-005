@@ -111,3 +111,9 @@ class Nationality(BaseModel):
     nationality = models.CharField(_("nationality"), max_length=30)
     continent = models.CharField(_("continent"), max_length=15)
     flag_icon = models.ImageField(_("flag icon"), upload_to="images/nationality/", editable=True)
+
+
+class AgeGroup(BaseModel):
+    group = models.CharField(max_length=10, unique=True)
+    max_age = models.IntegerField()
+    min_age = models.IntegerField()
