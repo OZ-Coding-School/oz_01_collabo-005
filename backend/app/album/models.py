@@ -2,7 +2,6 @@ from django.db import models
 
 from app.common.models import BaseModel
 
-
 # class Album(BaseModel):
 #     club = models.ForeignKey("club.Club", on_delete=models.CASCADE, related_name="album")
 
