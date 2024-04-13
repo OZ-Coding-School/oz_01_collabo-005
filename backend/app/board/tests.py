@@ -6,7 +6,7 @@ from app.club.models import Club
 from app.user.models import User
 
 
-class PostModelTest(TestCase):
+class PostModelTests(TestCase):
     def setUp(self) -> None:
         email = "user@test.com"
         password = "aejflslefjla"
@@ -33,7 +33,7 @@ class PostModelTest(TestCase):
         self.assertEqual(res.status_code, 400)
 
 
-class ScheduleModelTest(TestCase):
+class ScheduleModelTests(TestCase):
     def setUp(self) -> None:
         email = "user1@test.com"
         password = "aelsfjkflefjla"
