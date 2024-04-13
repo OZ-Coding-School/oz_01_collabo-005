@@ -2,7 +2,6 @@ from rest_framework import serializers
 
 from app.board.models import Post, Schedule
 
-
 # class BoardSerializer(serializers.ModelSerializer[Board]):
 #     class Meta:
 #         model = Board

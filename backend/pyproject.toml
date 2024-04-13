@@ -30,6 +30,7 @@ mypy = "^1.9.0"
 django-stubs = "^4.2.7"
 ipython = "^8.23.0"
 django-stubs-ext = "^4.2.7"
+coverage = "^7.4.4"
 
 [build-system]
 requires = ["poetry-core"]
@@ -58,3 +59,6 @@ ignore_errors = true
 
 [tool.django-stubs]
 django_settings_module = "mysite.settings"
+
+[tool.coverage.run]
+omit = ["*/migrations/*"]
