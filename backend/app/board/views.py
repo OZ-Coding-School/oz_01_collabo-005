@@ -11,8 +11,6 @@ from app.board.permissions import IsWriterOrReadOnly
 from app.board.serializers import PostSerializer, ScheduleSerializer
 from app.club.models import Club
 
-_MT = TypeVar("_MT", bound=Model)
-
 
 class PostViewSet(viewsets.ModelViewSet[Post]):
     # queryset = Post.objects.all()
@@ -35,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet[Post]):
     #     except Club.DoesNotExist:
     #         raise NotFound("Club not found")
 
-    def perform_create(self, serializer: BaseSerializer[_MT]) -> None:
+    def perform_create(self, serializer: BaseSerializer[Post]) -> None:
         club_id = self.kwargs.get("club_id")
         serializer.save(club_id=club_id, writer=self.request.user)
 
@@ -51,6 +49,6 @@ class ScheduleViewSet(viewsets.ModelViewSet[Schedule]):
             raise NotFound(detail="club not found")
         return Schedule.objects.filter(club_id=club_id)
 
-    def perform_create(self, serializer: BaseSerializer[_MT]) -> None:
+    def perform_create(self, serializer: BaseSerializer[Schedule]) -> None:
         club_id = self.kwargs.get("club_id")
         serializer.save(club_id=club_id, writer=self.request.user)
