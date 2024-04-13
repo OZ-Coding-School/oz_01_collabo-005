@@ -59,3 +59,6 @@ ignore_errors = true
 
 [tool.django-stubs]
 django_settings_module = "mysite.settings"
+
+[tool.coverage.run]
+omit = ["*/migrations/*"]
