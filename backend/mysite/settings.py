@@ -34,7 +34,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS: List[str] = []
-ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(',')
+ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -86,9 +86,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173"
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
