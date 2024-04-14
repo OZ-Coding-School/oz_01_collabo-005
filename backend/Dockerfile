@@ -21,5 +21,7 @@ COPY ./.env ./.env
 
 RUN export $(cat .env | xargs)
 
+ENV DB_HOST db
+
 COPY ./entrypoint.sh ./entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
