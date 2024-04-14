@@ -34,7 +34,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS: List[str] = []
-ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(',')
+ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -61,6 +61,7 @@ CUSTOM_USER_APPS = [
     "allauth",
     "allauth.account",
     # "allauth.socialaccount",
+    "corsheaders",
     "app.activity",
     "app.album",
     "app.board",
@@ -74,6 +75,7 @@ INSTALLED_APPS = DJANGO_SYSTEM_APPS + CUSTOM_USER_APPS
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -83,6 +85,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+APPEND_SLASH = False
 
 INTERNAL_IPS = ["127.0.0.1"]
 
