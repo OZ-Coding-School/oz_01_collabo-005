@@ -34,7 +34,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS: List[str] = []
-ALLOWED_HOSTS += [env("ALLOWED_HOSTS")]
+ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(',')
 
 # Application definition
 
