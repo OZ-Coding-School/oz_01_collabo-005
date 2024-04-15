@@ -8,7 +8,7 @@ from app.user.models import User
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ("email", "nickname", "is_staff", "is_active", "is_superuser")
+    list_display = ("id", "email", "nickname", "is_staff", "is_active", "is_superuser")
     list_filter = ("is_staff", "is_active", "is_superuser", "nationality")
     search_fields = ("email", "nickname")
     ordering = ("email", "nickname", "is_staff", "is_active")
