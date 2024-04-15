@@ -5,7 +5,7 @@
   justify-content: center;
   font-size: 1.3rem;
   height: 100vh;
-  padding-top: 15%;
+  padding-top: 10%;
 }
 
 .landingText {
@@ -19,7 +19,6 @@
   width: 400px;
   align-items: center;
 }
-
 #loginForm {
   display: flex;
   width: 100%;
@@ -28,11 +27,8 @@
 }
 
 #loginForm input {
-  height: 40px;
-  padding: 5px;
-}
-#loginForm input[type="password"] {
-  margin-bottom: 4px;
+  height: 50px;
+  padding: 0 5px;
 }
 
 #loginForm input[type="submit"] {
@@ -55,25 +51,30 @@
   font-size: 20px;
 }
 
-.inGoogle {
-  width: 20%;
-  height: 45px;
-  margin: 0 20%;
-  border-radius: 5px;
-  color: white;
-  background-color: #b22222;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
 .enterJoin {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin-top: 5px;
+  padding: 0 5px;
 }
 
 .enterJoin a {
-  margin: 8px 0;
+  padding: 0 10px;
+  margin: 8px 0px;
   text-decoration: none;
+  width: 30;
   color: black;
+}
+
+.HidePasswordButton {
+  color: black;
+  font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+  .loginContainer {
+    width: 100%;
+    margin: 0;
+  }
 }
