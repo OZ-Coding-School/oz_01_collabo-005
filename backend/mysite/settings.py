@@ -90,7 +90,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-APPEND_SLASH = False
+# APPEND_SLASH = False
 
 INTERNAL_IPS = ["127.0.0.1"]
 
@@ -294,19 +294,36 @@ REST_AUTH = {
 # }
 
 STATIC_ROOT = BASE_DIR / "static"
-DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
+# 기본 설정
+# DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
+# AWS
 # DEFAULT_FILE_STORAGE = env("DEFAULT_FILE_STORAGE")
 # STATICFILES_STORAGE = env("STATICFILES_STORAGE")
 # AWS_S3_SESSION_PROFILE = env("STORAGE_SESSION_PROFILE")
-AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
-AWS_REGION_NAME = env("AWS_REGION_NAME")
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+# AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+# AWS_REGION_NAME = env("AWS_REGION_NAME")
+# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
 # AWS_DEFAULT_ACL = env("AWS_DEFAULT_ACL")
 # AWS_QUERYSTRING_AUTH = False
+
+# NCloud
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = "storages.backends.ncloud.NCloudStorage"
+# STATICFILES_STORAGE = "storages.backends.ncloud.NCloudStorage"
+AWS_ACCESS_KEY_ID = env("STORAGE_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = env("STORAGE_SECRET_KEY")
+AWS_STORAGE_BUCKET_NAME = env("STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = env("STORAGE_REGION_NAME")
+AWS_S3_ENDPOINT_URL = env("STORAGE_ENDPOINT_URL")
+
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Landing",
@@ -315,19 +332,19 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
 }
 
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "handlers": {
-#         "console": {
-#             "level": "DEBUG",
-#             "class": "logging.StreamHandler",
-#         },
-#     },
-#     "loggers": {
-#         "django.db.backends": {
-#             "handlers": ["console"],
-#             "level": "DEBUG",
-#         },
-#     },
-# }
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+        },
+    },
+}
