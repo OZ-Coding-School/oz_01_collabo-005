@@ -91,3 +91,6 @@ class UserSerializer(serializers.ModelSerializer[User]):
             "profession",
             "profile_image",
         )
+        extra_kwargs = {
+            "password": {"write_only": True}
+        }
