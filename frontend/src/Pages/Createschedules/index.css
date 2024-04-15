@@ -1,0 +1,103 @@
+.CreateSchedulesContainer {
+  width: 70%;
+  height: auto;
+  margin: 0 15%;
+  padding: 3% 2%;
+  background-color: #fffdf8;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  font-size: 2.5rem;
+}
+
+.clubName {
+  display: flex;
+  justify-content: center;
+}
+
+.schedulesDateBox {
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+}
+
+.schedulesDateContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.schedulesDateContainer div {
+  display: flex;
+  padding-top: 15px;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.SchedulesTextBox {
+  gap: 20px;
+}
+
+.SchedulesIcon {
+  display: flex;
+  width: 50px;
+  height: auto;
+}
+
+.afterArea {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  color: black;
+  margin-top: 20px;
+}
+
+.textareaBox {
+  display: flex;
+  width: 90%;
+}
+.textareaBox textarea {
+  width: 700px;
+}
+.schedulesSubmitContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.schedulesSubmitBox {
+  position: relative;
+  display: flex;
+  width: 700px;
+  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.schedulesDateBox input {
+  box-sizing: border-box;
+  border: none;
+  background-color: #fffdf8;
+  color: black;
+  width: 300px;
+}
+
+.schedulesSubmitBox input[type="files"] {
+  margin-right: auto;
+}
+.schedulesSubmitBox input[type="submit"] {
+  margin-left: auto;
+}
+
+.submitBox input[type="submit"]:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .CreateSchedulesContainer {
+    width: 100%;
+    margin: 0;
+  }
+  .schedulesSubmitBox {
+    width: 80%;
+  }
+}

@@ -1,33 +1,45 @@
 .writeBoardContainer {
   width: 70%;
-  height: auto;
-  margin: 0 15%;
-  padding: 3% 2%;
+  height: 100vh;
+  margin: 0% 15%;
+  padding: 0% 2%;
   background-color: #fffdf8;
   justify-content: center;
 }
 
+.OnClickBoardContainer {
+}
+
+.topTitleBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boardForm {
+  display: flex;
+  gap: 10px;
+}
+
 .beforeText {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  width: 20%;
+  padding-left: 35px;
+  width: 700px;
+  gap: 40px;
 }
 
 .writeBoardImgBox img {
-  width: 130px;
-  height: 110px;
+  width: 150px;
+  height: 120px;
 }
 
-.textBox {
-  font-size: 2rem;
-}
-.userName {
+.boardUserName {
   display: flex;
   height: 50px;
   width: 100%;
   font-weight: bolder;
   margin-bottom: 10px;
+  font-size: 3rem;
 }
 
 .ToggleButtonBox {
@@ -63,13 +75,6 @@
   transition: 0.3s;
 }
 
-@media (max-width: 1024px) {
-  .writeBoardContainer {
-    width: 100%;
-    margin: 0;
-  }
-}
-
 .pleaseWriteTitle {
   display: flex;
   justify-content: center;
@@ -83,6 +88,10 @@
   display: flex;
   justify-content: center;
 }
+.OnClickBoardContainer {
+  display: flex;
+  justify-content: center;
+}
 
 .OnClickBoardContainer form {
   display: flex;
@@ -90,6 +99,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+  width: 700px;
 }
 
 .boardTitle {
@@ -101,15 +111,12 @@
 
 .textareaBox textarea {
   width: 700px;
+  height: 50vh;
   font-size: 2rem;
 }
 
 .submitBox {
-  position: relative;
   display: flex;
-  width: 700px;
-  margin-top: 30px;
-  gap: 250px;
 }
 
 .submitBox input {
@@ -132,21 +139,9 @@
   transition: 0.3s;
 }
 
-@media (max-width: 768px) {
-  .boardTitle {
-    width: 50%;
-  }
-  .textareaBox textarea {
-    width: 80%;
-    height: 50%;
-  }
-  .submitBox {
-    width: 60%;
-    flex-direction: column;
-    height: auto;
-    gap: 30px;
-  }
-  .submitBox input {
-    font-size: 2rem;
+@media (max-width: 1024px) {
+  .writeBoardContainer {
+    width: 100%;
+    margin: 0;
   }
 }
