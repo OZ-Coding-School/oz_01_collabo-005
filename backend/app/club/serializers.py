@@ -11,7 +11,7 @@ class ClubSerializer(serializers.ModelSerializer[Club]):
 
     class Meta:
         model = Club
-        fields = ("id", "url", "name", "description", "category", "image", "leader", "max_members", "frequent_place")
+        fields = ("id", "url", "name", "description", "category", "image", "leader", "max_members", "frequent_place", "age_group")
 
 
 # class ClubSerializer(serializers.ModelSerializer):

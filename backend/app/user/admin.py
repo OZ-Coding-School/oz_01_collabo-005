@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from app.user.models import User
+from app.user.models import User, AgeGroup, Nationality
 
-# admin.site.register(User)
+admin.site.register(User)
+admin.site.register(Nationality)
+admin.site.register(AgeGroup)
 
 
-@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = ("id", "email", "nickname", "is_staff", "is_active", "is_superuser")
     list_filter = ("is_staff", "is_active", "is_superuser", "nationality")
