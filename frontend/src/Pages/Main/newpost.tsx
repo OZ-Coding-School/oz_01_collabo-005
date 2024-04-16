@@ -84,6 +84,14 @@ function NewPost() {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => {
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("accessToken");
+        }}
+      >
+        로그아웃
+      </button>
     </div>
   );
 }
