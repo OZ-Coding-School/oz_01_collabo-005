@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "./index.css";
 import instance from "../../Apis/axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -21,11 +24,29 @@ function Login() {
       const { access, refresh } = response.data;
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
-      console.log("로그인 성공");
+      ShowUserName;
+      alert(
+        `환영합니다 ${response.data.user.first_name}${response.data.user.last_name}님`,
+      );
+      navigate("/");
     } catch (error) {
-      console.log("로그인 실패", error);
+      alert("유효하지 않은 계정입니다.");
     }
   };
+
+  const ShowUserName = async () => {
+    try {
+      const response = await instance.get("/api/accounts/login/");
+    } catch (error) {
+      alert("사용자 이름 가져오기 실패");
+    }
+  };
+
+  //로그인 유무 확인
+  const isLogin = !!localStorage.getItem("refreshToken");
+  if (isLogin) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="loginContainer">
