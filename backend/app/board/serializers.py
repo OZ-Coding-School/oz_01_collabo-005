@@ -10,7 +10,7 @@ from app.board.models import Post, Schedule
 
 class PostSerializer(serializers.ModelSerializer[Post]):
     # writer = serializers.SerializerMethodField("get_writer")
-    writer = serializers.ReadOnlyField(source='writer.nickname')
+    writer = serializers.ReadOnlyField(source="writer.nickname")
 
     class Meta:
         model = Post
