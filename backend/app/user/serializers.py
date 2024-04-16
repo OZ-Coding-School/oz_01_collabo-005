@@ -18,7 +18,7 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     last_name = serializers.CharField()
     phone = serializers.CharField()
     date_of_birth = serializers.DateField()
-    profession = serializers.CharField()
+    profession = serializers.CharField(required=False)
 
     # class Meta:
     #     model = User
@@ -91,6 +91,4 @@ class UserSerializer(serializers.ModelSerializer[User]):
             "profession",
             "profile_image",
         )
-        extra_kwargs = {
-            "password": {"write_only": True}
-        }
+        extra_kwargs = {"password": {"write_only": True}}

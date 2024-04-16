@@ -2,7 +2,12 @@ from typing import Any
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.utils import user_field
+from django import forms
+from django.utils.translation import gettext as _
 from requests import Request
+from rest_framework.exceptions import ValidationError
+
+from app.user.models import User
 
 
 class CustomAccountAdapter(DefaultAccountAdapter):  # type: ignore
@@ -26,3 +31,8 @@ class CustomAccountAdapter(DefaultAccountAdapter):  # type: ignore
         # user.profession = data.get("profession")
         user.save()
         return user
+
+    def clean_email(self, email: str) -> str:
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("This email is already in use."))
+        return email
