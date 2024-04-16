@@ -10,4 +10,5 @@ class IsUserOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         # return request.user == obj.leader
-        return request.user == getattr(obj, "user", None)
+        # print(type(request.user), type(obj.email), request.user == obj.email)
+        return str(request.user) == getattr(obj, "email", None)

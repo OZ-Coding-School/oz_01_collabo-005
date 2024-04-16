@@ -4,6 +4,9 @@ from app.category.models import Category
 from app.club.models import Club
 from app.club.serializers import ClubSerializer
 
+# from app.common.utils import upload_image_to_object_storage
+
+
 # class CategorySerializer(serializers.ModelSerializer):
 #     club_set = ClubSerializer(many=True, read_only=True)
 #
@@ -20,6 +23,22 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
         model = Category
         fields = ("id", "url", "name", "picture", "club_set")
         # fields = ["url", "name", "picture", "clubs", "club_set"]
+
+    # def create(self, validated_data):
+    #     picture = validated_data.pop("picture", None)
+    #     category = super().create(validated_data)
+    #     if picture:
+    #         category.picture = upload_image_to_object_storage(picture)
+    #         category.save()
+    #     return category
+    #
+    # def update(self, instance, validated_data):
+    #     picture = validated_data.pop("picture", None)
+    #     category = super().update(instance, validated_data)
+    #     if picture:
+    #         category.picture = upload_image_to_object_storage(picture)
+    #         category.save()
+    #     return category
 
 
 # class CategorySerializer(serializers.ModelSerializer):

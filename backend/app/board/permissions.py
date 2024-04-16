@@ -18,4 +18,5 @@ class IsWriterOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         # return request.user == obj.writer
-        return request.user == getattr(obj, "writer", None)
+        print(str(request.user) == obj.writer.email)
+        return str(request.user) == getattr(obj, "writer.email", None)
