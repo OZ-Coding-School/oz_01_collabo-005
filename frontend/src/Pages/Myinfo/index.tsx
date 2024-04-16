@@ -1,11 +1,10 @@
 import { MdEdit } from "react-icons/md";
-import SelectBox from "../../Components/Nationoption/Selectbox";
 import "./index.css";
 
 function MyInfo() {
   return (
     <div className="myinfo">
-      <h1 className="my">내 정보수정</h1>
+      <h1 className="myinfoTitle">내 정보수정</h1>
       <form className="myinfoForm">
         <div className="myinfoImgEdit">
           <img
@@ -18,13 +17,20 @@ function MyInfo() {
           </div>
           <input type="file" />
         </div>
-        <div>
-          <div className="idEdit"></div>
-          <img />
+        <div className="NickandFlag">
+          <div className="myinfoNickName">리디아</div>
+          <div className="nationImg">
+            <img
+              className="nationFlag"
+              src="../public/pictures/Myinfo/korea.jpg"
+            />
+          </div>
         </div>
-        <div>2024년 가입`가져오기` </div>
-        <div>
-          다양한 사람들과 한국어로 대화`편집가능` <MdEdit />
+        <div className="myinfoUpdate">
+          <div className="signupDate">2024년 가입 </div>
+          <div className="myinfoComment">
+            다양한 사람들과 한국어로 대화 <MdEdit />
+          </div>
         </div>
 
         <div className="myinfoEdit">
@@ -55,9 +61,7 @@ function MyInfo() {
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">국적</div>
-          <div className="rightInfoDiv">
-            <SelectBox defaultValue="Korea, Republic of"></SelectBox>
-          </div>
+          <div className="rightInfoDiv"></div>
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">이름</div>
