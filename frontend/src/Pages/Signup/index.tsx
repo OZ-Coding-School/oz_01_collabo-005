@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import instance from "../../Apis/axios";
 import NationBox from "../../Components/Nationoption/Selectbox";
 import "./index.css";
 
@@ -9,12 +10,12 @@ interface IFormInput {
   email: string;
   password1: string;
   password2: string;
-  nickName: string;
-  firstName: string;
-  lastName: string;
+  nickname: string;
+  first_name: string;
+  last_name: string;
   nationality: string;
   phone: string;
-  birth: Date;
+  date_of_birth: Date;
   profession: string;
 }
 
@@ -28,23 +29,30 @@ function SignUp() {
   } = useForm<IFormInput>();
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleSignUpSuccess = () => {
+    // 여기서 회원가입 성공 시에 success 페이지로 이동합니다.
+    navigate("/signup/success");
+  };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setLoading(true);
     console.log(data);
     try {
-      const response = await axios.post(
-        "http://ec2-43-201-73-9.ap-northeast-2.compute.amazonaws.com:8000/api/accounts/",
-        data,
-        { withCredentials: true },
-      );
+      const response = await instance.post("api/accounts/", data, {
+        withCredentials: true,
+      });
       console.log(response);
+      handleSignUpSuccess();
     } catch (error) {
-      alert(error.response?.data);
+      // alert(error.response?.data);
     }
     setLoading(false);
   };
 
+  const isSignUpSuccess = (data) => {
+    return true;
+  };
   return (
     <div className="signup">
       <h1 className="signupTitle">회원가입</h1>
@@ -119,7 +127,7 @@ function SignUp() {
             <input
               placeholder="8글자 이내 한글로 적어주세요."
               className="signupInput"
-              {...register("nickName", {
+              {...register("nickname", {
                 required: true,
                 maxLength: {
                   value: 8,
@@ -132,10 +140,10 @@ function SignUp() {
                 },
               })}
               type="text"
-              id="nickName"
-              name="nickName"
+              id="nickname"
+              name="nickname"
             />
-            {errors.nickName && <Message>{errors.nickName.message}</Message>}
+            {errors.nickname && <Message>{errors.nickname.message}</Message>}
           </div>
         </div>
         <div className="signupInputDiv">
@@ -155,13 +163,13 @@ function SignUp() {
           <div className="rightSignDiv">
             <input
               className="signupInput"
-              {...register("firstName", {
+              {...register("first_name", {
                 required: true,
                 pattern: /^[A-Za-z|가-힣]{1,}$/,
               })}
               type="text"
-              id="firstName"
-              name="firstName"
+              id="first_name"
+              name="first_name"
             />
           </div>
         </div>
@@ -170,13 +178,13 @@ function SignUp() {
           <div className="rightSignDiv">
             <input
               className="signupInput"
-              {...register("lastName", {
+              {...register("last_name", {
                 required: true,
                 pattern: /^[A-Za-z|가-힣]{1,}$/,
               })}
               type="text"
-              id="lastName"
-              name="lastName"
+              id="last_name"
+              name="last_name"
             />
           </div>
         </div>
@@ -206,14 +214,14 @@ function SignUp() {
           <div className="rightSignDiv">
             <input
               className="signupInput"
-              {...register("birth", {
+              {...register("date_of_birth", {
                 required: true,
                 min: "1901-01-01",
                 max: "2024-12-31",
               })}
               type="date"
-              id="birth"
-              name="birth"
+              id="date_of_birth"
+              name="date_of_birth"
             />
           </div>
         </div>

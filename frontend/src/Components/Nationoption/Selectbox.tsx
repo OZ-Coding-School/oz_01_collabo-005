@@ -9,7 +9,7 @@ function NationBox({ field }: NationboxProps) {
   return (
     <Select {...field}>
       {Option.map((option) => (
-        <option key={option.value} value={option.value}>
+        <option key={option.name} value={option.value}>
           {option.name}
         </option>
       ))}
