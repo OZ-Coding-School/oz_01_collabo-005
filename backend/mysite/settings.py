@@ -60,7 +60,7 @@ CUSTOM_USER_APPS = [
     "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
-    # "allauth.socialaccount",
+    "allauth.socialaccount",
     "corsheaders",
     "app.activity",
     "app.album",
