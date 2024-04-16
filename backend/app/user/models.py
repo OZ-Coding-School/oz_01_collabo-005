@@ -116,7 +116,7 @@ class Nationality(BaseModel):
         verbose_name = "Nationality"
         verbose_name_plural = "Nationalities"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.nationality
 
 
@@ -125,5 +125,5 @@ class AgeGroup(BaseModel):
     max_age = models.IntegerField()
     min_age = models.IntegerField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.group

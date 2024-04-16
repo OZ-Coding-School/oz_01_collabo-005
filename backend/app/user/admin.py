@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from app.user.models import User, AgeGroup, Nationality
+from app.user.models import AgeGroup, Nationality, User
 
 admin.site.register(User)
 admin.site.register(Nationality)

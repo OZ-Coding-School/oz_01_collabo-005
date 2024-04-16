@@ -3,7 +3,7 @@ from rest_framework import serializers
 from app.activity.models import JoinedClub
 
 
-class JoinedClubSerializer(serializers.ModelSerializer):
+class JoinedClubSerializer(serializers.ModelSerializer[JoinedClub]):
     class Meta:
         model = JoinedClub
         fields = ("id", "user", "club")
