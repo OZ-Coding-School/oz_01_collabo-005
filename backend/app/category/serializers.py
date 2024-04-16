@@ -3,6 +3,7 @@ from rest_framework import serializers
 from app.category.models import Category
 from app.club.models import Club
 from app.club.serializers import ClubSerializer
+
 # from app.common.utils import upload_image_to_object_storage
 
 
@@ -38,6 +39,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
     #         category.picture = upload_image_to_object_storage(picture)
     #         category.save()
     #     return category
+
 
 # class CategorySerializer(serializers.ModelSerializer):
 # clubs = serializers.PrimaryKeyRelatedField(many=True, queryset=Club.objects.all())

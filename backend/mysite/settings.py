@@ -314,10 +314,8 @@ STATIC_ROOT = BASE_DIR / "static"
 # AWS_QUERYSTRING_AUTH = False
 
 # NCloud
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = "storages.backends.ncloud.NCloudStorage"
-# STATICFILES_STORAGE = "storages.backends.ncloud.NCloudStorage"
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = env("STORAGE_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = env("STORAGE_SECRET_KEY")
 AWS_STORAGE_BUCKET_NAME = env("STORAGE_BUCKET_NAME")
