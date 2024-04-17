@@ -18,7 +18,7 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     last_name = serializers.CharField()
     phone = serializers.CharField()
     date_of_birth = serializers.DateField()
-    profession = serializers.CharField(required=False)
+    profession = serializers.CharField(required=False, allow_blank=True)
 
     # class Meta:
     #     model = User
