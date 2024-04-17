@@ -25,4 +25,5 @@ env_for_sharing
 diff*
 images/
 static/
+django.log
 
