@@ -88,6 +88,8 @@ function NewPost() {
         onClick={() => {
           localStorage.removeItem("refreshToken");
           localStorage.removeItem("accessToken");
+          localStorage.removeItem("first_name");
+          localStorage.removeItem("last_name");
         }}
       >
         로그아웃

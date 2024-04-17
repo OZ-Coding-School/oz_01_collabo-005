@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { BsPersonCircle } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { FaAngleDown, FaUser } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
@@ -9,61 +8,102 @@ import "./Topnav.css";
 
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<string | null>("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("refreshToken");
+    setIsLogin(token); //
+  }, [isLogin]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행 /refresh토큰이 달라질때도 제렌더링
 
   const toggleSearch = (): void => {
     setShowSearch(!showSearch);
   };
 
+  const toggleMenu = (): void => {
+    setShowMenu(!showMenu);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLogin(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
+  };
+
   return (
-    <div className="NavContainer">
-      <div className="header-box">
-        <Link to={"/"} style={{ textDecoration: "none" }}>
-          {" "}
-          <div className="Logo">LANDING</div>{" "}
+    <div className="topNavContainer">
+      <div className="headerBox">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div className="Logo">LANDING</div>
         </Link>
-        <div className="navbar-button-box">
+        <div className="navbarButtonBox">
           {showSearch && (
-            <form className="search-button">
-              <label>
+            <form className="searchScreen">
+              <label className="searchInputLabel">
                 <input
                   className="searchInput"
                   type="text"
                   placeholder="어떤 모임을 찾으시나요?"
                 />
-                <button type="submit" className="inScreen-search">
+                <button type="submit" className="inScreenSearch">
                   <FiSearch />
                 </button>
               </label>
             </form>
           )}
-          <div className="icon-container">
-            <button className="search-button" onClick={toggleSearch}>
+          <div className="navMenuIcon">
+            <button className="searchButton" onClick={toggleSearch}>
               {showSearch ? <RxCross1 size={27} /> : <FiSearch size={27} />}
             </button>
-            <NavDropdown
-              title={<BsPersonCircle size={27} />}
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item>
-                <Link to={"/login"} style={{ textDecoration: "none" }}>
-                  로그인
-                </Link>{" "}
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                {" "}
-                <Link to={"/myinfo"} style={{ textDecoration: "none" }}>
-                  나의 정보
-                </Link>{" "}
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                {" "}
-                <Link to={"/myMeet"} style={{ textDecoration: "none" }}>
-                  나의 모임
-                </Link>{" "}
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="createMeet">모임 개설</NavDropdown.Item>
-            </NavDropdown>
+
+            <label className="dropdownLabel" onClick={toggleMenu}>
+              <FaUser className="userIcon" />
+              <FaAngleDown className="caretIcon" />
+            </label>
+            <div className={showMenu ? "aboutMyMenuHidden" : "myMenuList"}>
+              <ul className="menuList">
+                {isLogin ? (
+                  <>
+                    <li className="logoutList">
+                      <button className="logoutButton" onClick={logoutHandler}>
+                        로그아웃
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="loginList">
+                      <Link
+                        to="/login"
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        로그인
+                      </Link>
+                    </li>
+                  </>
+                )}
+                <li className="myInfoList">
+                  <Link
+                    to="/myInfo"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    나의정보
+                  </Link>
+                </li>
+                <li className="myMeetList">
+                  <Link
+                    to="/myMeet"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    나의모임
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <Link to="/createMeet">
+              <button>➕</button>
+            </Link>
           </div>
         </div>
       </div>

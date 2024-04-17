@@ -17,9 +17,8 @@ import PrivateRoute from "./Privateroute/Privateroute";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
-    email: "",
-    first_name: "",
-    last_name: "",
+    first_name: localStorage.getItem("first_name"),
+    last_name: localStorage.getItem("last_name"),
   });
 
   return (

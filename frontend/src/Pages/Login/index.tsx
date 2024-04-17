@@ -24,21 +24,13 @@ function Login() {
       const { access, refresh } = response.data;
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
-      ShowUserName;
-      alert(
-        `환영합니다 ${response.data.user.first_name}${response.data.user.last_name}님`,
-      );
+      const { first_name, last_name } = response.data.user;
+      localStorage.setItem("first_name", first_name);
+      localStorage.setItem("last_name", last_name);
+      alert(`환영합니다 ${first_name}${last_name}님`);
       navigate("/");
     } catch (error) {
       alert("유효하지 않은 계정입니다.");
-    }
-  };
-
-  const ShowUserName = async () => {
-    try {
-      const response = await instance.get("/api/accounts/login/");
-    } catch (error) {
-      alert("사용자 이름 가져오기 실패");
     }
   };
 

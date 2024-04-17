@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./index.css";
+import instance from "../../Apis/axios";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CreateMeet() {
   const categories = [
     "취미/오락",
-    "문화 예술",
+    "문화/예술",
     "자기계발",
     "음악/악기",
     "가족/육아",
@@ -12,24 +15,63 @@ function CreateMeet() {
     "책/인문학",
     "운동",
   ];
-  const ages: string[] = ["10", "20", "30", "40", "50", "60", "70"];
-  const [selectCategory, setSelectCategory] = useState<string>("");
-  const [selectAges, setSelectAges] = useState<string>("");
-  const [postImg, setPostImg] = useState<string | null>(null);
+  const ages: string[] = ["1", "2", "3", "4", "5", "6", "7"];
 
+  //보낼 거
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState("");
+  const [postImg, setPostImg] = useState<string | null>(null);
+  const [selectCategory, setSelectCategory] = useState<string>("");
+  const [selectAges, setSelectAges] = useState<string[]>([]);
+  const [place, setPlace] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  //카테고리 설정
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
       setSelectCategory(value);
     }
   };
+
+  //연령대 설정
   const handleAgeChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
-      setSelectAges(value);
+      //클릭한 값이 이미 배열에 있는지 확인하고
+      const index = selectAges.indexOf(value);
+      //클릭한 값이 배열에 없으면 배열의 맨앞에 추가하기
+      const newSelectedAges = [value, ...selectAges];
+      newSelectedAges.sort((a, b) => a - b);
+      setSelectAges(newSelectedAges);
+    } else {
+      //체크박스 해제되면, 값에서 필터링(제거) , 그 후에 상태 업데이트
+      const newSelectedAges = selectAges.filter((age) => age !== value);
+      setSelectAges(newSelectedAges);
     }
   };
+  const handleInputChange = (e, setter) => {
+    const { value } = e.target;
+    setter(value);
+  };
 
+  // 모임명 설정
+  const handleNameChange = (e) => {
+    handleInputChange(e, setName);
+  };
+
+  // 장소 설정
+  const handlePlaceChange = (e) => {
+    handleInputChange(e, setPlace);
+  };
+
+  // 소개 설정
+  const handleDescriptionChange = (e) => {
+    handleInputChange(e, setDescription);
+  };
+
+  //이미지 설정
   const handleImgChange = (e) => {
     const file = e.target.files && e.target.files[0];
     const reader = new FileReader();
@@ -41,9 +83,31 @@ function CreateMeet() {
     reader.readAsDataURL(file);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      name: name,
+      description: description,
+      category: selectCategory,
+      image: postImg,
+      frequent_place: place,
+      age_group: selectAges,
+    };
+    console.log(formData);
+    try {
+      const response = await instance.post("api/clubs/", formData);
+      console.log(response.data);
+      navigate("/");
+      alert("모임 개설해주셔서 감사합니다.");
+    } catch (error) {
+      alert("전부 입력해주세요(사진은 선택)");
+      console.log(error);
+    }
+  };
+
   return (
     <div className="CreateMeetContainer">
-      <form className="formContainer">
+      <form className="formContainer" onSubmit={handleSubmit}>
         <div className="contentBox">
           {categories.map((category, index) => (
             <label
@@ -66,27 +130,38 @@ function CreateMeet() {
         <div className="contentBox">
           {ages.map((age, index) => (
             <label
-              className={age === selectAges ? "catBox selected" : "catBox"}
+              className={
+                selectAges.includes(age) ? "catBox selected" : "catBox"
+              }
               key={index}
             >
               <input
                 type="checkbox"
                 value={age}
-                checked={age === selectAges}
+                checked={selectAges.includes(age)}
                 onChange={handleAgeChange}
               ></input>
-              <div>{age}대</div>
+              <div>{age}0대</div>
             </label>
           ))}
         </div>
         <div className="namePlaceBox">
           <div className="meetName">
             <div className="titles">모임명</div>
-            <input placeholder="모임명이 짧을수록 이해하기 쉬워요."></input>
+            <input
+              type="text"
+              placeholder="모임명이 짧을수록 이해하기 쉬워요."
+              value={name}
+              onChange={handleNameChange}
+            ></input>
           </div>
           <div className="meetPlace">
             <div className="titles">자주 모이는 장소</div>
-            <input placeholder="장소명으로 기입"></input>
+            <input
+              placeholder="장소명으로 기입"
+              value={place}
+              onChange={handlePlaceChange}
+            ></input>
           </div>
         </div>
         <div className="meetIntro">
@@ -94,6 +169,8 @@ function CreateMeet() {
           <textarea
             cols={100}
             rows={30}
+            value={description}
+            onChange={handleDescriptionChange}
             placeholder="활동 중심으로 모임을 소개해주세요.   (모임설정에서 언제든지 바꿀 수 있어요)"
           ></textarea>
         </div>
@@ -111,7 +188,7 @@ function CreateMeet() {
           </div>
         </div>
         <div className="pick">선택된 카테고리 : {selectCategory}</div>
-        <div className="pick">선택된 나이 : {selectAges}대</div>
+        <div className="pick">선택된 나이 : {selectAges}0대</div>
       </form>
     </div>
   );
