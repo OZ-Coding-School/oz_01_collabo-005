@@ -25,26 +25,36 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     #     # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
     #     fields = ("email", "nickname", "password", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
 
-    def get_cleaned_data(self) -> Any:
-        # return {
-        #     "nickname": self.validated_data.get("nickname", ""),
-        #     "nationality": self.validated_data.get("nationality", ""),
-        #     "first_name": self.validated_data.get("first_name", ""),
-        #     "last_name": self.validated_data.get("last_name", ""),
-        #     "phone": self.validated_data.get("phone", ""),
-        #     "date_of_birth": self.validated_data.get("date_of_birth", ""),
-        #     "profession": self.validated_data.get("profession", "")
-        # }
-        cleaned_data = super().get_cleaned_data()
-        cleaned_data["nickname"] = self.validated_data.get("nickname", "")
-        cleaned_data["nationality"] = self.validated_data.get("nationality", "")
-        cleaned_data["first_name"] = self.validated_data.get("first_name", "")
-        cleaned_data["last_name"] = self.validated_data.get("last_name", "")
-        cleaned_data["phone"] = self.validated_data.get("phone", "")
-        # cleaned_data["date_of_birth"] = self.validated_data.get("date_of_birth")
-        cleaned_data["profession"] = self.validated_data.get("profession", "")
-        return cleaned_data
+    # def get_cleaned_data(self) -> Any:
+    #     # return {
+    #     #     "nickname": self.validated_data.get("nickname", ""),
+    #     #     "nationality": self.validated_data.get("nationality", ""),
+    #     #     "first_name": self.validated_data.get("first_name", ""),
+    #     #     "last_name": self.validated_data.get("last_name", ""),
+    #     #     "phone": self.validated_data.get("phone", ""),
+    #     #     "date_of_birth": self.validated_data.get("date_of_birth", ""),
+    #     #     "profession": self.validated_data.get("profession", "")
+    #     # }
+    #     cleaned_data = super().get_cleaned_data()
+    #     cleaned_data["nickname"] = self.validated_data.get("nickname", "")
+    #     cleaned_data["nationality"] = self.validated_data.get("nationality", "")
+    #     cleaned_data["first_name"] = self.validated_data.get("first_name", "")
+    #     cleaned_data["last_name"] = self.validated_data.get("last_name", "")
+    #     cleaned_data["phone"] = self.validated_data.get("phone", "")
+    #     cleaned_data["date_of_birth"] = self.validated_data.get("date_of_birth")
+    #     cleaned_data["profession"] = self.validated_data.get("profession", "")
+    #     return cleaned_data
 
+    def save(self, request) -> Any:
+        user = super().save(request)
+        user.nickname = self.data.get("nickname")
+        user.nationality = self.data.get("nationality")
+        user.first_name = self.data.get("first_name")
+        user.last_name = self.data.get("last_name")
+        user.phone = self.data.get("phone")
+        user.date_of_birth = self.data.get("date_of_birth")
+        user.profession = self.data.get("profession")
+        return user
 
 # class SignupSerializer(serializers.ModelSerializer):
 #     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
