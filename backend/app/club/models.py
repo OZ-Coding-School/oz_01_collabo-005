@@ -1,7 +1,7 @@
 from django.db import models
 
 from app.common.models import BaseModel
-from app.user.models import AgeGroup
+from app.user.models import AgeGroup, User
 
 
 class Club(BaseModel):
@@ -14,3 +14,4 @@ class Club(BaseModel):
     # place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
     frequent_place = models.CharField(max_length=10, null=True, blank=True, help_text="frequent gathering place")
     age_group = models.ManyToManyField(AgeGroup, blank=True)
+    # members = models.ManyToManyField(User, blank=True)

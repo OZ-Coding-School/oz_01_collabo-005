@@ -31,7 +31,7 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS: List[str] = []
 ALLOWED_HOSTS += env("ALLOWED_HOSTS").split(",")
@@ -60,7 +60,7 @@ CUSTOM_USER_APPS = [
     "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
-    # "allauth.socialaccount",
+    "allauth.socialaccount",
     "corsheaders",
     "app.activity",
     "app.album",
@@ -264,8 +264,8 @@ ACCOUNT_ADAPTER = "app.user.adapters.CustomAccountAdapter"
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
-    "JWT_AUTH_COOKIE": "access",
-    "JWT_AUTH_REFRESH_COOKIE": "refresh",  # refresh token 담을 쿠키 이름
+    # "JWT_AUTH_COOKIE": "access",
+    # "JWT_AUTH_REFRESH_COOKIE": "refresh",  # refresh token 담을 쿠키 이름
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
     "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
