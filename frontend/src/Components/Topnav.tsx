@@ -1,20 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaAngleDown, FaUser } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import "./Topnav.css";
+import UserContext from "../Context/Authuser";
 
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<string | null>("");
+  const { userInfo, setUserInfo }: any = useContext(UserContext);
 
   useEffect(() => {
     const token = localStorage.getItem("refreshToken");
-    setIsLogin(token); //
-  }, [isLogin]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행 /refresh토큰이 달라질때도 제렌더링
+    setIsLogin(token);
+    setUserInfo();
+  }, [userInfo]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행 /refresh토큰이 달라질때도 제렌더링
 
   const toggleSearch = (): void => {
     setShowSearch(!showSearch);
@@ -27,7 +30,10 @@ function TopNav(): JSX.Element {
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("first_name");
+    localStorage.removeItem("last_name");
     setIsLogin(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
+    alert("로그아웃 되었습니다.");
   };
 
   return (

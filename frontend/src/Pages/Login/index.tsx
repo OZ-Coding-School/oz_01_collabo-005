@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./index.css";
 import instance from "../../Apis/axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import UserContext from "../../Context/Authuser";
+import { UserContextType } from "../../Type/User";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+  const { userInfo, setUserInfo }: any = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -27,6 +30,7 @@ function Login() {
       const { first_name, last_name } = response.data.user;
       localStorage.setItem("first_name", first_name);
       localStorage.setItem("last_name", last_name);
+      setUserInfo(first_name, last_name);
       alert(`환영합니다 ${first_name}${last_name}님`);
       navigate("/");
     } catch (error) {
