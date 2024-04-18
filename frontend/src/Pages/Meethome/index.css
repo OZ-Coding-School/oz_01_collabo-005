@@ -1,0 +1,58 @@
+.meetScreenContainer {
+  width: 70%;
+  height: 200vh;
+  margin: 0 15%;
+  background-color: #fffdf8;
+  padding-top: 30px;
+}
+.repMeetImgBox {
+  display: flex;
+  justify-content: center;
+  height: 267px;
+  margin-bottom: 30px;
+}
+.changePageIconBox {
+  height: 48px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.changePageIconBox > .meetHomeIcons {
+  width: 30%;
+  height: 100%;
+}
+.personIconBtn,
+.meetOutBtn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: inherit;
+}
+.nameOfMeeting {
+  display: flex;
+}
+.meetingTitleName {
+  padding-left: 49px;
+}
+.aboutUserNumber {
+  display: flex;
+  padding-left: 49px;
+  width: 27%;
+  justify-content: space-between;
+}
+.createPost {
+  position: fixed;
+  bottom: 20px;
+  right: 280px;
+  background-color: #b22222;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 3px #999;
+}
+.createPostBtn {
+  border: 0;
+  background-color: transparent;
+}

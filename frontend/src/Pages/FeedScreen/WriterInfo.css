@@ -1,0 +1,8 @@
+.webUserInfo {
+  display: flex;
+  width: 200px;
+  align-items: center;
+}
+.wrapWrittenBox {
+  padding-left: 10px;
+}

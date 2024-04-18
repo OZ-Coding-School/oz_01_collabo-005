@@ -1,1 +1,6 @@
-
+button {
+  border: 0;
+  background-color: transparent;
+  color: #b22222;
+  font-weight: 800;
+}

@@ -1,0 +1,93 @@
+.scheduleBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.makingScheduleBox {
+  height: 66px;
+  width: 80%;
+  background-color: rgb(241, 241, 241);
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 18px;
+}
+.wrapScheduleBox {
+  height: 160vh;
+}
+.divisionScheduleBox {
+  display: flex;
+  margin-top: 16px;
+  margin-left: 16px;
+  width: 35%;
+  justify-content: space-between;
+}
+.expectedSchedule,
+.closedSchedule {
+  width: 48%;
+  background-color: rgb(241, 241, 241);
+  border: 0.7px solid rgb(137, 137, 137);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+}
+.scheduleDate {
+  width: 50px;
+  height: 60px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 18px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.meetingScheduleBox {
+  padding-top: 20px;
+  padding-left: 16px;
+  display: flex;
+  height: 120px;
+}
+.scheduleMonth {
+  font-size: 20px;
+  font-weight: 800;
+}
+.specificInfo {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.aboutScheduleNumber {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+.recruitmentStatus {
+  padding-left: 14px;
+  font-size: 16px;
+  color: #b22222;
+  padding-bottom: 6px;
+}
+.scheduleName {
+  margin-left: 5px;
+  height: 35px;
+  font-size: 20px;
+
+  display: flex;
+  align-items: center;
+}
+.createMeetingSchedule {
+  border: 0;
+  font-size: 16px;
+}
+.expectScheduleBtn {
+  border: 0;
+  background-color: transparent;
+  font-size: 16px;
+}
+.closeScheduleBtn {
+  border: 0;
+  background-color: transparent;
+  font-size: 16px;
+}

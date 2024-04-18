@@ -1,0 +1,24 @@
+.meetingAlbumBox {
+  width: 90%;
+  height: 200vh;
+  margin-left: 46px;
+  display: flex;
+  flex-direction: column;
+}
+.albumBox {
+  width: 250px;
+  height: 210px;
+}
+.albumImg {
+  width: 100%;
+  border: 1px solid rgb(132, 132, 132);
+}
+.wrapAlbum {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  border: 5px solid rgb(132, 132, 132);
+  box-sizing: content-box;
+}
