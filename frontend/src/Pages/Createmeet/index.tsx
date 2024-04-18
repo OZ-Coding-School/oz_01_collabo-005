@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 import instance from "../../Apis/axios";
 import { useNavigate } from "react-router-dom";
-
-interface FormDataValue {
-  name: string;
-  description: string;
-  category: number | null;
-  frequent_place: string;
-  age_group: number[];
-  image: File | null;
-}
+import { FormDataValue } from "../../Type/User";
 
 function CreateMeet() {
   const categories = [
