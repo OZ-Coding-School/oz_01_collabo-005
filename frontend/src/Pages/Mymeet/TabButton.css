@@ -1,0 +1,35 @@
+.buttonList {
+  list-style: none;
+  width: 89px;
+  display: flex;
+  justify-content: center;
+}
+.tabButtonTitle {
+  border: 0;
+  background-color: transparent;
+  color: #b22222;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.tabButtonBox {
+  width: 320px;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+}
+.tabButtonBox:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.tabButtonBox:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.buttonList:first-child:hover {
+  border-bottom: 1.6px solid #b22222;
+}

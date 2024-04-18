@@ -34,12 +34,12 @@
   cursor: -webkit-grab;
   align-items: center;
 }
-.searchButton {
+/* .searchButton {
   all: unset;
   margin-right: 10px;
-}
+} */
 
-.searchInputLabel {
+/* .searchInputLabel {
   position: relative;
 }
 
@@ -53,15 +53,15 @@
   background-color: white;
   width: 20px;
   border-radius: 16px;
-}
-.searchScreen {
+} */
+/* .searchScreen {
   position: relative;
   display: flex;
   align-items: center;
   width: 300px;
   height: 3rem;
-}
-
+} */
+/* 
 .searchInput {
   height: 2.5rem;
   width: 280px;
@@ -79,10 +79,10 @@
   left: 6px;
   top: 2px;
   padding-left: 10px;
-}
+} */
 
 .navMenuIcon {
-  width: 150px;
+  width: 90px;
   height: 2.6rem;
   display: flex;
   justify-content: space-between;
@@ -108,8 +108,11 @@
   width: 100%;
 }
 .menuList {
-  padding-left: 20px;
+  display: flex;
   list-style: none;
+  flex-direction: column;
+  padding: 0;
+  justify-content: center;
 }
 .aboutMyMenuHidden {
   background: rgb(248, 245, 245);
@@ -127,5 +130,13 @@
 .logoutButton {
   border: 0;
   background-color: transparent;
-  font-size: 16px;
+  font-size: 14px;
+  padding: 0;
+}
+.logoutList,
+.loginList,
+.myInfoList,
+.myMeetList {
+  display: flex;
+  justify-content: center;
 }

@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import TopNav from "./Components/Topnav";
+import UserContext from "./Context/Authuser";
 import CreateBoard from "./Pages/Createboard";
 import CreateMeet from "./Pages/Createmeet";
 import CreateSchedules from "./Pages/Createschedules";
+import FeedScreen from "./Pages/FeedScreen";
 import Login from "./Pages/Login";
 import Main from "./Pages/Main";
 import MeetHome from "./Pages/Meethome";
@@ -11,8 +14,6 @@ import MyInfo from "./Pages/Myinfo";
 import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
 import Success from "./Pages/Signup/Success";
-import { useState } from "react";
-import UserContext from "./Context/Authuser";
 import PrivateRoute from "./Privateroute/Privateroute";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/meetHome" element={<MeetHome />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
             <Route path="/createBoard" element={<CreateBoard />}></Route>
+            <Route path="/feedScreen" element={<FeedScreen />}></Route>
             <Route
               path="/createSchedules"
               element={<CreateSchedules />}

@@ -1,11 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext, useEffect, useState } from "react";
 import { FaAngleDown, FaUser } from "react-icons/fa";
-import { FiSearch } from "react-icons/fi";
-import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import "./Topnav.css";
 import UserContext from "../Context/Authuser";
+import "./Topnav.css";
 
 function TopNav(): JSX.Element {
   const [showSearch, setShowSearch] = useState<boolean>(false);
@@ -19,9 +17,9 @@ function TopNav(): JSX.Element {
     setUserInfo();
   }, [userInfo]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행 /refresh토큰이 달라질때도 제렌더링
 
-  const toggleSearch = (): void => {
-    setShowSearch(!showSearch);
-  };
+  // const toggleSearch = (): void => {
+  //   setShowSearch(!showSearch);
+  // };
 
   const toggleMenu = (): void => {
     setShowMenu(!showMenu);
@@ -43,7 +41,7 @@ function TopNav(): JSX.Element {
           <div className="Logo">LANDING</div>
         </Link>
         <div className="navbarButtonBox">
-          {showSearch && (
+          {/* {showSearch && (
             <form className="searchScreen">
               <label className="searchInputLabel">
                 <input
@@ -56,11 +54,11 @@ function TopNav(): JSX.Element {
                 </button>
               </label>
             </form>
-          )}
+          )} */}
           <div className="navMenuIcon">
-            <button className="searchButton" onClick={toggleSearch}>
+            {/* <button className="searchButton" onClick={toggleSearch}>
               {showSearch ? <RxCross1 size={27} /> : <FiSearch size={27} />}
-            </button>
+            </button> */}
 
             <label className="dropdownLabel" onClick={toggleMenu}>
               <FaUser className="userIcon" />

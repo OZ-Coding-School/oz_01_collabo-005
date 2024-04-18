@@ -2,38 +2,25 @@ import axios from "axios";
 import { useEffect, useState } from "react"; // 추가
 import { HiUsers } from "react-icons/hi";
 import { MdRemoveRedEye } from "react-icons/md";
+
 import dummy from "./dummy.json";
 import "./index.css";
-
-interface TabButtonProps {
-  title: string;
-  onSelect: () => void;
-}
+import TabButton from "./TabButton";
 
 interface DummyItem {
   url: string;
   title: string;
 }
-function TabButton({ title, onSelect }: TabButtonProps): JSX.Element {
-  return (
-    <menu onClick={onSelect} className="tabButtonBox">
-      <li>
-        <div>
-          <button onClick={onSelect}>{title}</button>
-        </div>
-      </li>
-    </menu>
-  );
-}
 
 function ShowMyMeet(): JSX.Element {
   useEffect(() => {
-    console.log("에러!!");
-    axios({})
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(() => {});
+    axios({
+      method: "get",
+      url: "https://b63dca28-1170-4ac5-91c8-65e06ade5071.mock.pstmn.io/list",
+      responseType: "json",
+    }).then(function (response) {
+      console.log(response.data);
+    });
   }, []);
 
   return (
@@ -65,8 +52,12 @@ function ShowMyFeed(): JSX.Element {
               className="meetPicture"
             />
             <div className="feedInfo">
-              <h6>{item.title}</h6> {/* dummy 데이터의 제목을 사용합니다. */}
-              <span>작성자</span> <span>작성일시</span>
+              <h4 className="c">{item.title}</h4>{" "}
+              {/* dummy 데이터의 제목을 사용합니다. */}
+              <div className="articleInfo">
+                {" "}
+                <span>작성자</span> <span>작성일시</span>
+              </div>
             </div>{" "}
           </div>
           <div className="FeedWriting">

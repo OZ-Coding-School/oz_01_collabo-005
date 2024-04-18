@@ -1,0 +1,44 @@
+.noticeBoardBox {
+  padding-top: 8px;
+  margin-left: 15px;
+  width: 95%;
+  border-bottom: 0.6px solid rgb(166, 166, 166);
+  height: 160px;
+}
+.writerPicture {
+  border-radius: 26px;
+}
+.writerBox {
+  height: 50px;
+  width: 100%;
+  display: flex;
+}
+.writerInfo {
+  width: 100%;
+  display: flex;
+}
+.userFeedInfo {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+}
+.divisionInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  width: 116px;
+  font-size: 14px;
+}
+.divisionInfo > li:first-child {
+  list-style-type: none;
+}
+.joinerFeedBox {
+  height: 98px;
+  padding-top: 20px;
+  font-size: 16px;
+}
+.deleteIcon {
+  border: 0;
+  background-color: transparent;
+}

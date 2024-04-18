@@ -1,0 +1,93 @@
+.feedScreenTopNav {
+  display: flex;
+  margin: 0 15%;
+  align-items: center;
+  background-color: #fffdf8;
+  border-top: 0.3px solid rgb(190, 190, 190);
+  padding-bottom: 30px;
+}
+.goBackBtn {
+  width: 7%;
+  display: flex;
+  justify-content: center;
+}
+.postScreen {
+  margin: 0 15%;
+  background-color: #fffdf8;
+  height: 150vh;
+}
+.conCreateFeedBox {
+  height: 540px;
+  border-bottom: 0.6px solid black;
+}
+.designationClub {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+.landingUserImg {
+  display: flex;
+  justify-content: center;
+}
+.landingUserBox {
+  display: flex;
+  justify-content: space-between;
+}
+.landingFeedBox {
+  margin-top: 30px;
+  margin-left: 10px;
+  height: 200px;
+}
+.feedLikesBtn {
+  background-color: rgb(245, 81, 40);
+  border: 0;
+  border-radius: 30px;
+}
+.numberOfEvent {
+  display: flex;
+  height: 30px;
+  width: 200px;
+  margin-top: 40px;
+}
+.usersActionBtn {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 0 0;
+}
+.iconsDetectAction {
+  display: flex;
+  width: 70px;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 1024px) {
+  .feedScreenTopNav,
+  .postScreen {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.containComments {
+  height: auto;
+}
+#commentCreate {
+  height: 70px;
+  margin-bottom: 40px;
+  border-top: 0.6px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.commentForm {
+  height: 48px;
+}
+#commentInput {
+  width: 300px;
+  height: 30px;
+  border-radius: 18px;
+}
+#sendComment {
+  border: 0;
+  background-color: transparent;
+}
