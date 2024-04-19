@@ -20,7 +20,7 @@ from app.user.serializers import SignupSerializer, UserSerializer
 class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
 
 
 # class SignupView(APIView):
