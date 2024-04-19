@@ -16,6 +16,13 @@ from app.user.models import User
 from app.user.permissions import IsUserOrReadOnly
 from app.user.serializers import SignupSerializer, UserSerializer
 
+
+class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+
+
 # class SignupView(APIView):
 #     def post(self, request):
 #         serializer = SignupSerializer(data=request.data)
@@ -75,12 +82,6 @@ from app.user.serializers import SignupSerializer, UserSerializer
 #         response.delete_cookie("access")
 #         response.delete_cookie("refresh")
 #         return response
-
-
-class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
 
 # class UserViewSet(viewsets.ModelViewSet[User]):

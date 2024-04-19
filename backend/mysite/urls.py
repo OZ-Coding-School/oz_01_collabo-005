@@ -43,4 +43,6 @@ urlpatterns = [
     path("api/clubs/", include("app.club.urls")),
     path("api/clubs/<int:club_id>/", include("app.board.urls")),
     path("api/clubs/<int:club_id>/posts/<int:post_id>/", include("app.comment.urls")),
+    # path("api/users/(?P<int:pk>)\d+/", include("app.activity.urls")),
+    path("api/", include("app.activity.urls")),
 ]
