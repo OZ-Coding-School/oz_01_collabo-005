@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from rest_framework.request import Request
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.settings import api_settings
 
@@ -45,7 +46,7 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     #     cleaned_data["profession"] = self.validated_data.get("profession", "")
     #     return cleaned_data
 
-    def save(self, request) -> Any:
+    def save(self, request: Request) -> Any:
         user = super().save(request)
         user.nickname = self.data.get("nickname")
         user.nationality = self.data.get("nationality")
@@ -55,6 +56,7 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
         user.date_of_birth = self.data.get("date_of_birth")
         user.profession = self.data.get("profession")
         return user
+
 
 # class SignupSerializer(serializers.ModelSerializer):
 #     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])

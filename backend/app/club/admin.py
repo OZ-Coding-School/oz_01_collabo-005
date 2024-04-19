@@ -14,7 +14,7 @@ django_stubs_ext.monkeypatch()
 class ClubAdmin(admin.ModelAdmin[Club]):
     list_display = ("name", "get_category_name", "leader", "max_members")
 
-    def get_category_name(self, obj: Club) -> str:
+    def get_category_name(self, obj: Club) -> Any:
         return obj.category.name if obj.category else "No Category"
 
 

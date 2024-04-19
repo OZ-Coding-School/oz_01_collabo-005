@@ -17,7 +17,7 @@ class PostViewSet(viewsets.ModelViewSet[Post]):
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsWriterOrReadOnly]
 
-    def get_queryset(self) -> QuerySet[Post]:
+    def get_queryset(self) -> Post:
         # club_id: Optional[int] = self.kwargs.get("club_id")
         club_id = self.kwargs.get("club_id")
         if club_id is None:
@@ -43,7 +43,7 @@ class ScheduleViewSet(viewsets.ModelViewSet[Schedule]):
     serializer_class = ScheduleSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsWriterOrReadOnly]
 
-    def get_queryset(self) -> QuerySet[Schedule]:
+    def get_queryset(self) -> Schedule:
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")

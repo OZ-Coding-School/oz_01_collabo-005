@@ -1,42 +1,46 @@
 import datetime
+from typing import Any
 
-from django.db.models import QuerySet
+from django.db.models.query import QuerySet
 from django.http import Http404
 from django.shortcuts import render
-from rest_framework import generics, permissions, viewsets, status
+from rest_framework import generics, permissions, status, viewsets
 from rest_framework.generics import get_object_or_404
+from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.serializers import BaseSerializer
 
 from app.activity.models import JoinedClub
-from app.activity.serializers import JoinedClubListSerializer, JoinClubSerializer
+from app.activity.permissions import IsUserOrReadOnly
+from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer
 from app.activity.utils import check_age_condition, is_user_already_joined
 from app.club.models import Club
-from app.activity.permissions import IsUserOrReadOnly
+from app.user.models import User
 
 
-class JoinedClubList(generics.ListAPIView):
+class JoinedClubList(generics.ListAPIView[JoinedClub]):
     serializer_class = JoinedClubListSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
-        user_id = self.kwargs.get('pk')
+    def get_queryset(self) -> QuerySet[JoinedClub | JoinedClub]:
+        user_id = self.kwargs.get("pk")
         return JoinedClub.objects.filter(user_id=user_id)
 
 
-class JoinClub(generics.CreateAPIView):
+class JoinClub(generics.CreateAPIView[JoinedClub]):
     serializer_class = JoinClubSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def perform_create(self, serializer):
+    def perform_create(self, serializer: BaseSerializer[JoinedClub]) -> None:
         club_id = self.kwargs.get("pk")
         club = Club.objects.get(pk=club_id)
         serializer.save(club=club, user=self.request.user)
 
-    def post(self, request, *args, **kwargs):
-        club = Club.objects.get(pk=kwargs['pk'])
+    def post(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        club = Club.objects.get(pk=kwargs["pk"])
         age_groups = club.age_group.all()
         user = request.user
-        user_birthdate = user.date_of_birth
+        user_birthdate = user.date_of_birth if isinstance(user, User) else None
         serializer = self.get_serializer(data=request.data)
 
         if is_user_already_joined(club, user):
@@ -51,25 +55,28 @@ class JoinClub(generics.CreateAPIView):
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"error": "You do not meet the age requirements to join this club."}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "You do not meet the age requirements to join this club."}, status=status.HTTP_400_BAD_REQUEST
+        )
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LeaveClub(generics.DestroyAPIView):
+class LeaveClub(generics.DestroyAPIView[JoinedClub]):
     serializer_class = JoinClubSerializer
     permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
 
-    def get_queryset(self):
-        club_id = self.kwargs.get('pk')
+    def get_queryset(self) -> QuerySet[JoinedClub]:
+        club_id = self.kwargs.get("pk")
         return JoinedClub.objects.filter(club_id=club_id, user=self.request.user)
 
     # debug 한 유저가 같은 클럽 가입했을때 필요. 나중에 지울것.
-    def destroy(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        if queryset:
-            self.perform_destroy(queryset.first())
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    # def destroy(self, request, *args, **kwargs) -> Response:
+    #     queryset = self.get_queryset()
+    #     if queryset:
+    #         self.perform_destroy(queryset.first())
+    #         return Response(status=status.HTTP_204_NO_CONTENT)
+    #     return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 # class JoinedClubViewSet(viewsets.ViewSet):
 #     def get_object(self, pk):

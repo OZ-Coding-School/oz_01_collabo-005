@@ -1,11 +1,10 @@
-from rest_framework import permissions, viewsets, generics
+from rest_framework import generics, permissions, viewsets
 from rest_framework.serializers import BaseSerializer
 
 from app.activity.models import JoinedClub
 from app.club.models import Club
 from app.club.permissions import IsLeaderOrReadOnly
-from app.club.serializers import ClubSerializer, ClubMemberSerializer
-
+from app.club.serializers import ClubMemberSerializer, ClubSerializer
 
 # _MT = TypeVar("_MT", bound=Model)
 
@@ -19,11 +18,11 @@ class ClubViewSet(viewsets.ModelViewSet[Club]):
         serializer.save(leader=self.request.user)
 
 
-class ClubMemberView(generics.ListAPIView):
+class ClubMemberView(generics.ListAPIView[JoinedClub]):
     # queryset = JoinedClub.objects.all()
     serializer_class = ClubMemberSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
+    def get_queryset(self) -> JoinedClub:
         club_id = self.kwargs.get("pk")
         return JoinedClub.objects.filter(club_id=club_id)
