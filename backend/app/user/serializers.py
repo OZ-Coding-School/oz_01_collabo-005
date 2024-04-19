@@ -90,6 +90,7 @@ class UserSerializer(serializers.ModelSerializer[User]):
         model = User
         fields = (
             "id",
+            "url",
             "email",
             "nickname",
             "nationality",
