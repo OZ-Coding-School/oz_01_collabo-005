@@ -31,7 +31,11 @@ class ClubSerializer(serializers.ModelSerializer[Club]):
 
 class ClubMemberSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    members_count = serializers.SerializerMethodField()
 
     class Meta:
         model = JoinedClub
-        fields = ("id", "user")
+        fields = ("id", "user", "members_count")
+
+    def get_members_count(self, obj):
+        return obj.club.joinedclub_set.count()
