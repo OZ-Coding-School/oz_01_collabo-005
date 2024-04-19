@@ -24,6 +24,8 @@ class ClubSerializer(serializers.ModelSerializer[Club]):
             "max_members",
             "frequent_place",
             "age_group",
+            "created_at",
+            "updated_at"
         )
 
 
