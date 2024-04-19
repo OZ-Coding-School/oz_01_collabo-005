@@ -1,3 +1,5 @@
+import os
+
 from .base import *
 
 # LOGGING = {
@@ -35,9 +37,7 @@ LOGGING = {
             "format": "[{server_time}] {message}",
             "style": "{",
         },
-        'standard': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
-        },
+        "standard": {"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"},
     },
     "handlers": {
         "console": {
@@ -55,14 +55,14 @@ LOGGING = {
         #     "class": "logging.FileHandler",
         #     "filename": log_file_path,
         # },
-        'file': {
-            'level': 'INFO',
+        "file": {
+            "level": "INFO",
             # 'filters': ['require_debug_false'],
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': log_file_path,
-            'maxBytes': 1024*1024*5,  # 5 MB
-            'backupCount': 5,
-            'formatter': 'standard',
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": log_file_path,
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
+            "formatter": "standard",
         },
     },
     "loggers": {

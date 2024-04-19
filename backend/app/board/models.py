@@ -28,6 +28,5 @@ class Schedule(BaseModel):
     place = models.CharField(max_length=100)
     max_attendees = models.IntegerField(null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
-
