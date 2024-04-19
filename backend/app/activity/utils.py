@@ -1,5 +1,11 @@
 import datetime
 
+from app.activity.models import JoinedClub
+
+
+def is_user_already_joined(club, user) -> bool:
+    return JoinedClub.objects.filter(club=club, user=user).exists()
+
 
 def check_age_condition(age_groups, user_birthdate) -> bool:
     if not age_groups:

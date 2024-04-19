@@ -9,7 +9,7 @@ from rest_framework.response import Response
 
 from app.activity.models import JoinedClub
 from app.activity.serializers import JoinedClubListSerializer, JoinClubSerializer
-from app.activity.utils import check_age_condition
+from app.activity.utils import check_age_condition, is_user_already_joined
 from app.club.models import Club
 from app.activity.permissions import IsUserOrReadOnly
 
@@ -39,6 +39,9 @@ class JoinClub(generics.CreateAPIView):
         user_birthdate = user.date_of_birth
         serializer = self.get_serializer(data=request.data)
 
+        if is_user_already_joined(club, user):
+            return Response({"error": "You are already a member of this club."}, status=status.HTTP_400_BAD_REQUEST)
+
         if check_age_condition(age_groups, user_birthdate):
             # if serializer.is_valid():
             #     serializer.save()
@@ -47,10 +50,9 @@ class JoinClub(generics.CreateAPIView):
 
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
-            # headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({"error": "You do not meet the age requirements to join this club."}, status=status.HTTP_400_BAD_REQUEST)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LeaveClub(generics.DestroyAPIView):
