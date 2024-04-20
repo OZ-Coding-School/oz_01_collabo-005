@@ -271,6 +271,7 @@ REST_AUTH = {
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
     "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
+    "USER_DETAILS_SERIALIZER": "app.user.serializers.CustomUserDetail",
 }
 
 # REST_AUTH_REGISTER_SERIALIZER = {
