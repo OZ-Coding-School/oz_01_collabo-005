@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
+import { CiCircleCheck } from "react-icons/ci";
 import { GrLike } from "react-icons/gr";
 import { IoMdSend } from "react-icons/io";
 import { IoArrowBack } from "react-icons/io5";
@@ -11,48 +12,54 @@ import WriterInfo from "./WriterInfo";
 import "./index.css";
 
 function FeedScreen() {
-  const [comment, setComment] = useState("");
-  const [addComment, setAddComment] = useState([
+  const [addComment, setAddComment] = useState("");
+  const [commentList, setCommentList] = useState([
     {
       id: 1, //고유한 값이어야 한다.
       text: "다음주에 놀러오세요~",
     },
   ]);
-  const [isEdit, setIsEdit] = useState(true);
-  const [commentEdit, SetCommentEdit] = useState("");
-  function commentInput(event) {
-    setComment(event.target.value);
-  }
+  const [updateText, setUpdateText] = useState("");
 
-  function commentSubmit(event) {
-    event.preventDefault();
+  const [isEdit, setIsEdit] = useState(false);
+  const [editCommentId, setEditCommentId] = useState(null);
+
+  function handleAddComment(e) {
+    setAddComment(e.target.value);
+  }
+  function handelCreateComment(e) {
+    e.preventDefault();
     const newComment = {
       id: Date.now(), // 각 댓글마다 고유한 ID를 부여 (현재 시간을 사용)
-      text: comment,
+      text: addComment,
     };
-    setAddComment([...addComment, newComment]);
-    setComment("");
+    setCommentList([...commentList, newComment]);
+    setAddComment("");
   }
-  function handleEditClick() {
-    setIsEdit(false);
+  function handleEditComment(commentId) {
+    setIsEdit(true); // 수정 모드를 활성화합니다.
+    setEditCommentId(commentId); // 수정 중인 댓글의 ID를 설정합니다.
   }
-  function handleEditSave() {
-    const updateComment = addComment.map((item) => {
-      if (item.id === 댓글.id) {
-        return {
-          ...item,
-          text: commentEdit,
-        };
+  function handleSaveComment() {
+    // 수정한 내용을 저장하는 로직
+    const updatedCommentList = commentList.map((comment) => {
+      if (comment.id === editCommentId) {
+        // 현재 수정 중인 댓글의 ID를 나타내며, 이 값과 현재 순회 중인 댓글의 ID가 같은지를 확인한다.
+        return { ...comment, text: updateText }; //같으면 해당 댓글을 복사하고, text만 업데이트한다.
       }
-      return item;
+      return comment; // 현재 수정 중인 댓글의 ID와 현재 순회 중인 댓글 ID가 다른 댓글은 그대로 밷어낸다.
     });
-    setAddComment(updateComment);
-    setIsEdit(true);
+    setCommentList(updatedCommentList);
+    setIsEdit(false); // 수정 모드 종료
+    setEditCommentId(null); // 수정 중인 댓글 ID 초기화
+    setUpdateText(""); // 수정한 텍스트 초기화
   }
-  function handleDelete() {}
 
-  function handleEdit(e) {
-    SetCommentEdit(e.target.value);
+  function handleDeleteComment(commentId) {
+    const updatedCommentList = commentList.filter(
+      (comment) => comment.id !== commentId,
+    );
+    setCommentList(updatedCommentList);
   }
   return (
     <>
@@ -95,24 +102,30 @@ function FeedScreen() {
           </div>
         </div>
         <div className="containComments">
-          {addComment.map((댓글) => (
+          {commentList.map((item) => (
             <>
               <WriterInfo paddingTop="20px" />
               <div className="personsComment">
-                {isEdit ? (
-                  <div className="feedComment">{댓글.text}</div>
-                ) : (
+                {isEdit && item.id === editCommentId ? (
                   <input
                     type="text"
-                    value={commentEdit}
-                    onChange={handleEdit}
+                    value={updateText || item.text}
+                    onChange={(event) => setUpdateText(event.target.value)}
                   />
+                ) : (
+                  <div className="feedComment" key={item.id}>
+                    {item.text}
+                  </div>
                 )}
+
                 <div className="commentChangeIcons">
-                  <button onClick={isEdit ? handleEditClick : handleEditSave}>
+                  <button onClick={() => handleEditComment(item.id)}>
                     <LuPencilLine />
                   </button>
-                  <button onClick={handleDelete}>
+                  <button onClick={handleSaveComment}>
+                    <CiCircleCheck />
+                  </button>
+                  <button onClick={() => handleDeleteComment(item.id)}>
                     <MdDelete />
                   </button>
                 </div>
@@ -121,15 +134,15 @@ function FeedScreen() {
           ))}
         </div>
         <div id="commentCreate">
-          <form className="commentForm" onSubmit={commentSubmit}>
+          <form className="commentForm">
             <input
               id="commentInput"
               placeholder="댓글을 입력하세요."
               type="text"
-              value={comment}
-              onChange={commentInput}
+              value={addComment}
+              onChange={handleAddComment}
             />
-            <button id="sendComment">
+            <button id="sendComment" onClick={handelCreateComment}>
               <IoMdSend size={20} />
             </button>
           </form>

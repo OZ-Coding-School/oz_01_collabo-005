@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
-import "./index.css";
-import UserContext from "../../Context/Authuser";
-import { FormDataValue, UserInfo } from "../../Type/User";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import instance from "../../Apis/axios";
+import "./index.css";
 
 function CreateBoard() {
   interface CreateBoardValue {
@@ -59,7 +57,7 @@ function CreateBoard() {
 
     try {
       const response = await instance.post(
-        "api/clubs/40/posts/",
+        "api/clubs/1/posts/",
         formDataToSend,
         {
           headers: {
