@@ -10,9 +10,12 @@ from app.club.serializers import ClubMemberSerializer, ClubSerializer
 
 
 class ClubViewSet(viewsets.ModelViewSet[Club]):
-    queryset = Club.objects.all()
+    # queryset = Club.objects.all()
     serializer_class = ClubSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsLeaderOrReadOnly]
+
+    def get_queryset(self):
+        return Club.objects.all().order_by('-created_at')
 
     def perform_create(self, serializer: BaseSerializer[Club]) -> None:
         serializer.save(leader=self.request.user)
