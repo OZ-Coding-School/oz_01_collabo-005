@@ -1,6 +1,6 @@
 .signup {
   width: 70%;
-  height: 100vh;
+  height: auto;
   margin: 0 15%;
   padding-top: 5%;
   display: flex;
@@ -43,7 +43,8 @@
   font-size: inherit;
   border: 1px solid;
 }
-#birth.signupInput {
+
+#date_of_birth.signupInput {
   margin-top: 13.5px;
   min-width: 176px;
   max-width: 220px;
@@ -85,6 +86,11 @@
   cursor: pointer;
   background-color: #b22222;
   color: white;
+}
+
+.eyesIcon {
+  position: absolute;
+  top: -5px;
 }
 @media screen and (max-width: 1024px) {
   .signup {
