@@ -26,7 +26,6 @@ function Login() {
       const { access, refresh } = response.data;
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
-
       const { first_name, last_name, pk } = response.data.user;
       localStorage.setItem("first_name", first_name);
       localStorage.setItem("last_name", last_name);

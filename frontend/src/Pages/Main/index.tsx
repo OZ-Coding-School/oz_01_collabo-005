@@ -1,7 +1,7 @@
-import "./index.css";
-import MoveImages from "./Moveimages";
 import CategoryBox from "./Categoryicons";
+import MoveImages from "./Moveimages";
 import NewPost from "./Newpost";
+import "./index.css";
 
 function Main() {
   return (
