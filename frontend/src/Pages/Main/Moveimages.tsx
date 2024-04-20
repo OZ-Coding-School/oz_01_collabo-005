@@ -1,47 +1,50 @@
 import React, { useEffect, useState } from "react";
-import "./moveimages.css";
+import "./Moveimages.css";
 import { GrNext, GrPrevious } from "react-icons/gr";
+import instance from "../../Apis/axios";
+import { Link } from "react-router-dom";
 
 function MoveImages() {
-  const images = [
-    "/pictures/Main/ex0.jpeg",
-    "/pictures/Main/ex1.jpg",
-    "/pictures/Main/ex2.jpg",
-    "/pictures/Main/ex0.jpeg",
-    "/pictures/Main/ex1.jpg",
-    "/pictures/Main/ex2.jpg",
-    "/pictures/Main/ex0.jpeg",
-    "/pictures/Main/ex1.jpg",
-    "/pictures/Main/ex2.jpg",
-    "/pictures/Main/ex0.jpeg",
-    "/pictures/Main/ex1.jpg",
-    "/pictures/Main/ex2.jpg",
-  ];
-
+  // const [images, setImages] = useState([]);
+  const [club, setClub]: any = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imgHover, setImgHover] = useState(false);
   //현재 인덱스넘버,이미지 호버
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 4 ? 0 : prevIndex + 1,
+      prevIndex === club.length - 4 ? 0 : prevIndex + 1,
     );
     setImgHover(true);
   };
   //다음 이미지 넘기는 것
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 4 : prevIndex - 1,
+      prevIndex === 0 ? club.length - 4 : prevIndex - 1,
     );
     setImgHover(true);
   };
+  //서버에서 정보받기
+  useEffect(() => {
+    async function newPosts() {
+      try {
+        const response = await instance.get("api/clubs/");
+        setClub(response.data.results);
+      } catch (error) {
+        console.log("Error fetching", error);
+      }
+    }
+    newPosts();
+    console.log(club);
+  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (!imgHover)
         setCurrentIndex((prevIndex) =>
-          prevIndex === images.length - 4 ? 0 : prevIndex + 1,
+          prevIndex === club.length - 4 ? 0 : prevIndex + 1,
         );
+      setImgHover(true);
     }, 3000);
     // useEffect의 반환 함수를 사용하여 컴포넌트가 unmount 될 때 interval을 정리합니다.
     return () => clearInterval(intervalId);
@@ -55,12 +58,18 @@ function MoveImages() {
         onMouseLeave={() => setImgHover(false)}
       >
         <div className={`imageCarousel ${imgHover ? "show-buttons" : ""}`}>
-          {images.slice(currentIndex, currentIndex + 4).map((image, index) => (
+          {club.slice(currentIndex, currentIndex + 4).map((clubName, index) => (
             <div className="imageBox" key={index}>
-              <img src={image} alt="carousel" />
-              <a href={`www.link${index}.com`} className="review">
-                리뷰보기
-              </a>
+              <img
+                src={
+                  clubName.image ? clubName.image : import.meta.env.VITE_ICON
+                }
+                alt="carousel"
+              />
+              <div className="reviewTitle ">{clubName.name}</div>
+              <Link to={`/meetHome/${clubName.id}`} className="review">
+                모임가기
+              </Link>
             </div>
           ))}
           <GrPrevious

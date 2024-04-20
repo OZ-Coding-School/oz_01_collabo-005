@@ -41,7 +41,7 @@
 }
 .createPost {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 280px;
   background-color: #b22222;
   width: 60px;
@@ -55,4 +55,21 @@
 .createPostBtn {
   border: 0;
   background-color: transparent;
+}
+.enterMeet {
+  height: 50px;
+  width: 246px;
+  background-color: #b22222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7.5px;
+  position: fixed;
+  bottom: 10px;
+  left: 400px;
+}
+.enterBtn {
+  color: white;
+  font-size: 22px;
+  font-weight: 560;
 }

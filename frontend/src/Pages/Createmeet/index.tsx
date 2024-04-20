@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 import instance from "../../Apis/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormDataValue } from "../../Type/User";
 
 function CreateMeet() {
@@ -108,7 +108,7 @@ function CreateMeet() {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate("/");
+      navigate(`/clubCategory/${formData.category}`);
       alert("모임 개설해주셔서 감사합니다.");
     } catch (error) {
       alert("전부 입력해주세요(사진은 선택)");

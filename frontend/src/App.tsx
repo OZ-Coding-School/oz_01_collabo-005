@@ -15,6 +15,7 @@ import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
 import Success from "./Pages/Signup/Success";
 import PrivateRoute from "./Privateroute/Privateroute";
+import ClubCategory from "./Pages/Clubcategory";
 
 function App() {
   const [userInfo, setUserInfo]: any = useState({
@@ -32,14 +33,16 @@ function App() {
           <Route path="login" element={<Login />}></Route>
           <Route path="signUp" element={<SignUp />}></Route>
           <Route path="/signUp/Success" element={<Success />} />
+          <Route path="/clubCategory/:id" element={<ClubCategory />}></Route>
 
           <Route element={<PrivateRoute />}>
             <Route path="/myMeet" element={<MyMeet />}></Route>
             <Route path="/myInfo" element={<MyInfo />}></Route>
-            <Route path="/meetHome" element={<MeetHome />}></Route>
+            <Route path="/meetHome/:id" element={<MeetHome />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
             <Route path="/createBoard" element={<CreateBoard />}></Route>
             <Route path="/feedScreen" element={<FeedScreen />}></Route>
+
             <Route
               path="/createSchedules"
               element={<CreateSchedules />}

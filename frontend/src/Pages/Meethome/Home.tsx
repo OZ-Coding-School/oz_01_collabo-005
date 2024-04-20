@@ -1,13 +1,11 @@
 import "./Home.css";
 
-function Home({ button }: { button: React.ReactNode }) {
+function Home({ button, getData }: { button: React.ReactNode; getData: any }) {
   return (
     <div className="meetingHomeScreen">
       <div className="meetingIntroBox">
         <h3 className="introTitle">소개</h3>
-        <div className="meetIntroduce">
-          세종시에 사는 개발자들이 모여 개발에 대한 이야기를 하는 모임입니다.
-        </div>
+        <div className="meetIntroduce">{getData.description}</div>
       </div>
       {button}
     </div>
