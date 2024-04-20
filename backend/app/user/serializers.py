@@ -1,6 +1,7 @@
 from typing import Any
 
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
@@ -46,8 +47,9 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     #     cleaned_data["profession"] = self.validated_data.get("profession", "")
     #     return cleaned_data
 
-    def save(self, request: Request) -> Any:
-        user = super().save(request)
+    # def save(self, request: Request) -> Any:
+    def save(self, **kwargs) -> Any:
+        user = super().save(**kwargs)
         user.nickname = self.data.get("nickname")
         user.nationality = self.data.get("nationality")
         user.first_name = self.data.get("first_name")
@@ -56,6 +58,43 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
         user.date_of_birth = self.data.get("date_of_birth")
         user.profession = self.data.get("profession")
         return user
+
+
+class CustomUserDetail(UserDetailsSerializer):
+    nickname = serializers.CharField()
+    nationality = serializers.CharField()
+    # first_name = serializers.CharField()
+    # last_name = serializers.CharField()
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+    phone = serializers.CharField()
+    date_of_birth = serializers.DateField()
+    profession = serializers.CharField(required=False, allow_blank=True)
+    profile_image = serializers.ImageField(required=False)
+
+    class Meta:
+        model = User
+        fields = UserDetailsSerializer.Meta.fields + ("nickname", "nationality", "password1", "password2", "phone", "date_of_birth", "profession", "profile_image")
+        write_only_fields = ("password1", "password2")
+
+    # def save(self, request: Request) -> Any:
+    #     user = super().save(request=request)
+    #     user.nickname = self.data.get("nickname")
+    #     user.nationality = self.data.get("nationality")
+    #     # user.first_name = self.data.get("first_name")
+    #     # user.last_name = self.data.get("last_name")
+    #     user.phone = self.data.get("phone")
+    #     user.date_of_birth = self.data.get("date_of_birth")
+    #     user.profession = self.data.get("profession")
+    #
+    #     password1 = self.data.get("password1")
+    #     password2 = self.data.get("password2")
+    #     if password1 and password2 and password1 == password2:
+    #         user.set_password(password1)
+    #     raise serializers.ValidationError(_("Passwords do not match."))
+    #
+    #     # user.save()
+    #     return user
 
 
 # class SignupSerializer(serializers.ModelSerializer):
