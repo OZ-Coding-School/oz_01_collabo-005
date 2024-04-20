@@ -39,10 +39,13 @@ function MeetHome() {
   function handleCreateFeed() {
     navigate("/createboard");
   }
-  const handleJoinClub = async () => {
+  const handleJoinClub = async (e) => {
+    e.preventDefault(); // 폼 제출 기본 동작 방지
+
     try {
       const response = await instance.post(
-        `api/clubs/${id}/join/`,
+        `api/clubs/${id}/join`,
+
         {},
         {
           headers: {

@@ -19,6 +19,6 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
-  border: 5px solid rgb(132, 132, 132);
+  border: 5px solid rgb(191, 191, 191);
   box-sizing: content-box;
 }
