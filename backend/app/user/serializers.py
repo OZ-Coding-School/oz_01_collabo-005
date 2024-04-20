@@ -70,10 +70,11 @@ class CustomUserDetail(UserDetailsSerializer):
     phone = serializers.CharField()
     date_of_birth = serializers.DateField()
     profession = serializers.CharField(required=False, allow_blank=True)
+    profile_image = serializers.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = UserDetailsSerializer.Meta.fields + ("nickname", "nationality", "password1", "password2", "phone", "date_of_birth", "profession")
+        fields = UserDetailsSerializer.Meta.fields + ("nickname", "nationality", "password1", "password2", "phone", "date_of_birth", "profession", "profile_image")
         write_only_fields = ("password1", "password2")
 
     # def save(self, request: Request) -> Any:
