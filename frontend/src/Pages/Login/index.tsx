@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
-import "./index.css";
-import instance from "../../Apis/axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import instance from "../../Apis/axios";
 import UserContext from "../../Context/Authuser";
-import { UserContextType } from "../../Type/User";
+import "./index.css";
 
 function Login() {
   const [email, setEmail] = useState<string>("");
@@ -27,7 +26,8 @@ function Login() {
       const { access, refresh } = response.data;
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
-      const { pk, first_name, last_name } = response.data.user;
+
+      const { first_name, last_name, pk } = response.data.user;
       localStorage.setItem("first_name", first_name);
       localStorage.setItem("last_name", last_name);
       localStorage.setItem("pk", pk);

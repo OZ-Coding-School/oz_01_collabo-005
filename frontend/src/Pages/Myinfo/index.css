@@ -20,26 +20,38 @@
 }
 .myinfoImgEdit {
   display: flex;
+  flex-direction: row;
+  position: relative;
   width: 150px;
   height: 150px;
 }
+.profileImgEdit {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
 .myinfoProfileImg {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
-.editIcon {
+.MdEditIcon {
   position: absolute;
-  left: 59%;
-  top: 80%;
+  bottom: 0px;
+  right: 0px;
 }
 .NickandFlag {
   display: flex;
+  width: 300px;
+  height: 30px;
   flex-direction: row;
   margin: 10px;
   justify-content: center;
 }
 .myinfoNickName {
+  font-size: 1.8rem;
   margin-right: 5px;
   justify-content: center;
 }
@@ -66,6 +78,70 @@
 }
 .myinfoComment {
   width: 100%;
+  text-align: center;
+}
+.commentEdit {
+  display: block;
+  width: 260px;
+}
+
+.myinfoEdit {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  font-weight: 700;
+  justify-content: space-evenly;
+}
+.myinfoDiv {
+  width: 40%;
+  margin: 15px -40px 15px 30px;
+  text-align: left;
+  padding: 2px;
+}
+.myinfoEditInput {
+  margin-top: 13.5px;
+  min-width: 150px;
+  max-width: 220px;
+  height: 30px;
+  display: block;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 5px;
+  font-size: inherit;
+  border: 1px solid;
+}
+
+#new_birth.myinfoEditInput {
+  margin-top: 13.5px;
+  min-width: 176px;
+  max-width: 220px;
+  height: 30px;
+  display: block;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 5px;
+  font-size: inherit;
+  border: 1px solid;
+}
+.myinfoBtnBox {
+  margin-top: 40px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 250px;
+}
+.myinfoBtn {
+  width: 70%;
+  height: 55%;
+  margin-left: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid;
+  cursor: pointer;
+  background-color: #b22222;
+  color: white;
 }
 
 @media screen and (max-width: 1024px) {

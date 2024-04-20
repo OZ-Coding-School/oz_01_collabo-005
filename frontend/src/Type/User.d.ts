@@ -18,3 +18,16 @@ export interface FormDataValue {
   age_group: number[];
   image: File | null;
 }
+
+export interface IFormInput {
+  email: string;
+  password1: string;
+  password2: string;
+  nickname: string;
+  first_name: string;
+  last_name: string;
+  nationality: string;
+  phone: string;
+  date_of_birth: Date;
+  profession: string;
+}

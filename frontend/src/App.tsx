@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import TopNav from "./Components/Topnav";
 import UserContext from "./Context/Authuser";
+import ClubCategory from "./Pages/Clubcategory";
 import CreateBoard from "./Pages/Createboard";
 import CreateMeet from "./Pages/Createmeet";
 import CreateSchedules from "./Pages/Createschedules";
@@ -15,7 +16,6 @@ import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
 import Success from "./Pages/Signup/Success";
 import PrivateRoute from "./Privateroute/Privateroute";
-import ClubCategory from "./Pages/Clubcategory";
 
 function App() {
   const [userInfo, setUserInfo]: any = useState({
@@ -37,8 +37,8 @@ function App() {
 
           <Route element={<PrivateRoute />}>
             <Route path="/myMeet" element={<MyMeet />}></Route>
-            <Route path="/myInfo" element={<MyInfo />}></Route>
             <Route path="/meetHome/:id" element={<MeetHome />}></Route>
+            <Route path="/myInfo/:pk" element={<MyInfo />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
             <Route path="/createBoard" element={<CreateBoard />}></Route>
             <Route path="/feedScreen" element={<FeedScreen />}></Route>
