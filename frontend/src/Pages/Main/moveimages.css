@@ -46,11 +46,23 @@
   color: white;
 }
 
+.reviewTitle {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* 기본적으로 숨김 */
+  transition: opacity 0.3s ease;
+  font-size: 2rem;
+  color: white;
+}
+
 .imageBox:hover img {
   filter: brightness(0.3); /* 이미지 어둡게 처리 */
 }
 
-.imageBox:hover .review {
+.imageBox:hover .review,
+.reviewTitle {
   opacity: 1; /* 호버 시 표시 */
 }
 
