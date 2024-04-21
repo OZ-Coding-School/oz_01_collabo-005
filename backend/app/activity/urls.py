@@ -8,7 +8,7 @@ from app.activity.views import JoinClub, JoinedClubList, LeaveClub
 # urlpatterns = router.urls
 
 urlpatterns = [
-    path("users/clubs", JoinedClubList.as_view(), name="joined-club-list"),
+    path("activities/clubs", JoinedClubList.as_view(), name="joined-club-list"),
     path("clubs/<int:pk>/join", JoinClub.as_view(), name="join-club"),
     path("clubs/<int:pk>/leave", LeaveClub.as_view(), name="leave-club"),
 ]
