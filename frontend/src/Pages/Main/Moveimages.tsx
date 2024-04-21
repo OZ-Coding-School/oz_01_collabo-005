@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./Moveimages.css";
+import { useEffect, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import instance from "../../Apis/axios";
 import { Link } from "react-router-dom";
+import instance from "../../Apis/axios";
+import "./Moveimages.css";
 
 function MoveImages() {
   // const [images, setImages] = useState([]);
@@ -58,20 +58,25 @@ function MoveImages() {
         onMouseLeave={() => setImgHover(false)}
       >
         <div className={`imageCarousel ${imgHover ? "show-buttons" : ""}`}>
-          {club.slice(currentIndex, currentIndex + 4).map((clubName, index) => (
-            <div className="imageBox" key={index}>
-              <img
-                src={
-                  clubName.image ? clubName.image : import.meta.env.VITE_ICON
-                }
-                alt="carousel"
-              />
-              <div className="reviewTitle ">{clubName.name}</div>
-              <Link to={`/meetHome/${clubName.id}`} className="review">
-                모임가기
-              </Link>
-            </div>
-          ))}
+          {Array.isArray(club) &&
+            club
+              .slice(currentIndex, currentIndex + 4)
+              .map((clubName, index) => (
+                <div className="imageBox" key={index}>
+                  <img
+                    src={
+                      clubName.image
+                        ? clubName.image
+                        : import.meta.env.VITE_ICON
+                    }
+                    alt="carousel"
+                  />
+                  <div className="reviewTitle ">{clubName.name}</div>
+                  <Link to={`/meetHome/${clubName.id}`} className="review">
+                    모임가기
+                  </Link>
+                </div>
+              ))}
           <GrPrevious
             style={{ width: "20px", height: "60px" }}
             className="prev-button"
