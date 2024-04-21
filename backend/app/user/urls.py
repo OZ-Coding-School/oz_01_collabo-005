@@ -5,7 +5,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from app.user import views
-from app.user.views import UserView
+# from app.user.views import UserView
 
 # from app.user.views import UserViewSet, google_login, google_callback, GoogleLogin
 
@@ -21,7 +21,8 @@ from app.user.views import UserView
 urlpatterns = format_suffix_patterns(
     [
         # path("", include(router.urls)),
-        path("<int:pk>", views.UserView.as_view(), name="user-detail"),
+        # path("<int:pk>", views.UserView.as_view(), name="user-detail"),
+        path("", views.DeleteUserView.as_view(), name="user-detail"),
         # path("<int:pk>", user_detail, name="user_detail"),
         # path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
         # path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
