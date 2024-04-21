@@ -4,6 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import instance from "../../Apis/axios";
 import "./index.css";
 
+interface Clubs {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  frequent_place: string;
+  updated_at: string;
+}
+
 function ClubCategory() {
   let { id } = useParams();
   const [club, setClub]: any = useState([]);
@@ -40,8 +49,9 @@ function ClubCategory() {
   };
   const nextPage = () => {
     if (
-      (Array.isArray(currentClubs) && currentClubs.length < postsPerPage) ||
-      (Array.isArray(currentClubs) && currentClubs.length === 0)
+      (currentClubs && currentClubs.length < postsPerPage) ||
+      !currentClubs ||
+      currentClubs.length === 0
     ) {
       setCurrentPage(currentPage);
     } else {
