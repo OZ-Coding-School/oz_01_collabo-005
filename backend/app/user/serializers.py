@@ -22,10 +22,10 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     date_of_birth = serializers.DateField()
     profession = serializers.CharField(required=False, allow_blank=True)
 
-    # class Meta:
-    #     model = User
-    #     # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
-    #     fields = ("email", "nickname", "password", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
+    class Meta:
+        model = User
+        # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
+        fields = ("email", "nickname", "password1", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
 
     # def get_cleaned_data(self) -> Any:
     #     # return {
@@ -48,16 +48,16 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
     #     return cleaned_data
 
     # def save(self, request: Request) -> Any:
-    def save(self, **kwargs) -> Any:
-        user = super().save(**kwargs)
-        user.nickname = self.data.get("nickname")
-        user.nationality = self.data.get("nationality")
-        user.first_name = self.data.get("first_name")
-        user.last_name = self.data.get("last_name")
-        user.phone = self.data.get("phone")
-        user.date_of_birth = self.data.get("date_of_birth")
-        user.profession = self.data.get("profession")
-        return user
+    # def save(self, **kwargs) -> Any:
+    #     user = super().save(**kwargs)
+    #     user.nickname = self.data.get("nickname")
+    #     user.nationality = self.data.get("nationality")
+    #     user.first_name = self.data.get("first_name")
+    #     user.last_name = self.data.get("last_name")
+    #     user.phone = self.data.get("phone")
+    #     user.date_of_birth = self.data.get("date_of_birth")
+    #     user.profession = self.data.get("profession")
+    #     return user
 
 
 class CustomUserDetail(UserDetailsSerializer):

@@ -23,8 +23,9 @@ class JoinedClubList(generics.ListAPIView[JoinedClub]):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self) -> QuerySet[JoinedClub | JoinedClub]:
-        user_id = self.kwargs.get("pk")
-        return JoinedClub.objects.filter(user_id=user_id)
+        # user_id = self.kwargs.get("pk")
+        user = self.request.user
+        return JoinedClub.objects.filter(user=user)
 
 
 class JoinClub(generics.CreateAPIView[JoinedClub]):

@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
+from django.db.models import QuerySet
 from requests import Request
 
 # from allauth.socialaccount.models import SocialAccount
@@ -14,13 +15,32 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from app.user.models import User
 from app.user.permissions import IsUserOrReadOnly
-from app.user.serializers import SignupSerializer, UserSerializer
+from app.user.serializers import SignupSerializer, UserSerializer, CustomUserDetail
 
 
-class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
+class DeleteUserView(APIView):
+    def delete(self, request, *args, **kwargs):
+        user = request.user
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# class UserView(generics.DestroyAPIView[User]):
+#     # queryset = User.objects.all()
+#     # serializer_class = UserSerializer
+#     serializer_class = CustomUserDetail
+#     permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
+#     # lookup_field = 'email'
+#
+#     def get_queryset(self) -> QuerySet[User]:
+#         # user = self.request.user
+#         return User.objects.filter(id=self.request.user.id)
+
+
+# class UserView(generics.RetrieveUpdateDestroyAPIView[User]):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
 
 
 # class SignupView(APIView):
