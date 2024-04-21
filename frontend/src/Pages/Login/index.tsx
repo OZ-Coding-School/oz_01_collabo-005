@@ -26,10 +26,9 @@ function Login() {
       const { access, refresh } = response.data;
       localStorage.setItem("accessToken", access);
       localStorage.setItem("refreshToken", refresh);
-      const { first_name, last_name, pk } = response.data.user;
+      const { first_name, last_name } = response.data.user;
       localStorage.setItem("first_name", first_name);
       localStorage.setItem("last_name", last_name);
-      localStorage.setItem("pk", pk);
       setUserInfo(first_name, last_name);
       alert(`환영합니다 ${first_name}${last_name}님`);
       navigate("/");
