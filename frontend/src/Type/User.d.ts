@@ -1,13 +1,23 @@
-import { Dispatch, SetStateAction } from "react";
-
-export interface UserInfo {
+//user가 로그인하면 들어오는 정보
+export type AuthData = {
   first_name: string | null;
   last_name: string | null;
-}
+  refreshToken: string | null;
+  accessToken: string | null;
+  pk: number | null;
+} | null;
+
+export type getAuthData = {
+  first_name: string;
+  last_name: string;
+  refreshToken: string;
+  accessToken: string;
+  pk: Number;
+};
 
 export interface UserContextType {
-  userInfo: UserInfo;
-  setUserInfo: SetStateAction<UserInfo>;
+  userInfo: AuthData;
+  setUserInfo: React.Dispatch<React.SetStateAction<AuthData>>;
 }
 
 export interface FormDataValue {

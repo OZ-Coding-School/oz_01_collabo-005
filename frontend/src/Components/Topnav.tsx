@@ -6,20 +6,17 @@ import UserContext from "../Context/Authuser";
 import "./Topnav.css";
 
 function TopNav(): JSX.Element {
+  const { userInfo, setUserInfo }: any = useContext(UserContext);
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [isLogin, setIsLogin] = useState<string | null>("");
-  const { userInfo, setUserInfo }: any = useContext(UserContext);
+  const [isLogin, setIsLogin] = useState<boolean>(
+    userInfo?.accessToken ? true : false,
+  );
 
+  //로그인 , 로그아웃 기능
   useEffect(() => {
-    const token = localStorage.getItem("refreshToken");
-    setIsLogin(token);
-    setUserInfo();
-  }, [userInfo]); // 컴포넌트가 처음 렌더링될 때 한 번만 실행 /refresh토큰이 달라질때도 제렌더링
-
-  // const toggleSearch = (): void => {
-  //   setShowSearch(!showSearch);
-  // };
+    userInfo == null ? setIsLogin(false) : setIsLogin(true);
+  }, [userInfo]);
 
   const toggleMenu = (): void => {
     setShowMenu(!showMenu);
@@ -30,7 +27,8 @@ function TopNav(): JSX.Element {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("first_name");
     localStorage.removeItem("last_name");
-    setIsLogin(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
+    localStorage.removeItem("pk");
+    setUserInfo(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
     alert("로그아웃 되었습니다.");
   };
 

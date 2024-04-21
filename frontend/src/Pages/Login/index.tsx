@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import instance from "../../Apis/axios";
+import { setAuthDataToLocalStorage } from "../../App";
 import UserContext from "../../Context/Authuser";
 import "./index.css";
 
@@ -24,13 +25,16 @@ function Login() {
         password,
       });
       const { access, refresh } = response.data;
-      localStorage.setItem("accessToken", access);
-      localStorage.setItem("refreshToken", refresh);
-      const { first_name, last_name } = response.data.user;
-      localStorage.setItem("first_name", first_name);
-      localStorage.setItem("last_name", last_name);
-      setUserInfo(first_name, last_name);
+      const { first_name, last_name, pk } = response.data.user;
       alert(`환영합니다 ${first_name}${last_name}님`);
+      const userData = setAuthDataToLocalStorage({
+        first_name,
+        last_name,
+        refreshToken: refresh,
+        accessToken: access,
+        pk,
+      });
+      setUserInfo(userData);
       navigate("/");
     } catch (error) {
       alert("유효하지 않은 계정입니다.");
