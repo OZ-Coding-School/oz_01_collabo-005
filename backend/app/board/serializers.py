@@ -11,10 +11,11 @@ from app.board.models import Post, Schedule
 class PostSerializer(serializers.ModelSerializer[Post]):
     # writer = serializers.SerializerMethodField("get_writer")
     writer = serializers.ReadOnlyField(source="writer.nickname")
+    # images = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ("id", "title", "content", "writer", "created_at", "updated_at")
+        fields = ("id", "title", "content", "images", "writer", "created_at", "updated_at")
         read_only_fields = ("writer",)
 
     # def get_writer(self, model):
