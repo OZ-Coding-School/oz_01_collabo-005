@@ -12,9 +12,12 @@ from rest_framework.serializers import BaseSerializer
 
 from app.activity.models import JoinedClub
 from app.activity.permissions import IsUserOrReadOnly
-from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer
+from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer, MyPostSerializer, MyCommentSerializer
 from app.activity.utils import check_age_condition, is_user_already_joined
+from app.board.models import Post
+from app.board.serializers import PostSerializer
 from app.club.models import Club
+from app.comment.models import Comment
 from app.user.models import User
 
 
@@ -123,3 +126,26 @@ class LeaveClub(generics.DestroyAPIView[JoinedClub]):
 # class LeaveClubDestroyView(generics.DestroyAPIView):
 #     queryset = JoinedClub.objects.all()
 #     serializer_class = JoinedClubSerializer
+
+class MyPostList(generics.ListAPIView):
+    serializer_class = MyPostSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> QuerySet[Post]:
+        return Post.objects.filter(writer=self.request.user)
+
+
+class MyPostList(generics.ListAPIView):
+    serializer_class = MyPostSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> QuerySet[Post]:
+        return Post.objects.filter(writer=self.request.user)
+
+
+class MyCommentList(generics.ListAPIView):
+    serializer_class = MyCommentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> QuerySet[Post]:
+        return Comment.objects.filter(writer=self.request.user)

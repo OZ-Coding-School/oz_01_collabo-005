@@ -9,6 +9,18 @@ from app.common.models import BaseModel
 #     type = models.IntegerField(choices=TYPE_CHOICES, default=0)
 
 
+# def post_image_path(instance, filename):
+#     title = instance.post.title
+#     filename, file_extension = filename.split('.')
+#     filename = filename.replace(' ', '_')
+#     return f'post_images/{title}_{filename}'
+
+
+# class PostImage(models.Model):
+#     post = models.ForeignKey("board.Post", on_delete=models.CASCADE, related_name="post_image")
+#     image = models.ImageField(upload_to="post_images/")
+
+
 class Post(BaseModel):
     # board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="post")
     club = models.ForeignKey("club.Club", on_delete=models.CASCADE, related_name="post")
@@ -16,6 +28,8 @@ class Post(BaseModel):
     content = models.TextField()
     view_count = models.IntegerField(default=0)
     writer = models.ForeignKey("user.User", on_delete=models.CASCADE, related_name="post")
+    # images = models.ManyToManyField(PostImage, related_name="posts", blank=True)
+    image = models.ImageField(upload_to="images/posts/", blank=True, null=True)
 
 
 class Schedule(BaseModel):

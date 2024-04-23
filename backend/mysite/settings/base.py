@@ -86,7 +86,8 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [env("CORS_ALLOWED_ORIGINS")]
+CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS += env("CORS_ALLOWED_ORIGINS").split(",")
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -272,6 +273,40 @@ REST_AUTH = {
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
     "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
     "USER_DETAILS_SERIALIZER": "app.user.serializers.CustomUserDetail",
+
+    # default
+    # 'LOGIN_SERIALIZER': 'dj_rest_auth.serializers.LoginSerializer',
+    # 'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+    # 'JWT_SERIALIZER': 'dj_rest_auth.serializers.JWTSerializer',
+    # 'JWT_SERIALIZER_WITH_EXPIRATION': 'dj_rest_auth.serializers.JWTSerializerWithExpiration',
+    # 'JWT_TOKEN_CLAIMS_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenObtainPairSerializer',
+    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
+    # 'PASSWORD_RESET_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetSerializer',
+    # 'PASSWORD_RESET_CONFIRM_SERIALIZER': 'dj_rest_auth.serializers.PasswordResetConfirmSerializer',
+    # 'PASSWORD_CHANGE_SERIALIZER': 'dj_rest_auth.serializers.PasswordChangeSerializer',
+    #
+    # 'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+    #
+    # 'REGISTER_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    #
+    # 'TOKEN_MODEL': 'rest_framework.authtoken.models.Token',
+    # 'TOKEN_CREATOR': 'dj_rest_auth.utils.default_create_token',
+    #
+    # 'PASSWORD_RESET_USE_SITES_DOMAIN': False,
+    # 'OLD_PASSWORD_FIELD_ENABLED': False,
+    # 'LOGOUT_ON_PASSWORD_CHANGE': False,
+    # 'SESSION_LOGIN': True,
+    # 'USE_JWT': False,
+    #
+    # 'JWT_AUTH_COOKIE': None,
+    # 'JWT_AUTH_REFRESH_COOKIE': None,
+    # 'JWT_AUTH_REFRESH_COOKIE_PATH': '/',
+    # 'JWT_AUTH_SECURE': False,
+    # 'JWT_AUTH_HTTPONLY': True,
+    # 'JWT_AUTH_SAMESITE': 'Lax',
+    # 'JWT_AUTH_RETURN_EXPIRATION': False,
+    # 'JWT_AUTH_COOKIE_USE_CSRF': False,
+    # 'JWT_AUTH_COOKIE_ENFORCE_CSRF_ON_UNAUTHENTICATED': False,
 }
 
 # REST_AUTH_REGISTER_SERIALIZER = {
