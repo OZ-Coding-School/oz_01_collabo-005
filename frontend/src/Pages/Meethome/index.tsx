@@ -82,7 +82,7 @@ function MeetHome() {
   }
 
   function handleCreateFeed() {
-    navigate("/createboard");
+    navigate(`/createboard/${id}`);
   }
 
   const handleJoinClub = async (e) => {
