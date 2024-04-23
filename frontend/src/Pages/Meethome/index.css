@@ -61,9 +61,6 @@
   background-color: transparent;
 }
 .enterMeet {
-  height: 50px;
-  width: 246px;
-  background-color: #b22222;
   display: flex;
   justify-content: center;
   align-items: center;

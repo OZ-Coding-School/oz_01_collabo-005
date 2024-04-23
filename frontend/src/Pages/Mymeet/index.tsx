@@ -1,11 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react"; // 추가
 import { HiUsers } from "react-icons/hi";
 import { MdRemoveRedEye } from "react-icons/md";
 
+import instance from "../../Apis/axios";
+import TabButton from "./TabButton";
 import dummy from "./dummy.json";
 import "./index.css";
-import TabButton from "./TabButton";
 
 interface DummyItem {
   url: string;
@@ -13,14 +13,20 @@ interface DummyItem {
 }
 
 function ShowMyMeet(): JSX.Element {
+  const [getData, setGetData] = useState([]);
+
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "https://b63dca28-1170-4ac5-91c8-65e06ade5071.mock.pstmn.io/list",
-      responseType: "json",
-    }).then(function (response) {
-      console.log(response.data);
-    });
+    async function getMyMeet() {
+      try {
+        const response = await instance.get(`
+        api/activities/clubs`,);   // 404 에러 //url 잘못입력 된듯 
+        setGetData(response.data);
+      } catch (error) {
+        console.error("error", error);
+      }
+    }
+    getMyMeet();
+    console.log(getData);
   }, []);
 
   return (

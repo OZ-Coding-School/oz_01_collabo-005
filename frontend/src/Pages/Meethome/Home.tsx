@@ -2,7 +2,17 @@ import "./Home.css";
 import NoticeBox from "./NoticeBox";
 import ScheduleBox from "./ScheduleBox";
 
-function Home({ button, getData }: { button: React.ReactNode; getData: any }) {
+function Home({
+  button,
+  getData,
+  memberCount,
+  feedData,
+}: {
+  button: React.ReactNode;
+  getData: any;
+  memberCount: number;
+  feedData: any;
+}) {
   return (
     <div className="meetingHomeScreen">
       <div className="meetingIntroBox">
@@ -13,7 +23,7 @@ function Home({ button, getData }: { button: React.ReactNode; getData: any }) {
         <div>
           <h4>게시판 1</h4>
         </div>
-        <NoticeBox />
+        <NoticeBox feedData={feedData} />
       </div>
       <div>
         <div>
@@ -23,7 +33,7 @@ function Home({ button, getData }: { button: React.ReactNode; getData: any }) {
       </div>
       <div>
         <div>
-          <h4>멤버 1</h4>
+          <h4>멤버 {memberCount}</h4>
         </div>
         멤버 목록
       </div>
