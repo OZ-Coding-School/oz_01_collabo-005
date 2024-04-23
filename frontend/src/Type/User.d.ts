@@ -6,7 +6,7 @@ export type AuthData = {
   accessToken: string | null;
   pk: number | null;
 } | null;
-
+//로그인 할 때 getItem (위에껀 빌 수 있을 때 , 밑은 무조건 있을 때)
 export type getAuthData = {
   first_name: string;
   last_name: string;
@@ -14,12 +14,12 @@ export type getAuthData = {
   accessToken: string;
   pk: Number;
 };
-
+//UserContext의 타입
 export interface UserContextType {
   userInfo: AuthData;
   setUserInfo: React.Dispatch<React.SetStateAction<AuthData>>;
 }
-
+//모임개설 할 때
 export interface FormDataValue {
   name: string;
   description: string;
