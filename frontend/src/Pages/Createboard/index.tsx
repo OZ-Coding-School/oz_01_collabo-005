@@ -55,7 +55,6 @@ function CreateBoard() {
     if (formData.image) {
       formDataToSend.append("image", formData.image);
     }
-    console.log(formData);
 
     try {
       const response = await instance.post(

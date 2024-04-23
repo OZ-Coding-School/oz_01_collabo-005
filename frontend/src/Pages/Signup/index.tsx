@@ -42,7 +42,6 @@ function SignUp() {
       console.log(response);
       handleSignUpSuccess();
     } catch (error) {
-      // console.log(error.response.data);
       alert(error);
     }
     setLoading(false);

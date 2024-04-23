@@ -11,13 +11,11 @@ function NewPost() {
       try {
         const response = await instance.get("api/clubs/");
         setClub(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         console.log("Error fetching", error);
       }
     }
     newPosts();
-    console.log(club);
   }, []);
 
   // const currentClub = club.sort((a, b) => b.id - a.id);

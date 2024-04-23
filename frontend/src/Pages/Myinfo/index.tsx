@@ -56,7 +56,6 @@ function MyInfo() {
     const nextMode = pageMode === "VIEW" ? "EDIT" : "VIEW";
     if (nextMode === "VIEW") {
       try {
-        console.log("전송", values);
         await sendPatchRequest(values);
         setPageMode(nextMode); //
       } catch (error) {
@@ -106,7 +105,7 @@ function MyInfo() {
         formData,
         config,
       );
-      console.log(response.data);
+
       // 수정된 정보에 따라 화면 갱신 또는 다른 작업 수행
 
       //수정된 데이터를 다시 가져와서 화면에 반영
@@ -145,7 +144,7 @@ function MyInfo() {
           },
         };
         const response = await instance.get(`api/accounts/user/`, config);
-        console.log(response.data);
+
         setUserData(response.data);
         setValues({
           ...values,
