@@ -82,13 +82,13 @@ function App() {
             <Route path="/clubs/:id/members" element={<MemberList />} />
             <Route path="/myInfo/" element={<MyInfo />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
-            <Route path="/createBoard" element={<CreateBoard />}></Route>
+            <Route path="/createBoard/:id" element={<CreateBoard />}></Route>
             <Route path="/feedScreen" element={<FeedScreen />}></Route>
-
             <Route
               path="/createSchedules"
               element={<CreateSchedules />}
             ></Route>
+
             <Route path="*" element={<div> 없는 페이지임</div>}></Route>
           </Route>
         </Routes>

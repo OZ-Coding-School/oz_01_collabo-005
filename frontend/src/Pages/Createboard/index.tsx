@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../Apis/axios";
 import "./index.css";
 
 function CreateBoard() {
+  const { id } = useParams();
+
   interface CreateBoardValue {
     title: string;
     content: string;
-    // image: File | null;
+    image: File | null;
   }
 
   const [formData, setFormData] = useState<CreateBoardValue>({
     title: "",
     content: "",
-    // image: null,
+    image: null,
   });
 
   const navigate = useNavigate();
@@ -39,10 +41,10 @@ function CreateBoard() {
   };
 
   // 이미지 설정
-  // const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files && e.target.files[0];
-  //   setFormData({ ...formData, image: file });
-  // };
+  const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    setFormData({ ...formData, image: file });
+  };
   //제출
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,14 +52,14 @@ function CreateBoard() {
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("content", formData.content);
-    // if (formData.image) {
-    //   formDataToSend.append("image", formData.image);
-    // }
+    if (formData.image) {
+      formDataToSend.append("image", formData.image);
+    }
     console.log(formData);
 
     try {
       const response = await instance.post(
-        "api/clubs/1/posts/",
+        `api/clubs/${id}/posts/`,
         formDataToSend,
         {
           headers: {
@@ -66,7 +68,7 @@ function CreateBoard() {
           },
         },
       );
-      navigate("/"); // 미트홈으로 돌아가도록
+      navigate(`/meetHome/${id}`);
       alert("게시판 글 등록했어요.");
     } catch (error) {
       alert("게시판 글 실패");
@@ -109,7 +111,7 @@ function CreateBoard() {
 
           <div className="schedulesSubmitContainer">
             <div className="submitBox">
-              {/* <input type="file" accept="image/*" onChange={handleImgChange} /> */}
+              <input type="file" accept="image/*" onChange={handleImgChange} />
               <input type="submit" value={"작성완료"} />
             </div>
           </div>

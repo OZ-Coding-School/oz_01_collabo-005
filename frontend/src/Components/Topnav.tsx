@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext, useEffect, useState } from "react";
 import { FaAngleDown, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import instance from "../Apis/axios";
 import UserContext from "../Context/Authuser";
 import "./Topnav.css";
 
@@ -23,13 +24,20 @@ function TopNav(): JSX.Element {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("first_name");
-    localStorage.removeItem("last_name");
-    localStorage.removeItem("pk");
-    setUserInfo(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
-    alert("로그아웃 되었습니다.");
+    try {
+      const refresh = localStorage.getItem("refreshToken");
+      instance.post("api/accounts/logout/", { refresh: refresh });
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("first_name");
+      localStorage.removeItem("last_name");
+      localStorage.removeItem("pk");
+      setUserInfo(null); // 로그아웃 후에 상태를 업데이트하여 다시 렌더링되도록 합니다.
+      alert("로그아웃 되었습니다.");
+    } catch {
+      console.error("로그아웃 중 에러발생");
+      alert("로그아웃에 실패했습니다");
+    }
   };
 
   return (

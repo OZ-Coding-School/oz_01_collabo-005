@@ -25,6 +25,8 @@
 }
 .meetPicture {
   border-radius: 22px;
+  width: 50px;
+  height: auto;
 }
 .feedTitleBox {
   padding-top: 10px;

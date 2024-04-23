@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"; // 추가
 import { HiUsers } from "react-icons/hi";
 import { MdRemoveRedEye } from "react-icons/md";
-
+import { Link, useParams } from "react-router-dom";
 import instance from "../../Apis/axios";
 import TabButton from "./TabButton";
 import dummy from "./dummy.json";
@@ -12,39 +12,62 @@ interface DummyItem {
   title: string;
 }
 
+type ClubInfo = {
+  id: number;
+  url: string | null;
+  name: string | null;
+  image: string | null;
+};
+
+type MyItems = {
+  id: number | null;
+  club: ClubInfo | null;
+};
+
 function ShowMyMeet(): JSX.Element {
   const [getData, setGetData] = useState([]);
+  const [seeMyMeet, setSeeMyMeet]: any = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     async function getMyMeet() {
       try {
-        const response = await instance.get(`
-        api/activities/clubs`,);   // 404 에러 //url 잘못입력 된듯 
-        setGetData(response.data);
+        const response = await instance.get("/api/activities/clubs", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+        // console.log(response.data);
+        setSeeMyMeet(response.data.results);
       } catch (error) {
-        console.error("error", error);
+        console.log("error", error);
       }
     }
     getMyMeet();
-    console.log(getData);
   }, []);
+  console.log(seeMyMeet, "시마이트미트");
 
   return (
     <>
-      {dummy.img.map((item: DummyItem, index: number) => (
-        <div className="myMeetBox" key={index}>
-          <img
-            src={item.url}
-            width={69}
-            className="meetPicture"
-            alt={item.title}
-          />
-          <p>{item.title}</p>
-        </div>
-      ))}
+      {Array.isArray(seeMyMeet) &&
+        seeMyMeet.map((item, index) => (
+          <div className="myMeetBox" key={index}>
+            <Link to={`/meetHome/${item.club.id}`} className="">
+              <img
+                src={
+                  item.club.image ? item.club.image : import.meta.env.VITE_ICON
+                }
+                className="meetPicture"
+                // alt={item.name}
+              />
+              <p>{item.club.name}</p>
+            </Link>
+          </div>
+        ))}
     </>
   );
 }
+
 function ShowMyFeed(): JSX.Element {
   return (
     <div className="FeedArticleBox">
@@ -113,7 +136,7 @@ function MyMeet() {
     setSelectedTab(selectedButton); // 클릭된 버튼의 내용으로 상태 업데이트
   }
 
-  console.log(dummy);
+  // console.log(dummy);
   return (
     <div className="meet">
       <div className="tabs">

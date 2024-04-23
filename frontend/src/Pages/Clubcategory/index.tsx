@@ -84,7 +84,17 @@ function ClubCategory() {
 
               <div className="clubUpdatedDatePlace">
                 <div>{clubName.frequent_place}</div>
-                <div>{clubName.updated_at.slice(0, 10)}</div>
+                <div className="ageGroup">
+                  {clubName.age_group.map((age, index) => (
+                    <div key={index}>
+                      {index === clubName.age_group.length - 1
+                        ? age + "0"
+                        : age + "0,"}
+                    </div>
+                  ))}
+                  <div>대</div>
+                </div>
+                <div>{clubName.updated_at.slice(0, 10)}</div>1
               </div>
             </Link>
           ))}

@@ -27,6 +27,11 @@
   width: 60%;
 }
 
+.ageGroup {
+  display: flex;
+  flex-direction: row;
+}
+
 .clubUpdatedDatePlace {
   display: flex;
   flex-direction: column;
