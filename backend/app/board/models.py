@@ -16,9 +16,9 @@ from app.common.models import BaseModel
 #     return f'post_images/{title}_{filename}'
 
 
-class PostImage(models.Model):
-    post = models.ForeignKey("board.Post", on_delete=models.CASCADE, related_name="post_image")
-    image = models.ImageField(upload_to="post_images/")
+# class PostImage(models.Model):
+#     post = models.ForeignKey("board.Post", on_delete=models.CASCADE, related_name="post_image")
+#     image = models.ImageField(upload_to="post_images/")
 
 
 class Post(BaseModel):
@@ -29,7 +29,7 @@ class Post(BaseModel):
     view_count = models.IntegerField(default=0)
     writer = models.ForeignKey("user.User", on_delete=models.CASCADE, related_name="post")
     # images = models.ManyToManyField(PostImage, related_name="posts", blank=True)
-    # images = models.ImageField(upload_to="images/posts/")
+    image = models.ImageField(upload_to="images/posts/", blank=True, null=True)
 
 
 class Schedule(BaseModel):
