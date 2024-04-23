@@ -29,7 +29,6 @@ function MeetHome() {
       }
     }
     getFeed();
-    console.log(feedData);
   }, []);
 
   useEffect(() => {
@@ -54,7 +53,6 @@ function MeetHome() {
       }
     }
     getMember();
-    console.log(getCount);
   }, [memberCount]); //멤버수 바뀔 때마다 재렌더링 되도록.
 
   useEffect(() => {
@@ -100,7 +98,6 @@ function MeetHome() {
         },
       );
       alert("모임에 가입되었습니다.");
-      console.log(response.data);
     } catch (error) {
       console.error("Error joining club:", error);
       alert("모임 가입에 실패했습니다.");

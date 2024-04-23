@@ -59,8 +59,6 @@ function ClubCategory() {
     }
   };
 
-  // console.log();
-
   return (
     <div className="clubCategoryContainer">
       <div className="clubCategoryBox">

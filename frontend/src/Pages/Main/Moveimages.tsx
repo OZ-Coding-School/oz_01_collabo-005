@@ -35,7 +35,6 @@ function MoveImages() {
       }
     }
     newPosts();
-    console.log(club);
   }, []);
 
   useEffect(() => {

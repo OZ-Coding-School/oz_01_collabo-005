@@ -37,7 +37,7 @@ function ShowMyMeet(): JSX.Element {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         });
-        // console.log(response.data);
+
         setSeeMyMeet(response.data.results);
       } catch (error) {
         console.log("error", error);
@@ -45,7 +45,6 @@ function ShowMyMeet(): JSX.Element {
     }
     getMyMeet();
   }, []);
-  console.log(seeMyMeet, "시마이트미트");
 
   return (
     <>
