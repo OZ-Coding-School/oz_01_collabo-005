@@ -1,12 +1,18 @@
 import "./NoticeBoard.css";
 import NoticeBox from "./NoticeBox";
 
-function NoticeBoard({ button }: { button: React.ReactNode }) {
+function NoticeBoard({
+  button,
+  feedData,
+}: {
+  button: React.ReactNode;
+  feedData: any;
+}) {
   return (
     <div>
-      <NoticeBox />
-      <NoticeBox />
-      <NoticeBox />
+      <NoticeBox feedData={feedData} />
+      <NoticeBox feedData={feedData} />
+      <NoticeBox feedData={feedData} />
       {button}
     </div>
   );
