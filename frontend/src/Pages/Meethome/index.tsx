@@ -82,7 +82,7 @@ function MeetHome() {
   }
 
   function handleCreateFeed() {
-    navigate(`/createboard/${id}`);
+    navigate("/createboard");
   }
 
   const handleJoinClub = async (e) => {
@@ -167,7 +167,9 @@ function MeetHome() {
           feedData={feedData}
         />
       )}
-      {selectedTab === "게시판" && <NoticeBoard button={icon} />}
+      {selectedTab === "게시판" && (
+        <NoticeBoard button={icon} feedData={feedData} />
+      )}
       {selectedTab === "일정" && <Schedule />}
       {selectedTab === "앨범" && <Album button={icon} />}
       <form className="enterMeet" onSubmit={handleJoinClub}>
