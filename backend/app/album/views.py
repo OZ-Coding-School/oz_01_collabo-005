@@ -1,14 +1,19 @@
 from django.shortcuts import render
-from rest_framework import viewsets, permissions
+from rest_framework import generics, permissions, viewsets
+from rest_framework.exceptions import NotFound
 
-from app.album.models import Album
-from app.album.permissions import IsUploaderOrReadOnly
 from app.album.serializers import AlbumSerializer
-from app.board.permissions import IsWriterOrReadOnly
+from app.board.models import Post
 
 
-class AlbumView(viewsets.ModelViewSet):
-    queryset = Album.objects.all()
+# class AlbumView(generics.ListAPIView):
+class AlbumView(viewsets.ReadOnlyModelViewSet):
     serializer_class = AlbumSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsUploaderOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        club_id = self.kwargs.get("club_id")
+        if club_id is None:
+            raise NotFound(detail="club not found")
+        # return Post.objects.filter(club_id=club_id, image__isnull=False)
+        return Post.objects.filter(club_id=club_id)
