@@ -66,7 +66,7 @@ function CreateBoard() {
           },
         },
       );
-      navigate("/");
+      navigate("/"); // 미트홈으로 돌아가도록
       alert("게시판 글 등록했어요.");
     } catch (error) {
       alert("게시판 글 실패");

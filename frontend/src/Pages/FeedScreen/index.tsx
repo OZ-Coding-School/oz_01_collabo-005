@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import { CiCircleCheck } from "react-icons/ci";
@@ -7,7 +7,7 @@ import { IoMdSend } from "react-icons/io";
 import { IoArrowBack } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import "./CommentList.css";
+
 import WriterInfo from "./WriterInfo";
 import "./index.css";
 
@@ -23,7 +23,11 @@ function FeedScreen() {
 
   const [isEdit, setIsEdit] = useState(false);
   const [editCommentId, setEditCommentId] = useState(null);
+  const [likeCount, setLikeCount] = useState(0);
 
+  function handleLikeCount() {
+    setLikeCount(likeCount + 1);
+  }
   function handleAddComment(e) {
     setAddComment(e.target.value);
   }
@@ -45,14 +49,14 @@ function FeedScreen() {
     const updatedCommentList = commentList.map((comment) => {
       if (comment.id === editCommentId) {
         // 현재 수정 중인 댓글의 ID를 나타내며, 이 값과 현재 순회 중인 댓글의 ID가 같은지를 확인한다.
-        return { ...comment, text: updateText }; //같으면 해당 댓글을 복사하고, text만 업데이트한다.
+        return { ...comment, text: updateText || comment.text }; //같으면 해당 댓글을 복사하고, text만 업데이트한다.  수정된 텍스트가 없으면 기존 텍스트를 유지하도록 변경
       }
       return comment; // 현재 수정 중인 댓글의 ID와 현재 순회 중인 댓글 ID가 다른 댓글은 그대로 밷어낸다.
     });
     setCommentList(updatedCommentList);
     setIsEdit(false); // 수정 모드 종료
     setEditCommentId(null); // 수정 중인 댓글 ID 초기화
-    setUpdateText(""); // 수정한 텍스트 초기화
+    setUpdateText("");
   }
 
   function handleDeleteComment(commentId) {
@@ -93,18 +97,36 @@ function FeedScreen() {
                 <BsChat size={25} />
               </div>
               <div>
-                <button className="feedLikesBtn">
+                <button className="feedLikesBtn" onClick={handleLikeCount}>
                   <AiOutlineLike className="likeButton" />
                 </button>{" "}
-                <span>2</span>
+                <span>{likeCount}</span>
               </div>
             </div>
           </div>
         </div>
         <div className="containComments">
           {commentList.map((item) => (
-            <>
-              <WriterInfo paddingTop="20px" />
+            <React.Fragment key={item.id}>
+              <div className="landingUserBox" style={{ paddingTop: "30px" }}>
+                <div className="webUserInfo">
+                  <div className="landingUserImg">
+                    <img
+                      src="https://i.namu.wiki/i/G9ey-HFAbimbOE7iEYs-GQ108GtySNix3H9BD-YvPqcHYyIahrNxqamCqhYLsEl_2ws9HkZMXB5-N0Lg2nDtWchO9HeD0EDvOceVvq5ufBmVKWUM5oYMmM7lMF5UsJ_bP2mX_1pf4vHmweTVwe_bbA.webp"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div className="wrapWrittenBox">
+                    <div className="writtenBox">
+                      <p>userName</p>
+                    </div>
+                    <div>
+                      <span>작성일</span>
+                    </div>
+                  </div>{" "}
+                </div>
+              </div>{" "}
               <div className="personsComment">
                 {isEdit && item.id === editCommentId ? (
                   <input
@@ -130,7 +152,7 @@ function FeedScreen() {
                   </button>
                 </div>
               </div>
-            </>
+            </React.Fragment>
           ))}
         </div>
         <div id="commentCreate">

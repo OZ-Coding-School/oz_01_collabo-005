@@ -91,3 +91,7 @@
   border: 0;
   background-color: transparent;
 }
+.personsComment {
+  margin-top: 20px;
+  height: 56px;
+}

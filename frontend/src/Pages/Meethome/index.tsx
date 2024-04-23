@@ -13,8 +13,49 @@ import "./index.css";
 
 function MeetHome() {
   const [getData, setGetData]: any = useState([]);
-
+  const [getCount, setGetCount]: any = useState([]);
+  const [memberCount, setMemberCount] = useState<number>(0);
   const { id }: any = useParams();
+
+  const [feedData, setFeedData] = useState([]);
+
+  useEffect(() => {
+    async function getFeed() {
+      try {
+        const response = await instance.get(`api/clubs/${id}/posts/`); //이부분이 잘못됬음
+        setFeedData(response.data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+    getFeed();
+    console.log(feedData);
+  }, []);
+
+  useEffect(() => {
+    async function getMember() {
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (!accessToken) {
+        console.error("Access token not found");
+        return;
+      }
+
+      try {
+        const response = await instance.get(`api/clubs/${id}/members`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setGetCount(response.data);
+        setMemberCount(response.data.count);
+      } catch (error) {
+        console.error("Error fetching members:", error);
+      }
+    }
+    getMember();
+    console.log(getCount);
+  }, [memberCount]); //멤버수 바뀔 때마다 재렌더링 되도록.
 
   useEffect(() => {
     async function getImage() {
@@ -26,7 +67,6 @@ function MeetHome() {
       }
     }
     getImage();
-    console.log(getData);
   }, []);
 
   const [selectedTab, setSelectedTab] = useState<string>("홈"); // 추가
@@ -44,6 +84,7 @@ function MeetHome() {
   function handleCreateFeed() {
     navigate("/createboard");
   }
+
   const handleJoinClub = async (e) => {
     e.preventDefault(); // 폼 제출 기본 동작 방지
 
@@ -78,7 +119,7 @@ function MeetHome() {
           <BsPencil
             size={25}
             style={{ color: "#ffffff" }}
-            onClick={handleCreateFeed}
+            onClick={handleCreateFeed} //버튼 클릭 -> 글쓰기 페이지로 이동
           />
         </button>
       </div>
@@ -106,7 +147,7 @@ function MeetHome() {
       </div>
       <div className="aboutUserNumber">
         <span>멤버</span>
-        <span>18</span>
+        <span>{memberCount}</span>
         <span>게시글</span>
         <span>29</span>
         <span>일정</span>
@@ -118,8 +159,17 @@ function MeetHome() {
         <TabButton title="일정" onSelect={() => handleClick("일정")} />
         <TabButton title="앨범" onSelect={() => handleClick("앨범")} />
       </div>
-      {selectedTab === "홈" && <Home button={icon} getData={getData} />}
-      {selectedTab === "게시판" && <NoticeBoard button={icon} />}
+      {selectedTab === "홈" && (
+        <Home
+          button={icon}
+          getData={getData}
+          memberCount={memberCount}
+          feedData={feedData}
+        />
+      )}
+      {selectedTab === "게시판" && (
+        <NoticeBoard button={icon} feedData={feedData} />
+      )}
       {selectedTab === "일정" && <Schedule />}
       {selectedTab === "앨범" && <Album button={icon} />}
       <form className="enterMeet" onSubmit={handleJoinClub}>
