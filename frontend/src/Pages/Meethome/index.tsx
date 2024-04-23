@@ -36,6 +36,11 @@ function MeetHome() {
   }
   const navigate = useNavigate();
 
+  function handleShowMemberList() {
+    // MemberList 페이지로 이동
+    navigate(`/clubs/${id}/members`);
+  }
+
   function handleCreateFeed() {
     navigate("/createboard");
   }
@@ -88,7 +93,7 @@ function MeetHome() {
       </div>
       <div className="changePageIconBox">
         <div className="meetHomeIcons">
-          <button className="personIconBtn">
+          <button className="personIconBtn" onClick={handleShowMemberList}>
             <HiUsers size={23} style={{ color: "#000" }} />
           </button>
           <button className="meetOutBtn">

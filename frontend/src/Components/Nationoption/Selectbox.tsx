@@ -20,11 +20,22 @@ function NationBox({ field }: NationboxProps) {
 export default NationBox;
 const Select = styled.select`
   margin-top: 13.5px;
-  width: 176px;
-  height: 30px;
+  width: 220px;
+  height: 40px;
   display: block;
   border-radius: 5px;
   text-align: center;
   border: 1px solid;
-  font-size: 1rem;
+  font-size: 1.3rem;
+
+  @media screen and (max-width: 767px) {
+    margin-top: 13.5px;
+    width: 200px;
+    height: 40px;
+    display: block;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 1.3rem;
+  }
 `;

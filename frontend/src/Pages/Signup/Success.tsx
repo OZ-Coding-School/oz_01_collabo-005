@@ -11,11 +11,18 @@ function Success() {
         <br /> 함께 해주셔서 감사합니다.
       </Thanks>
       <button
+        style={{
+          width: "40%",
+          height: "40px",
+          margin: "auto",
+          backgroundColor: "#b22222",
+          color: "white",
+        }}
         onClick={() => {
           navigate("/login");
         }}
       >
-        로그인하러 가기
+        로그인
       </button>
     </SuccessPage>
   );
