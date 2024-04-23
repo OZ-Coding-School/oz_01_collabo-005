@@ -1,33 +1,110 @@
 import React, { useState } from "react";
+import { MdDateRange, MdOutlinePlace, MdPeopleAlt } from "react-icons/md";
+import { useNavigate, useParams } from "react-router-dom";
+import instance from "../../Apis/axios";
 import "./index.css";
-import { MdDateRange } from "react-icons/md";
-import { MdOutlinePlace } from "react-icons/md";
-import { MdPeopleAlt } from "react-icons/md";
 
 function CreateSchedules() {
-  // const handleImgChange = (e) => {
-  // const file = e.target.files && e.target.files[0];
-  // const reader = new FileReader();
-  // const [date, setDate] = useState("");
-  // const [place, setPlace] = useState("");
-  // const [peopleNum, setPeopleNum] = useState();
-  // const [postImg, setPostImg] = useState<string | null>(null);
+  const { id } = useParams();
 
-  //   reader.onloadend = () => {
-  //     if (reader.result) {
-  //       setPostImg(reader.result as any);
-  //     }
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
+  interface CreateSchedulesValue {
+    title: string;
+    content: string;
+    event_time: Date;
+    place: string;
+    max_attendees: number;
+  }
+
+  const [formData, setFormData] = useState<CreateSchedulesValue>({
+    title: "",
+    content: "",
+    event_time: new Date(),
+    place: "",
+    max_attendees: 1,
+  });
+
+  const navigate = useNavigate();
+
+  const ParseDate = new Date();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    setter: (value: string) => void,
+  ) => {
+    const { value } = e.target;
+    setter(value);
+  };
+
+  // 타이틀 설정
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e, (value) => setFormData({ ...formData, title: value }));
+  };
+
+  // 콘텐츠 설정
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleInputChange(e, (value) =>
+      setFormData({ ...formData, content: value }),
+    );
+  };
+  // 이벤트타임 설정
+  const handleEventTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value; // 사용자가 입력한 값
+    const parsedDate = new Date(inputValue); // 입력한 값을 Date 객체로 변환
+    setFormData({ ...formData, event_time: parsedDate });
+  };
+  //장소 설정
+  const handlePlaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(e, (value) => setFormData({ ...formData, place: value }));
+  };
+  // 사람 인원 체크
+  const handlePeopleNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseInt(e.target.value); // 입력값을 정수로 변환
+    setFormData({ ...formData, max_attendees: inputValue });
+  };
+
+  //제출
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("content", formData.content);
+    formDataToSend.append("event_time", formData.event_time.toISOString());
+    formDataToSend.append("place", formData.place);
+    formDataToSend.append("max_attendees", formData.max_attendees.toString());
+
+    try {
+      const response = await instance.post(
+        `api/clubs/${id}/schedules/`,
+        formDataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            // "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+      navigate(`/meetHome/${id}`);
+      alert("일정 글을 등록했어요.");
+    } catch (error) {
+      alert("게시판 글 실패");
+      console.log(error);
+    }
+  };
 
   return (
     <div className="CreateSchedulesContainer">
-      <div className="clubName">
-        <div>대충 클럽네임</div>
-      </div>
       <div className="SchedulesFormContainer">
-        <form className="schedulesForm" action="">
+        <form className="schedulesForm" onSubmit={handleSubmit}>
+          <div className="clubName">
+            <input
+              type="text"
+              placeholder="제목을 입력해주세요"
+              name="board-title"
+              value={formData.title}
+              onChange={handleTitleChange}
+            />
+          </div>
           <div className="schedulesMiddleBox">
             <div className="schedulesDateContainer">
               <div className="schedulesDateBox">
@@ -36,7 +113,11 @@ function CreateSchedules() {
                   <div>날짜 및 시간</div>
                 </div>
                 <div></div>
-                <input type="date" />
+                <input
+                  type="datetime-local"
+                  value={formData.event_time.toISOString().slice(0, -8)}
+                  onChange={handleEventTimeChange}
+                />
               </div>
             </div>
             <div className="schedulesDateContainer">
@@ -46,7 +127,12 @@ function CreateSchedules() {
                   <div>장소</div>
                 </div>
                 <div>
-                  <input type="text" placeholder="미정" />
+                  <input
+                    type="text"
+                    placeholder="미정"
+                    value={formData.place}
+                    onChange={handlePlaceChange}
+                  />
                 </div>
               </div>
             </div>
@@ -57,7 +143,12 @@ function CreateSchedules() {
                   <div>인원</div>
                 </div>
                 <div>
-                  <input type="number" placeholder="숫자만 입력 해주세요" />
+                  <input
+                    type="number"
+                    placeholder="숫자만 입력 해주세요"
+                    value={formData.max_attendees}
+                    onChange={handlePeopleNumChange}
+                  />
                 </div>
               </div>
             </div>
@@ -65,15 +156,14 @@ function CreateSchedules() {
           <div className="afterArea">
             <div className="textareaBox">
               <textarea
-                name=""
-                id=""
                 placeholder="활동에 대한 설명을 적어주세요"
+                value={formData.content}
+                onChange={handleContentChange}
               ></textarea>
             </div>
           </div>
           <div className="schedulesSubmitContainer">
             <div className="schedulesSubmitBox">
-              <input type="file" />
               <input type="submit" value={"작성완료"} className="submit" />
             </div>
           </div>

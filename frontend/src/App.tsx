@@ -85,7 +85,7 @@ function App() {
             <Route path="/createBoard/:id" element={<CreateBoard />}></Route>
             <Route path="/feedScreen" element={<FeedScreen />}></Route>
             <Route
-              path="/createSchedules"
+              path="/createSchedules/:id"
               element={<CreateSchedules />}
             ></Route>
 
