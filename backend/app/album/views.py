@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework import generics, permissions, viewsets
 from rest_framework.exceptions import NotFound
@@ -15,5 +16,6 @@ class AlbumView(viewsets.ReadOnlyModelViewSet):
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")
+        # return Post.objects.filter(club_id=club_id)
         # return Post.objects.filter(club_id=club_id, image__isnull=False)
-        return Post.objects.filter(club_id=club_id)
+        return Post.objects.filter(club_id=club_id).filter(Q(image__isnull=False) & ~Q(image=""))
