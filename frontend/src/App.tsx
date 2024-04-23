@@ -11,6 +11,7 @@ import FeedScreen from "./Pages/FeedScreen";
 import Login from "./Pages/Login";
 import Main from "./Pages/Main";
 import MeetHome from "./Pages/Meethome";
+import MemberList from "./Pages/Meethome/MemberList";
 import MyInfo from "./Pages/Myinfo";
 import MyMeet from "./Pages/Mymeet";
 import SignUp from "./Pages/Signup";
@@ -78,6 +79,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/myMeet" element={<MyMeet />}></Route>
             <Route path="/meetHome/:id" element={<MeetHome />}></Route>
+            <Route path="/clubs/:id/members" element={<MemberList />} />
             <Route path="/myInfo/" element={<MyInfo />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
             <Route path="/createBoard" element={<CreateBoard />}></Route>

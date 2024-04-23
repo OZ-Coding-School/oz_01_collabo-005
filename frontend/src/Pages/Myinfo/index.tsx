@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import instance from "../../Apis/axios";
 import NationBox from "../../Components/Nationoption/Selectbox";
-import { Message } from "../Signup";
+import { MyInfoInput } from "../../Type/User";
+import { Message, PasswordInput, PasswordInputContainer } from "../Signup";
 import "./index.css";
-
-interface MyInfoInput {
-  new_nickname: string;
-  comment: string;
-  new_password1: string;
-  new_password2: string;
-  new_nationality: string;
-  new_first_name: string;
-  new_last_name: string;
-  new_phone: string;
-  new_birth: Date;
-  new_profession: string;
-  profileImage: FileList;
-}
 
 function MyInfo() {
   const [pageMode, setPageMode] = useState("VIEW");
   const [userData, setUserData] = useState<any>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [eyeIcon, setEyeIcon] = useState(false);
 
-  let { id } = useParams();
+  let { pk } = useParams();
 
   const {
     register,
@@ -39,12 +30,16 @@ function MyInfo() {
   const [imgPreview, setImgPreview] = useState(
     "../public/pictures/Myinfo/profileImg.png",
   );
-  const image = watch("profileImage");
+  const image = watch("profile_image");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setImgPreview(URL.createObjectURL(file));
+      setValues({
+        ...values,
+        profile_image: file, // 파일 객체로 profile_image 필드를 업데이트
+      });
     }
   };
 
@@ -57,13 +52,19 @@ function MyInfo() {
     }
   };
 
-  const togglePageMode = () => {
+  const togglePageMode = async () => {
     const nextMode = pageMode === "VIEW" ? "EDIT" : "VIEW";
     if (nextMode === "VIEW") {
-      console.log("전송", values);
+      try {
+        console.log("전송", values);
+        await sendPatchRequest(values);
+        setPageMode(nextMode); //
+      } catch (error) {
+        console.error("수정요청 실패", error);
+      }
+    } else {
+      setPageMode(nextMode);
     }
-
-    setPageMode(nextMode);
   };
 
   const [values, setValues] = useState({
@@ -77,23 +78,78 @@ function MyInfo() {
     date_of_birth: "",
     profession: "",
     profile_image: "",
+    date_joined: "",
   });
 
+  const dateJoined = userData.date_joined
+    ? userData.date_joined.substring(0, 7)
+    : "";
+
+  const sendPatchRequest = async (data: MyInfoInput) => {
+    try {
+      data.date_of_birth = data.date_of_birth.toString();
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      const response = await instance.patch(
+        `api/accounts/user/`,
+        formData,
+        config,
+      );
+      console.log(response.data);
+      // 수정된 정보에 따라 화면 갱신 또는 다른 작업 수행
+
+      //수정된 데이터를 다시 가져와서 화면에 반영
+      const updateUserData = await getUserData();
+      setUserData(updateUserData);
+      setPageMode("VIEW");
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  // 사용자 데이터를 가져오는 함수
+  const getUserData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const response = await instance.get(`api/accounts/user/`, config);
+      return response.data;
+    } catch (error) {
+      console.error("error", error);
+      return {}; // 에러 발생 시 빈 객체 반환
+    }
+  };
+
   useEffect(() => {
-    async function fetchData() {
+    async function getData() {
       try {
         const token = localStorage.getItem("token");
-        const pk = localStorage.getItem("pk");
         const config = {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         };
-        const response = await instance.get(`api/users/${pk}`, config);
+        const response = await instance.get(`api/accounts/user/`, config);
         console.log(response.data);
         setUserData(response.data);
         setValues({
           ...values,
+          date_joined: response.data.date_joined || "",
           nickname: response.data.nickname || "",
           password1: response.data.password1 || "",
           password2: response.data.password2 || "",
@@ -111,7 +167,7 @@ function MyInfo() {
         console.error("error", error);
       }
     }
-    fetchData();
+    getData();
   }, []);
 
   const onChangeEdit = (e) => {
@@ -120,6 +176,11 @@ function MyInfo() {
       ...values,
       [name]: value,
     });
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+    setEyeIcon(!eyeIcon);
   };
 
   return (
@@ -143,7 +204,7 @@ function MyInfo() {
               />
               <input
                 type="file"
-                {...register("profileImage")}
+                {...register("profile_image")}
                 name="profileImage"
                 id="profileImageInput"
                 onChange={handleImageChange}
@@ -154,13 +215,13 @@ function MyInfo() {
 
           <MdEdit onClick={handleImgClick} className="MdEditIcon" />
         </div>
-        <div className="NickandFlag">
+        <div className="nickName">
           {pageMode === "VIEW" && (
             <div className="myinfoNickName">{userData.nickname}</div>
           )}
           {pageMode === "EDIT" && (
             <input
-              className="myinfoEditInput"
+              className="myinfoNickEditInput"
               onChange={onChangeEdit}
               type="text"
               id="nickname"
@@ -168,41 +229,21 @@ function MyInfo() {
               value={values.nickname}
             />
           )}
-
-          <div className="nationImg">
-            <img
-              className="nationFlag"
-              src="../public/pictures/Myinfo/korea.jpg"
-            />
+          <div className="myinfoUpdate">
+            <div className="myinfoSignupDate">{dateJoined} 가입</div>
           </div>
-        </div>
-        <div className="myinfoUpdate">
-          <div className="signupDate">2024년 가입</div>
-          {/* <div className="commentEdit">
-            {pageMode === "VIEW" && (
-              <div className="myinfoComment">{userData.comment}</div>
-            )}
-            {pageMode === "EDIT" && (
-              <textarea
-                className="commentEditInput"
-                id="comment"
-                name="comment"
-                onChange={onChangeEdit}
-              />
-            )}
-          </div> */}
         </div>
 
         <div className="myinfoEdit">
           <div className="myinfoDiv">비밀번호</div>
           <div className="rightInfoDiv">
-            {pageMode === "VIEW" && <div className="myinfoEditInput"></div>}
-            {
-              pageMode === "EDIT" && (
-                <input
+            <PasswordInputContainer>
+              {pageMode === "VIEW" && <div className="myinfoBeforeEdit"></div>}
+              {pageMode === "EDIT" && (
+                <PasswordInput
                   className="myinfoEditInput"
-                  {...register("new_password1", {
-                    required: false,
+                  {...register("password1", {
+                    required: true,
                     pattern: {
                       value:
                         /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
@@ -211,53 +252,63 @@ function MyInfo() {
                     },
                     deps: ["password2"],
                   })}
-                  type="password"
-                  id="new_password1"
-                  name="new_password1"
+                  type={showPassword ? "text" : "password"}
+                  onChange={onChangeEdit}
+                  id="password1"
+                  name="password1"
+                  value={values.password1}
                 />
-              )
-              /* {errors.new_password1 && (
-              <Message>{errors.new_password1.message}</Message>
-            )} */
-            }
+              )}
+              <EyeIcons
+                className="eyesIcon"
+                onClick={toggleShowPassword}
+                as={eyeIcon ? AiFillEye : AiFillEyeInvisible}
+              />
+            </PasswordInputContainer>
+            {errors.password1 && <Message>{errors.password1.message}</Message>}
           </div>
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">비밀번호 확인</div>
           <div className="rightInfoDiv">
-            {pageMode === "VIEW" && <div className="myinfoEditInput"></div>}
-            {
-              pageMode === "EDIT" && (
-                <input
-                  className="myinfoEditInput"
-                  {...register("new_password2", {
-                    required: false,
+            <PasswordInputContainer>
+              {pageMode === "VIEW" && <div className="myinfoBeforeEdit"></div>}
+              {pageMode === "EDIT" && (
+                <PasswordInput
+                  {...register("password2", {
+                    required: true,
                     validate: (value) =>
-                      value === watch("new_password1")
+                      value === watch("password1")
                         ? true
                         : "비밀번호를 확인해 주세요.",
                   })}
-                  type="password"
-                  id="new_password2"
-                  name="new_password2"
+                  type={showPassword ? "text" : "password"}
+                  onChange={onChangeEdit}
+                  id="password2"
+                  name="password2"
+                  value={values.password2}
                 />
-              )
-              /* {errors.new_password2 && (
-              <Message>{errors.new_password2.message}</Message>
-            )} */
-            }
+              )}
+              <EyeIcons
+                className="eyesIcon"
+                onClick={toggleShowPassword}
+                as={eyeIcon ? AiFillEye : AiFillEyeInvisible}
+              />
+            </PasswordInputContainer>
+            {errors.password2 && <Message>{errors.password2.message}</Message>}
           </div>
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">국적</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.nationality}</div>
+              <div className="myinfoBeforeEdit">{userData.nationality}</div>
             )}
             {pageMode === "EDIT" && (
               <Controller
-                name="new_nationality"
+                name="nationality"
                 control={control}
+                defaultValue={userData.nationality}
                 rules={{ required: true }}
                 render={({ field }) => <NationBox field={field} />}
               />
@@ -268,18 +319,20 @@ function MyInfo() {
           <div className="myinfoDiv">이름 (First Name)</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.first_name}</div>
+              <div className="myinfoBeforeEdit">{userData.first_name}</div>
             )}
             {pageMode === "EDIT" && (
               <input
                 className="myinfoEditInput"
-                {...register("new_first_name", {
+                {...register("first_name", {
                   required: false,
                   pattern: /^[A-Za-z|가-힣]{1,}$/,
                 })}
                 type="text"
+                onChange={onChangeEdit}
                 id="first_name"
                 name="first_name"
+                value={values.first_name}
               />
             )}
           </div>
@@ -288,18 +341,20 @@ function MyInfo() {
           <div className="myinfoDiv">성 (Last Name)</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.last_name}</div>
+              <div className="myinfoBeforeEdit">{userData.last_name}</div>
             )}
             {pageMode === "EDIT" && (
               <input
                 className="myinfoEditInput"
-                {...register("new_last_name", {
+                {...register("last_name", {
                   required: true,
                   pattern: /^[A-Za-z|가-힣]{1,}$/,
                 })}
                 type="text"
+                onChange={onChangeEdit}
                 id="last_name"
                 name="last_name"
+                value={values.last_name}
               />
             )}
           </div>
@@ -308,13 +363,13 @@ function MyInfo() {
           <div className="myinfoDiv">휴대폰 번호</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.phone}</div>
+              <div className="myinfoBeforeEdit">{userData.phone}</div>
             )}
             {pageMode === "EDIT" && (
               <input
                 className="myinfoEditInput"
                 placeholder="010-1234-1234"
-                {...register("new_phone", {
+                {...register("phone", {
                   required: true,
                   pattern: {
                     value: /^010-([0-9]{3,4})-([0-9]{4})$/,
@@ -322,50 +377,55 @@ function MyInfo() {
                   },
                 })}
                 type="text"
+                onChange={onChangeEdit}
                 id="phone"
                 name="phone"
+                value={values.phone}
               />
             )}
-            {errors.new_phone && <Message>{errors.new_phone.message}</Message>}
+            {errors.phone && <Message>{errors.phone.message}</Message>}
           </div>
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">생년월일</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.date_of_birth}</div>
+              <div className="myinfoBeforeEdit">{userData.date_of_birth}</div>
             )}
             {pageMode === "EDIT" && (
               <input
                 className="myinfoEditInput"
-                {...register("new_birth", {
+                {...register("date_of_birth", {
                   required: false,
                   min: "1901-01-01",
                   max: "2014-12-31",
                 })}
                 type="date"
-                id="new_birth"
-                name="new_birth"
+                onChange={onChangeEdit}
+                id="date_of_birth"
+                name="date_of_birth"
+                value={values.date_of_birth}
               />
             )}
-            {}
           </div>
         </div>
         <div className="myinfoEdit">
           <div className="myinfoDiv">직업</div>
           <div className="rightInfoDiv">
             {pageMode === "VIEW" && (
-              <div className="myinfoEditInput">{userData.profession}</div>
+              <div className="myinfoBeforeEdit">{userData.profession}</div>
             )}
             {pageMode === "EDIT" && (
               <input
                 className="myinfoEditInput"
-                type="text"
-                {...register("new_profession", {
+                {...register("profession", {
                   required: false,
                 })}
-                id="new_profession"
-                name="new_profession"
+                type="text"
+                onChange={onChangeEdit}
+                id="profession"
+                name="profession"
+                value={values.profession}
               />
             )}
           </div>
@@ -381,3 +441,11 @@ function MyInfo() {
 }
 
 export default MyInfo;
+
+const EyeIcons = styled(AiFillEyeInvisible)`
+  position: absolute;
+  top: 54%;
+  right: 5px;
+  transform: translateY(-50%);
+  cursor: pointer;
+`;

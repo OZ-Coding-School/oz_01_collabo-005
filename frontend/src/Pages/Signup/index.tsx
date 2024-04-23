@@ -51,6 +51,7 @@ function SignUp() {
   const isSignUpSuccess = (data) => {
     return true;
   };
+
   return (
     <div className="signup">
       <h1 className="signupTitle">회원가입</h1>
@@ -277,25 +278,38 @@ function SignUp() {
 export default SignUp;
 
 export const Message = styled.p`
-  width: 176px;
+  width: 220px;
   color: red;
   font-size: 0.85rem;
   margin-top: 5px;
   padding-left: 5px;
+
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    padding-left: 5px;
+  }
 `;
-const PasswordInputContainer = styled.div`
+export const PasswordInputContainer = styled.div`
   position: relative;
-  min-width: 176px;
-  max-width: 220px;
-  height: 30px;
+  width: 220px;
+  height: 40px;
+
+  @media screen and (max-width: 767px) {
+    position: relative;
+    width: 200px;
+    height: 40px;
+  }
 `;
 
-const PasswordInput = styled.input`
+export const PasswordInput = styled.input`
+  display: block;
   margin-top: 13.5px;
   width: 100%;
   height: 100%;
-  padding-right: 30px;
-  padding-left: 5px;
+  padding: 0 30px 0 5px;
   border-radius: 5px;
   text-align: left;
   border: 1px solid;
@@ -305,7 +319,7 @@ const PasswordInput = styled.input`
 
 const EyeIcon = styled(AiFillEyeInvisible)`
   position: absolute;
-  top: 95%;
+  top: 51%;
   right: 5px;
   transform: translateY(-50%);
   cursor: pointer;

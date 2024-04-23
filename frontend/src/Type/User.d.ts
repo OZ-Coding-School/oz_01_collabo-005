@@ -29,6 +29,7 @@ export interface FormDataValue {
   image: File | null;
 }
 
+//회원가입시 들어가는 정보
 export interface IFormInput {
   email: string;
   password1: string;
@@ -40,4 +41,19 @@ export interface IFormInput {
   phone: string;
   date_of_birth: Date;
   profession: string;
+}
+
+//마이페이지 수정시 필요한 정보
+export interface MyInfoInput {
+  nickname: string;
+  password1: string;
+  password2: string;
+  nationality: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  date_of_birth: string;
+  profession: string;
+  profile_image: string;
+  date_joined: string;
 }
