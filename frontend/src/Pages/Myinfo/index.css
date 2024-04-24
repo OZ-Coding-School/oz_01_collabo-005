@@ -1,7 +1,7 @@
 @media screen and (min-width: 1025px) {
   .myinfo {
     width: 70%;
-    height: auto;
+    height: 200vh;
     margin: 0 15%;
     padding-top: 5%;
     display: flex;

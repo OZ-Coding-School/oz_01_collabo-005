@@ -28,7 +28,7 @@ function MyInfo() {
   } = useForm<MyInfoInput>();
 
   const [imgPreview, setImgPreview] = useState(
-    "../public/pictures/Myinfo/profileImg.png",
+    "https://media.discordapp.net/attachments/1224938401825030174/1232584759880847360/KakaoTalk_20240424_155045300.jpg?ex=6629fd83&is=6628ac03&hm=1a96171078ceb912080e67e9fb83aff09dace7faf7ce671927160c841989e408&=&format=webp",
   );
   const image = watch("profile_image");
 
@@ -42,6 +42,14 @@ function MyInfo() {
       });
     }
   };
+
+  useEffect(() => {
+    // Retrieve image URL from local storage upon component mount
+    const storedImage = localStorage.getItem("profileImage");
+    if (storedImage) {
+      setImgPreview(storedImage);
+    }
+  }, []);
 
   const handleImgClick = () => {
     const fileInput = document.getElementById(
@@ -87,6 +95,7 @@ function MyInfo() {
   const sendPatchRequest = async (data: MyInfoInput) => {
     try {
       data.date_of_birth = data.date_of_birth.toString();
+
       const token = localStorage.getItem("token");
       const config = {
         headers: {
