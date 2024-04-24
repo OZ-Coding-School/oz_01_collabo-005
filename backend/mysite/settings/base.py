@@ -62,6 +62,7 @@ CUSTOM_USER_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "corsheaders",
+    "django_cleanup.apps.CleanupConfig",
     "app.activity",
     "app.album",
     "app.board",
