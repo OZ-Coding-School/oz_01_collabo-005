@@ -12,7 +12,8 @@ from rest_framework.serializers import BaseSerializer
 
 from app.activity.models import JoinedClub
 from app.activity.permissions import IsUserOrReadOnly
-from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer, MyPostSerializer, MyCommentSerializer
+from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer, MyPostSerializer, \
+    MyCommentSerializer, FeedSerializer
 from app.activity.utils import check_age_condition, is_user_already_joined
 from app.board.models import Post
 from app.board.serializers import PostSerializer
@@ -28,7 +29,7 @@ class JoinedClubList(generics.ListAPIView[JoinedClub]):
     def get_queryset(self) -> QuerySet[JoinedClub | JoinedClub]:
         # user_id = self.kwargs.get("pk")
         user = self.request.user
-        return JoinedClub.objects.filter(user=user)
+        return JoinedClub.objects.filter(user=user).order_by("-created_at")
 
 
 class JoinClub(generics.CreateAPIView[JoinedClub]):
@@ -132,20 +133,24 @@ class MyPostList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self) -> QuerySet[Post]:
-        return Post.objects.filter(writer=self.request.user)
-
-
-class MyPostList(generics.ListAPIView):
-    serializer_class = MyPostSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self) -> QuerySet[Post]:
-        return Post.objects.filter(writer=self.request.user)
+        return Post.objects.filter(writer=self.request.user).order_by("-created_at")
 
 
 class MyCommentList(generics.ListAPIView):
     serializer_class = MyCommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self) -> QuerySet[Comment]:
+        return Comment.objects.filter(writer=self.request.user).order_by("-created_at")
+
+
+class FeedList(generics.ListAPIView):
+    serializer_class = FeedSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
     def get_queryset(self) -> QuerySet[Post]:
-        return Comment.objects.filter(writer=self.request.user)
+        user = self.request.user
+        # joined_clubs = JoinedClub.objects.filter(user=user)
+        # return Post.objects.filter(club=)
+        latest_posts = Post.objects.filter(club__joinedclub__user=user).order_by('-created_at')
+        return latest_posts

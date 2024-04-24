@@ -40,6 +40,11 @@ class CustomAccountAdapter(DefaultAccountAdapter):  # type: ignore
         user_field(user, "phone", request.data.get("phone"))
         user_field(user, "date_of_birth", request.data.get("date_of_birth"))
         user_field(user, "profession", request.data.get("profession"))
+
+        # password = form.cleaned_data.get("password1")
+        # if password:
+        #     user.set_password(password)
+
         user.save()
         return user
 

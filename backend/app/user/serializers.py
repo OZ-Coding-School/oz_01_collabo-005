@@ -77,7 +77,18 @@ class CustomUserDetail(UserDetailsSerializer):
         model = User
         fields = UserDetailsSerializer.Meta.fields + ("nickname", "nationality", "password1", "password2", "phone", "date_of_birth", "profession", "profile_image", "date_joined")
         read_only_fields = ("date_joined",)
-        write_only_fields = ("password1", "password2")
+        # write_only_fields = ("password1", "password2")
+
+    def update(self, instance, validated_data):
+        if "password1" in validated_data and "password2" in validated_data:
+            password1 = validated_data.pop("password1")
+            password2 = validated_data.pop("password2")
+            if password1 and password2 and password1 == password2:
+                instance.set_password(password1)
+            else:
+                raise serializers.ValidationError("Passwords don't match")
+        return super().update(instance, validated_data)
+
 
     # def save(self, request: Request) -> Any:
     #     user = super().save(request=request)

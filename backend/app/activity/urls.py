@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from app.activity.views import JoinClub, JoinedClubList, LeaveClub, MyPostList
+from app.activity.views import JoinClub, JoinedClubList, LeaveClub, MyPostList, FeedList
 
 # router = DefaultRouter()
 # router.register(r"joined-club", JoinedClubViewSet, basename="joined-club")
@@ -13,4 +13,5 @@ urlpatterns = [
     path("clubs/<int:pk>/leave", LeaveClub.as_view(), name="leave-club"),
     path("activities/posts", MyPostList.as_view(), name="my-posts"),
     path("activities/comments", MyPostList.as_view(), name="my-comments"),
+    path("activities/feeds", FeedList.as_view(), name="feeds")
 ]

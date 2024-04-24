@@ -2,6 +2,7 @@ from typing import Any, Optional, TypeVar
 
 from django.db.models import Model, QuerySet
 from django.shortcuts import render
+from django.utils import timezone
 from rest_framework import permissions, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.serializers import BaseSerializer
@@ -22,7 +23,7 @@ class PostViewSet(viewsets.ModelViewSet[Post]):
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")
-        return Post.objects.filter(club_id=club_id)
+        return Post.objects.filter(club_id=club_id).order_by("-created_at")
 
     # def get_object(self):
     #     club_id = self.kwargs.get("club_id")
@@ -47,7 +48,8 @@ class ScheduleViewSet(viewsets.ModelViewSet[Schedule]):
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")
-        return Schedule.objects.filter(club_id=club_id)
+        current_datetime = timezone.now()
+        return Schedule.objects.filter(club_id=club_id, event_time__gte=current_datetime).order_by("event_time")
 
     def perform_create(self, serializer: BaseSerializer[Schedule]) -> None:
         club_id = self.kwargs.get("club_id")

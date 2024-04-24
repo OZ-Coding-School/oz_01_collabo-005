@@ -62,6 +62,7 @@ CUSTOM_USER_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "corsheaders",
+    "django_cleanup.apps.CleanupConfig",
     "app.activity",
     "app.album",
     "app.board",
@@ -86,7 +87,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS: List[str] = []
 CORS_ALLOWED_ORIGINS += env("CORS_ALLOWED_ORIGINS").split(",")
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -267,8 +268,8 @@ ACCOUNT_ADAPTER = "app.user.adapters.CustomAccountAdapter"
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,  # 쿠키를 http only로 안함(기본 True)
-    "JWT_AUTH_COOKIE": "access",
-    "JWT_AUTH_REFRESH_COOKIE": "refresh",  # refresh token 담을 쿠키 이름
+    "JWT_AUTH_COOKIE": "ac",
+    "JWT_AUTH_REFRESH_COOKIE": "rfs",  # refresh token 담을 쿠키 이름
     "JWT_AUTH_COOKIE_USE_CSRF": True,  # JWT 쿠키 csrf 검사
     "SESSION_LOGIN": False,  # sessionid가 쿠키로 남지 않음
     "REGISTER_SERIALIZER": "app.user.serializers.SignupSerializer",
@@ -332,6 +333,12 @@ REST_AUTH = {
 # }
 
 STATIC_ROOT = BASE_DIR / "static"
+
+CSRF_TRUSTED_ORIGINS: List[str] = []
+CSRF_TRUSTED_ORIGINS += env("CSRF_TRUSTED_ORIGINS").split(",")
+# CSRF_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_NAME = "ct"
 
 # 기본 설정
 # DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
