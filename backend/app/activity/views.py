@@ -12,7 +12,8 @@ from rest_framework.serializers import BaseSerializer
 
 from app.activity.models import JoinedClub
 from app.activity.permissions import IsUserOrReadOnly
-from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer, MyPostSerializer, MyCommentSerializer
+from app.activity.serializers import JoinClubSerializer, JoinedClubListSerializer, MyPostSerializer, \
+    MyCommentSerializer, FeedSerializer
 from app.activity.utils import check_age_condition, is_user_already_joined
 from app.board.models import Post
 from app.board.serializers import PostSerializer
@@ -147,5 +148,17 @@ class MyCommentList(generics.ListAPIView):
     serializer_class = MyCommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self) -> QuerySet[Post]:
+    def get_queryset(self) -> QuerySet[Comment]:
         return Comment.objects.filter(writer=self.request.user)
+
+
+class FeedList(generics.ListAPIView):
+    serializer_class = FeedSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self) -> QuerySet[Post]:
+        user = self.request.user
+        # joined_clubs = JoinedClub.objects.filter(user=user)
+        # return Post.objects.filter(club=)
+        latest_posts = Post.objects.filter(club__joinedclub__user=user).order_by('-created_at')
+        return latest_posts
