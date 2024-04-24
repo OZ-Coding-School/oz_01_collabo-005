@@ -1,7 +1,7 @@
 @media screen and (min-width: 1025px) {
   .signup {
     width: 70%;
-    height: auto;
+    height: 200vh;
     margin: 0 15%;
     padding-top: 5%;
     display: flex;
@@ -61,12 +61,6 @@
     font-size: 1rem;
   }
 
-  .message {
-    position: absolute;
-    left: 47%;
-    top: 83%;
-    font-size: 0.8rem;
-  }
   .signupBtnBox {
     margin-top: 40px;
     display: block;

@@ -34,12 +34,10 @@ function SignUp() {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setLoading(true);
-    console.log(data);
     try {
       const response = await instance.post("api/accounts/", data, {
         withCredentials: true,
       });
-      console.log(response);
       handleSignUpSuccess();
     } catch (error) {
       alert(error);
@@ -286,7 +284,7 @@ export const Message = styled.p`
   @media screen and (max-width: 767px) {
     width: 200px;
     color: red;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     margin-top: 5px;
     padding-left: 5px;
   }
