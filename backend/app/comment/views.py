@@ -21,7 +21,7 @@ class CommentViewSet(viewsets.ModelViewSet[Comment]):
         post_id = self.kwargs.get("post_id")
         if post_id is None:
             raise NotFound(detail="post not found")
-        return Comment.objects.filter(club_id=club_id, post_id=post_id)
+        return Comment.objects.filter(club_id=club_id, post_id=post_id).order_by("-created_at")
 
     def perform_create(self, serializer: BaseSerializer[Comment]) -> None:
         post_id = self.kwargs.get("post_id")

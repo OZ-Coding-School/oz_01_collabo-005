@@ -22,7 +22,7 @@ class PostViewSet(viewsets.ModelViewSet[Post]):
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")
-        return Post.objects.filter(club_id=club_id)
+        return Post.objects.filter(club_id=club_id).order_by("-created_at")
 
     # def get_object(self):
     #     club_id = self.kwargs.get("club_id")
@@ -47,7 +47,7 @@ class ScheduleViewSet(viewsets.ModelViewSet[Schedule]):
         club_id = self.kwargs.get("club_id")
         if club_id is None:
             raise NotFound(detail="club not found")
-        return Schedule.objects.filter(club_id=club_id)
+        return Schedule.objects.filter(club_id=club_id).order_by("event_time")
 
     def perform_create(self, serializer: BaseSerializer[Schedule]) -> None:
         club_id = self.kwargs.get("club_id")

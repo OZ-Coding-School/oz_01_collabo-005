@@ -18,4 +18,4 @@ class AlbumView(viewsets.ReadOnlyModelViewSet):
             raise NotFound(detail="club not found")
         # return Post.objects.filter(club_id=club_id)
         # return Post.objects.filter(club_id=club_id, image__isnull=False)
-        return Post.objects.filter(club_id=club_id).filter(Q(image__isnull=False) & ~Q(image=""))
+        return Post.objects.filter(club_id=club_id).filter(Q(image__isnull=False) & ~Q(image="")).order_by("-created_at")

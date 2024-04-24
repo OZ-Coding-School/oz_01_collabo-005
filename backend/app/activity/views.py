@@ -29,7 +29,7 @@ class JoinedClubList(generics.ListAPIView[JoinedClub]):
     def get_queryset(self) -> QuerySet[JoinedClub | JoinedClub]:
         # user_id = self.kwargs.get("pk")
         user = self.request.user
-        return JoinedClub.objects.filter(user=user)
+        return JoinedClub.objects.filter(user=user).order_by("-created_at")
 
 
 class JoinClub(generics.CreateAPIView[JoinedClub]):
@@ -133,15 +133,7 @@ class MyPostList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self) -> QuerySet[Post]:
-        return Post.objects.filter(writer=self.request.user)
-
-
-class MyPostList(generics.ListAPIView):
-    serializer_class = MyPostSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self) -> QuerySet[Post]:
-        return Post.objects.filter(writer=self.request.user)
+        return Post.objects.filter(writer=self.request.user).order_by("-created_at")
 
 
 class MyCommentList(generics.ListAPIView):
@@ -149,7 +141,7 @@ class MyCommentList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self) -> QuerySet[Comment]:
-        return Comment.objects.filter(writer=self.request.user)
+        return Comment.objects.filter(writer=self.request.user).order_by("-created_at")
 
 
 class FeedList(generics.ListAPIView):

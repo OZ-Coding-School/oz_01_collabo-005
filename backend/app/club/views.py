@@ -28,4 +28,4 @@ class ClubMemberView(generics.ListAPIView[JoinedClub]):
 
     def get_queryset(self) -> JoinedClub:
         club_id = self.kwargs.get("pk")
-        return JoinedClub.objects.filter(club_id=club_id)
+        return JoinedClub.objects.filter(club_id=club_id).order_by("-created_at")
