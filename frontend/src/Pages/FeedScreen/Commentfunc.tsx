@@ -4,7 +4,7 @@ import { FaRegComment } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import { LuPencilLine } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../Apis/axios";
 import "./Commentfunc.css";
 
@@ -17,9 +17,13 @@ function CommentFunc() {
   const [comment, setComment] = useState("");
   const [commentCount, setCommentCount] = useState("");
   const [writtenComments, setWrittenComments] = useState("");
+  const [editing, setEditing] = useState<boolean>(false);
+  const [editedContent, setEditedContent] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchComments();
+    window.scrollTo(0, 0);
   }, []);
   // console.log(writtenComments);
 
@@ -27,7 +31,7 @@ function CommentFunc() {
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
-  //서버에 댓글 보내는 함수
+  //서버에 댓글 가져오는 함수
   const fetchComments = async () => {
     try {
       const response = await instance.get(
@@ -39,8 +43,6 @@ function CommentFunc() {
         },
       );
       setWrittenComments(response.data.results);
-      setCommentCount(response.data.count);
-      fetchComments();
     } catch (error) {
       console.log("error", error);
     }
@@ -61,10 +63,21 @@ function CommentFunc() {
       );
 
       setComment(""); // 댓글 입력란 초기화
+      alert("댓글이 등록되었습니다.");
+      navigate(``);
     } catch (error) {
       alert("글작성 실패");
       console.log(error);
     }
+  };
+
+  //댓글 수정함수
+  const handleEdit = async () => {
+    try {
+      const response = await instance.put(
+        `/api/clubs/${id}/posts/${postId}/comments`,
+      );
+    } catch {}
   };
 
   return (

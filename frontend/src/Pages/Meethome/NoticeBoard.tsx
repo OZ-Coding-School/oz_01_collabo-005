@@ -21,7 +21,6 @@ function NoticeBoard({
   const noticeBoxes = feedData.results.map((result, index) => (
     <NoticeBox key={index} result={result} />
   ));
-
   return (
     <div className="noticeBoard">
       {noticeBoxes}

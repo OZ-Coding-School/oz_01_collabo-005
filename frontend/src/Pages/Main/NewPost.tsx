@@ -1,23 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import instance from "../../Apis/axios";
 import "./Newpost.css";
 
-function NewPost() {
-  const [club, setClub]: any = useState([]);
-
-  useEffect(() => {
-    async function newPosts() {
-      try {
-        const response = await instance.get("api/clubs/");
-        setClub(response.data.results);
-      } catch (error) {
-        console.log("Error fetching", error);
-      }
-    }
-    newPosts();
-  }, []);
-
+function NewPost({ club, setClub }) {
   // const currentClub = club.sort((a, b) => b.id - a.id);
   return (
     <div className="">

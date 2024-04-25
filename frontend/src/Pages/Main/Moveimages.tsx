@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import instance from "../../Apis/axios";
 import "./Moveimages.css";
 
-function MoveImages() {
+function MoveImages({ club, setClub }) {
   // const [images, setImages] = useState([]);
-  const [club, setClub]: any = useState([]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imgHover, setImgHover] = useState(false);
   //현재 인덱스넘버,이미지 호버
@@ -25,17 +24,17 @@ function MoveImages() {
     setImgHover(true);
   };
   //서버에서 정보받기
-  useEffect(() => {
-    async function newPosts() {
-      try {
-        const response = await instance.get("api/clubs/");
-        setClub(response.data.results);
-      } catch (error) {
-        console.log("Error fetching", error);
-      }
-    }
-    newPosts();
-  }, []);
+  // useEffect(() => {
+  //   async function newPosts() {
+  //     try {
+  //       const response = await instance.get("api/clubs/");
+  //       setClub(response.data.results);
+  //     } catch (error) {
+  //       console.log("Error fetching", error);
+  //     }
+  //   }
+  //   newPosts();
+  // }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
