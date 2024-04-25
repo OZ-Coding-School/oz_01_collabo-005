@@ -18,6 +18,7 @@ function MeetHome() {
   const { id }: any = useParams();
   const [feedCount, setFeedCount] = useState();
   const [feedData, setFeedData] = useState([]);
+  const [isMember, setIsMember] = useState(false);
 
   interface ScheduleData {
     results: Array<{
@@ -79,6 +80,7 @@ function MeetHome() {
         });
         setGetCount(response.data);
         setMemberCount(response.data.count);
+        setIsMember(true);
       } catch (error) {
         console.error("Error fetching members:", error);
       }
@@ -149,17 +151,45 @@ function MeetHome() {
     selectedTab === "게시판" ||
     selectedTab === "앨범"
   ) {
-    icon = (
-      <div className="createPost">
-        <button className="createPostBtn">
-          <BsPencil
-            size={25}
-            style={{ color: "#ffffff" }}
-            onClick={handleCreateFeed} //버튼 클릭 -> 글쓰기 페이지로 이동
-          />
-        </button>
-      </div>
-    );
+    if (isMember) {
+      icon = (
+        <div className="createPost">
+          <button className="createPostBtn" onClick={handleCreateFeed}>
+            <BsPencil
+              size={25}
+              style={{
+                color: "#ffffff",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "1px 0px 0 1px",
+              }}
+              //버튼 클릭 -> 글쓰기 페이지로 이동
+            />
+          </button>
+        </div>
+      );
+    } else {
+      icon = (
+        <div className="createPost">
+          <button
+            className="createPostBtn"
+            disabled
+            onClick={() => alert("모임에 가입하세요.")}
+          >
+            <BsPencil
+              size={25}
+              style={{
+                color: "#ffffff",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "1px 0px 0 1px",
+              }}
+              //버튼 클릭 -> 글쓰기 페이지로 이동
+            />
+          </button>
+        </div>
+      );
+    }
   } else {
     icon = null;
   }

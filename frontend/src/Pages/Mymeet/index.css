@@ -14,6 +14,7 @@
   flex-wrap: wrap;
   overflow-y: auto;
 }
+
 .myMeetBox {
   width: 104px;
 }
@@ -21,9 +22,9 @@
 .showMyFeed {
   width: 100%;
   height: auto;
-
   padding-left: 10px;
 }
+
 .meetPicture {
   border-radius: 22px;
   width: 50px;

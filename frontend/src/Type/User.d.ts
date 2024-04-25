@@ -45,6 +45,7 @@ export interface IFormInput {
 
 //마이페이지 수정시 필요한 정보
 export interface MyInfoInput {
+  email: string;
   nickname: string;
   password1: string;
   password2: string;
@@ -54,6 +55,6 @@ export interface MyInfoInput {
   phone: string;
   date_of_birth: string;
   profession: string;
-  profile_image: string;
+  profile_image: null;
   date_joined: string;
 }

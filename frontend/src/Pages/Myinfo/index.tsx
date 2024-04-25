@@ -58,6 +58,11 @@ function MyInfo() {
         ...values,
         profile_image: file, // 파일 객체로 profile_image 필드를 업데이트
       });
+    } else {
+      setValues({
+        ...values,
+        profile_image: null,
+      });
     }
   };
 
@@ -93,6 +98,7 @@ function MyInfo() {
   };
 
   const [values, setValues] = useState({
+    email: "",
     nickname: "",
     password1: "",
     password2: "",
@@ -102,7 +108,7 @@ function MyInfo() {
     phone: "",
     date_of_birth: "",
     profession: "",
-    profile_image: "",
+    profile_image: null,
     date_joined: "",
   });
 
@@ -175,6 +181,7 @@ function MyInfo() {
         setUserData(response.data);
         setValues({
           ...values,
+          email: response.data.email || "",
           date_joined: response.data.date_joined || "",
           nickname: response.data.nickname || "",
           password1: response.data.password1 || "",
@@ -213,26 +220,32 @@ function MyInfo() {
   return (
     <div className="myinfo">
       <h1 className="myinfoTitle">내 정보수정</h1>
-      <form className="myinfoForm">
+      <form className="myinfoForm" encType="multipart/form-data">
         <div className="myinfoImgEdit">
-          {pageMode === "VIEW" && (
-            <img
-              className="myinfoProfileImg"
-              src={values.profile_image}
-              alt="프로필사진"
-            />
-          )}
-          {pageMode === "EDIT" && (
+          {pageMode === "VIEW" &&
+            values.profile_image &&
+            typeof values.profile_image === "string" && (
+              <img
+                className="myinfoProfileImg"
+                src={values.profile_image || import.meta.env.VITE_PROFIE}
+                alt="프로필사진"
+              />
+            )}
+          {pageMode === "EDIT" && values.profile_image && (
             <div className="profileImgEdit" onClick={handleImgClick}>
               <img
                 className="myinfoProfileImg"
-                src={values.profile_image}
+                src={
+                  typeof values.profile_image === "string"
+                    ? values.profile_image
+                    : URL.createObjectURL(values.profile_image)
+                }
                 alt="프로필사진"
               />
               <input
                 type="file"
                 {...register("profile_image")}
-                name="profileImage"
+                name="profile_image"
                 id="profileImageInput"
                 onChange={handleImageChange}
                 style={{ display: "none" }}
@@ -258,6 +271,7 @@ function MyInfo() {
           )}
           <div className="myinfoUpdate">
             <div className="myinfoSignupDate">{dateJoined} 가입</div>
+            <div className="myinfoSignupEmail">{userData.email}</div>
           </div>
         </div>
 
