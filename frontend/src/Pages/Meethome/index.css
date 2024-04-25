@@ -1,6 +1,6 @@
 .meetScreenContainer {
   width: 70%;
-  height: 200vh;
+  height: auto;
   margin: 0 15%;
   background-color: #fffdf8;
   padding-top: 30px;
@@ -30,6 +30,9 @@
   border: none;
   border-radius: 30px;
   background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nameOfMeeting {
   display: flex;
@@ -45,7 +48,7 @@
 }
 .createPost {
   position: fixed;
-  bottom: 10px;
+  bottom: 70px;
   right: 280px;
   background-color: #b22222;
   width: 60px;
@@ -61,13 +64,16 @@
   background-color: transparent;
 }
 .enterMeet {
+  box-shadow: 2px 2px 5px #999;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 7.5px;
   position: fixed;
   bottom: 10px;
-  left: 600px;
+
+  left: 50%;
+  transform: translateX(-50%);
 }
 .enterBtn {
   color: white;
@@ -75,7 +81,41 @@
   font-weight: 560;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1300px) {
+  .aboutUserNumber {
+    display: flex;
+    padding-left: 49px;
+    width: 23%;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .aboutUserNumber {
+    display: flex;
+    padding-left: 49px;
+    width: 23%;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+}
+@media screen and (max-width: 920px) {
+  .aboutUserNumber {
+    display: flex;
+    padding-left: 49px;
+    width: 30%;
+    justify-content: space-between;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .aboutUserNumber {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
   .meetScreenContainer {
     width: 100%;
     margin: 0;
