@@ -72,7 +72,7 @@ function MeetHome() {
       }
 
       try {
-        const response = await instance.get(`api/clubs/${id}/members`, {
+        const response = await instance.get(`api/clubs/${id}/members/`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -89,7 +89,7 @@ function MeetHome() {
   useEffect(() => {
     async function getImage() {
       try {
-        const response = await instance.get(`api/clubs/${id}`);
+        const response = await instance.get(`api/clubs/${id}/`);
         setGetData(response.data);
       } catch (error) {
         console.error("error", error);
@@ -120,7 +120,7 @@ function MeetHome() {
 
     try {
       const response = await instance.post(
-        `api/clubs/${id}/join`,
+        `api/clubs/${id}/join/`,
         {},
         {
           headers: {

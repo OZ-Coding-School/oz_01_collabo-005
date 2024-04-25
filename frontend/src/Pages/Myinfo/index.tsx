@@ -153,7 +153,7 @@ function MyInfo() {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       };
-      const response = await instance.get(`api/accounts/user`, config);
+      const response = await instance.get(`api/accounts/user/`, config);
       return response.data;
     } catch (error) {
       console.error("error", error);

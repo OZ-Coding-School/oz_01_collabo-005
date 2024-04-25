@@ -22,7 +22,7 @@ function ClubCategory() {
   useEffect(() => {
     async function fetchClubs() {
       try {
-        const response = await instance.get(`api/categories/${id}`);
+        const response = await instance.get(`api/categories/${id}/`);
         setClub(response.data.club_set);
       } catch (error) {
         console.error("Error fetching", error);

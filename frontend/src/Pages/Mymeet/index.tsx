@@ -32,7 +32,7 @@ function ShowMyMeet(): JSX.Element {
   useEffect(() => {
     async function getMyMeet() {
       try {
-        const response = await instance.get("/api/activities/clubs", {
+        const response = await instance.get("/api/activities/clubs/", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
