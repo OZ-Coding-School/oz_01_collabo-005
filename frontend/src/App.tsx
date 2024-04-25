@@ -83,7 +83,10 @@ function App() {
             <Route path="/myInfo/" element={<MyInfo />}></Route>
             <Route path="createMeet" element={<CreateMeet />}></Route>
             <Route path="/createBoard/:id" element={<CreateBoard />}></Route>
-            <Route path="/feedScreen" element={<FeedScreen />}></Route>
+            <Route
+              path="/feedScreen/:id/:postId"
+              element={<FeedScreen />}
+            ></Route>
             <Route
               path="/createSchedules/:id"
               element={<CreateSchedules />}

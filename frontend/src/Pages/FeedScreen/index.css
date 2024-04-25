@@ -32,11 +32,17 @@
 .landingUserBox {
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid black;
 }
 .landingFeedBox {
-  margin-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
   margin-left: 10px;
-  height: 200px;
+  padding-top: 30px;
+  gap: 30px;
+  height: auto;
 }
 .feedLikesBtn {
   background-color: rgb(245, 81, 40);
@@ -87,6 +93,12 @@
   height: 30px;
   border-radius: 18px;
 }
+
+.contentDateBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 #sendComment {
   border: 0;
   background-color: transparent;
@@ -94,4 +106,17 @@
 .personsComment {
   margin-top: 20px;
   height: 56px;
+}
+
+.webUserInfo {
+  display: flex;
+  width: 200px;
+  align-items: center;
+}
+.wrapWrittenBox {
+  padding-left: 10px;
+}
+
+.noShowImage {
+  display: none;
 }
