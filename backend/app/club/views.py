@@ -18,7 +18,8 @@ class ClubViewSet(viewsets.ModelViewSet[Club]):
         return Club.objects.all().order_by('-created_at')
 
     def perform_create(self, serializer: BaseSerializer[Club]) -> None:
-        serializer.save(leader=self.request.user)
+        club = serializer.save(leader=self.request.user)
+        JoinedClub.objects.create(user=club.leader, club=club)
 
 
 class ClubMemberView(generics.ListAPIView[JoinedClub]):
