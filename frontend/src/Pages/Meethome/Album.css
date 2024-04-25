@@ -1,24 +1,47 @@
 .meetingAlbumBox {
-  width: 90%;
-  height: 200vh;
-  margin-left: 46px;
+  width: 100%;
+  height: auto;
   display: flex;
-  flex-direction: column;
 }
+
 .albumBox {
-  width: 250px;
-  height: 210px;
+  width: 100%;
+  height: 0;
+  padding-top: 100%; /* 가로 세로 비율 유지 */
+  position: relative;
 }
+
 .albumImg {
   width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   border: 1px solid rgb(132, 132, 132);
 }
+
 .wrapAlbum {
-  height: 250px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
+  height: auto;
+  width: 97%;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(
+    4,
+    minmax(200px, 1fr)
+  ); /* 반응형으로 열의 크기 조정 */
+  grid-gap: 20px;
   border: 5px solid rgb(191, 191, 191);
   box-sizing: content-box;
+}
+
+@media screen and (max-width: 859px) and (min-width: 545px) {
+  .wrapAlbum {
+    grid-template-columns: repeat(3, minmax(148px, 1fr));
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .wrapAlbum {
+    grid-template-columns: repeat(2, minmax(148px, 1fr));
+  }
 }

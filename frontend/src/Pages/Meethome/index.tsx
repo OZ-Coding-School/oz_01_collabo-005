@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -16,14 +16,45 @@ function MeetHome() {
   const [getCount, setGetCount]: any = useState([]);
   const [memberCount, setMemberCount] = useState<number>(0);
   const { id }: any = useParams();
-
+  const [feedCount, setFeedCount] = useState();
   const [feedData, setFeedData] = useState([]);
+
+  interface ScheduleData {
+    results: Array<{
+      // 결과 객체의 구조에 따라 필드를 추가합니다.
+      // 예를 들어, "content"와 "date"라는 필드가 있다고 가정합니다.
+      content: string;
+      date: string;
+      // 추가적인 필드가 있다면 여기에 추가합니다.
+    }>;
+    // 다른 필요한 속성이 있다면 여기에 추가합니다.
+  }
+  const [scheduleData, setScheduleData] = useState([]);
+
+  useEffect(() => {
+    async function getSchedule() {
+      try {
+        const response = await instance.get(`api/clubs/${id}/schedules/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+        setScheduleData(response.data);
+        setFeedCount(response.data.count);
+        console.log(response.data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+    getSchedule();
+  }, []); //일정  안불러와짐
 
   useEffect(() => {
     async function getFeed() {
       try {
-        const response = await instance.get(`api/clubs/${id}/posts/`); //이부분이 잘못됬음
+        const response = await instance.get(`api/clubs/${id}/posts/`);
         setFeedData(response.data);
+        // console.log(response.data); // 이 위치에 둬서 데이터가 업데이트된 후에 찍히도록 함
       } catch (error) {
         console.log("error", error);
       }
@@ -83,13 +114,13 @@ function MeetHome() {
     navigate(`/createboard/${id}`);
   }
 
-  const handleJoinClub = async (e) => {
+  const handleJoinClub = async (e: FormEvent) => {
+    // FormEvent 타입으로 변경
     e.preventDefault(); // 폼 제출 기본 동작 방지
 
     try {
       const response = await instance.post(
         `api/clubs/${id}/join`,
-
         {},
         {
           headers: {
@@ -98,9 +129,17 @@ function MeetHome() {
         },
       );
       alert("모임에 가입되었습니다.");
-    } catch (error) {
-      console.error("Error joining club:", error);
-      alert("모임 가입에 실패했습니다.");
+
+      console.log(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        alert("이미 모임에 가입되어 있습니다."); // 이미 가입되어 있는 경우
+      } else if (error.response && error.response.status === 400) {
+        alert("모임 연령대와 맞지 않습니다");
+      } else {
+        console.error("Error joining club:", error);
+        alert("모임 가입에 실패했습니다.");
+      }
     }
   };
 
@@ -124,10 +163,15 @@ function MeetHome() {
   } else {
     icon = null;
   }
+
   return (
     <div className="meetScreenContainer">
       <div className="repMeetImgBox">
-        <img src={getData.image} alt="모임대표이미지" width={700} />
+        <img
+          src={getData.image ? getData.image : import.meta.env.VITE_ICON}
+          alt="모임대표이미지"
+          width={700}
+        />
       </div>
       <div className="changePageIconBox">
         <div className="meetHomeIcons">
@@ -146,7 +190,7 @@ function MeetHome() {
         <span>멤버</span>
         <span>{memberCount}</span>
         <span>게시글</span>
-        <span>29</span>
+        <span>{feedCount}</span>
         <span>일정</span>
         <span>15</span>
       </div>
@@ -162,12 +206,13 @@ function MeetHome() {
           getData={getData}
           memberCount={memberCount}
           feedData={feedData}
+          scheduleData={scheduleData}
         />
       )}
       {selectedTab === "게시판" && (
         <NoticeBoard button={icon} feedData={feedData} />
       )}
-      {selectedTab === "일정" && <Schedule />}
+      {selectedTab === "일정" && <Schedule scheduleData={scheduleData} />}
       {selectedTab === "앨범" && <Album button={icon} />}
       <form className="enterMeet" onSubmit={handleJoinClub}>
         <input type="submit" className="submit" value={"모임 가입"} />
