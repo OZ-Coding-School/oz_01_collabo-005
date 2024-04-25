@@ -8,7 +8,7 @@ function Schedule({ scheduleData }) {
   const { id } = useParams();
 
   function handleMovePage() {
-    navigate(`/createschedules/${id}`);
+    navigate(`/createSchedules/${id}`);
   }
 
   if (

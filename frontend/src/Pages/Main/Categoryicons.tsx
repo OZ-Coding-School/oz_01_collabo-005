@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
-import { FaMountain } from "react-icons/fa";
-import { MdOutlineSportsHandball } from "react-icons/md";
-import { GiInnerSelf } from "react-icons/gi";
-import { MdOutlineMenuBook } from "react-icons/md";
-import { HiMiniMusicalNote } from "react-icons/hi2";
-import { FaPeopleGroup } from "react-icons/fa6";
 import { BiGame } from "react-icons/bi";
+import { FaMountain } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { GiInnerSelf } from "react-icons/gi";
+import { HiMiniMusicalNote } from "react-icons/hi2";
+import { MdOutlineMenuBook, MdOutlineSportsHandball } from "react-icons/md";
 import { PiBabyBold } from "react-icons/pi";
 import "./Categoryicons.css";
 
 function CategoryBox() {
-  useEffect(() => {});
-
   return (
     <div>
       <div className="categoryBox">

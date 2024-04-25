@@ -1,8 +1,10 @@
 import { AiOutlineMore } from "react-icons/ai";
+import { Link, useParams } from "react-router-dom";
 
 function NoticeBox({ result }) {
+  let { id } = useParams();
   return (
-    <div className="coverNoticeBox">
+    <Link to={`/feedScreen/${id}/${result.id}`} className="coverNoticeBox">
       <div className="noticeBoardBox">
         <div className="writerBox">
           <div className="writerInfo">
@@ -34,7 +36,7 @@ function NoticeBox({ result }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 export default NoticeBox;
