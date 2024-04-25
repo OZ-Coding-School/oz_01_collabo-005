@@ -42,7 +42,9 @@ function MemberList() {
           <StyleHiUsers />
           <div className="memberText">멤버 목록</div>
         </div>
+        <div className="memberListCount">총 {userData.length}명</div>
       </div>
+
       {/* <nav>
         <ul>
           <li className="memberListNav">가입한 멤버</li>

@@ -12,9 +12,9 @@ function Success() {
       </Thanks>
       <button
         style={{
-          width: "40%",
+          width: "300px",
           height: "40px",
-          margin: "auto",
+          margin: "3% auto",
           backgroundColor: "#b22222",
           color: "white",
         }}
@@ -36,7 +36,18 @@ const SuccessPage = styled.div`
   padding: 10%;
   margin: 0 15%;
   width: 70%;
-  height: auto;
+  height: 100vh;
+  background-color: #fffdf8;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+    height: 100vh;
+    background-color: #fffdf8;
+  }
 `;
 const Thanks = styled.div`
   font-size: 3rem;

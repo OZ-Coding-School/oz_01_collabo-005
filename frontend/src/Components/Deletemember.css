@@ -36,3 +36,22 @@
   .deleteMemberBtn {
   }
 }
+
+@media screen and (max-width: 767px) {
+  .deleteMemberContainer {
+    width: 100%;
+    margin: 0;
+    background-color: #fffdf8;
+    font-size: 1rem;
+  }
+  .deleteMemberBox {
+    width: 100%;
+    padding-left: 37px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  .deleteMemberBtn {
+  }
+}

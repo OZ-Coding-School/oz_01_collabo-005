@@ -64,6 +64,10 @@
     width: 100%;
     font-size: 1.3rem;
   }
+  .myinfoSignupEmail {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
   /* .myinfoComment {
     width: 100%;
     text-align: center;
@@ -130,7 +134,6 @@
   }
   .myinfoBtnBox {
     margin-top: 40px;
-    /* display: block; */
     align-items: center;
     justify-content: center;
     height: 70px;
@@ -216,6 +219,10 @@
     justify-content: center;
     width: 100%;
     font-size: 1.3rem;
+  }
+  .myinfoSignupEmail {
+    font-size: 1.5rem;
+    font-weight: 500;
   }
   /* .myinfoComment {
     width: 100%;
@@ -369,6 +376,10 @@
     justify-content: center;
     width: 100%;
     font-size: 1.3rem;
+  }
+  .myinfoSignupEmail {
+    font-size: 1.5rem;
+    font-weight: 500;
   }
   /* .myinfoComment {
     width: 100%;
