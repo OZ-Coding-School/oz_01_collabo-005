@@ -130,7 +130,7 @@
   }
   .myinfoBtnBox {
     margin-top: 40px;
-    display: block;
+    /* display: block; */
     align-items: center;
     justify-content: center;
     height: 70px;
@@ -139,7 +139,7 @@
   .myinfoBtn {
     width: 80%;
     height: 55%;
-    margin-left: 40px;
+    margin-left: 20px;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
@@ -292,7 +292,7 @@
   .myinfoBtn {
     width: 80%;
     height: 55%;
-    margin-left: 40px;
+    margin-left: 20px;
     align-items: center;
     justify-content: center;
     border-radius: 5px;

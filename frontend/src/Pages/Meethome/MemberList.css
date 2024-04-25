@@ -10,12 +10,18 @@
     flex-direction: row;
     width: 100%;
     height: 50px;
-    font-size: 2rem;
-    font-weight: 700;
     margin-left: 15px;
+    font-size: 1.8rem;
+    font-weight: 700;
   }
   .memberList {
+    display: flex;
     padding-left: 25px;
+    flex-direction: row;
+  }
+  .memberText {
+    margin-top: 3px;
+    padding-left: 5px;
   }
   .membersDiv {
     width: 80%;
@@ -70,7 +76,13 @@
     margin-left: 15px;
   }
   .memberList {
+    display: flex;
     padding-left: 25px;
+    flex-direction: row;
+  }
+  .memberText {
+    margin-top: 3px;
+    padding-left: 5px;
   }
   .membersDiv {
     width: 80%;
@@ -115,18 +127,23 @@
     margin: 0;
     background-color: #fffdf8;
   }
-
   .memberIcon {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 50px;
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 700;
     margin-left: 15px;
   }
   .memberList {
+    display: flex;
     padding-left: 25px;
+    flex-direction: row;
+  }
+  .memberText {
+    margin-top: 4px;
+    padding-left: 5px;
   }
   .membersDiv {
     width: 80%;
@@ -136,14 +153,14 @@
     padding-bottom: 10px;
   }
   .memberListImgDiv {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-right: 20px;
   }
   .memberListImg {
     width: 100%;
     height: 100%;
-    border-radius: 25px;
+    border-radius: 20px;
   }
   .memberDiv {
     display: flex;
@@ -151,7 +168,7 @@
     justify-content: space-evenly;
   }
   .memberNickname {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 5px;
   }

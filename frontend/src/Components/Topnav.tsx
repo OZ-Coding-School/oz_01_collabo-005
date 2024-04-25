@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useContext, useEffect, useState } from "react";
-import { FaAngleDown, FaUser } from "react-icons/fa";
+import { useContext, useEffect, useRef, useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import instance from "../Apis/axios";
 import UserContext from "../Context/Authuser";
 import "./Topnav.css";
@@ -14,14 +15,39 @@ function TopNav(): JSX.Element {
     userInfo?.accessToken ? true : false,
   );
 
+  // Ref를 사용하여 메뉴 아이콘 영역과 메뉴 영역을 참조합니다.
+  const menuIconRef = useRef<HTMLLabelElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // document에 클릭 이벤트를 추가합니다.
+    document.addEventListener("click", handleClickOutside);
+
+    // 컴포넌트가 언마운트될 때 클릭 이벤트 리스너를 제거합니다.
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  // 메뉴 영역 외부를 클릭했을 때 메뉴를 닫습니다.
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      menuRef.current &&
+      menuIconRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      !menuIconRef.current.contains(event.target as Node)
+    ) {
+      setShowMenu(false);
+    }
+  };
+  const toggleMenu = (): void => {
+    setShowMenu(!showMenu);
+  };
+
   //로그인 , 로그아웃 기능
   useEffect(() => {
     userInfo == null ? setIsLogin(false) : setIsLogin(true);
   }, [userInfo]);
-
-  const toggleMenu = (): void => {
-    setShowMenu(!showMenu);
-  };
 
   const logoutHandler = () => {
     try {
@@ -66,11 +92,20 @@ function TopNav(): JSX.Element {
               {showSearch ? <RxCross1 size={27} /> : <FiSearch size={27} />}
             </button> */}
 
-            <label className="dropdownLabel" onClick={toggleMenu}>
-              <FaUser className="userIcon" />
-              <FaAngleDown className="caretIcon" />
+            <label
+              className="dropdownLabel"
+              onClick={toggleMenu}
+              ref={menuIconRef}
+            >
+              <StyleFaUser />
+              {/* <FaUser className="userIcon" /> */}
+              {/* <StyleFaAngleDown /> */}
+              {/* <FaAngleDown className="caretIcon" /> */}
             </label>
-            <div className={showMenu ? "aboutMyMenuHidden" : "myMenuList"}>
+            <div
+              className={showMenu ? "aboutMyMenuHidden" : "myMenuList"}
+              ref={menuRef}
+            >
               <ul className="menuList">
                 {isLogin ? (
                   <>
@@ -108,12 +143,20 @@ function TopNav(): JSX.Element {
                     나의모임
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/createMeet"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    모임 개설하기
+                  </Link>
+                </li>
               </ul>
             </div>
 
-            <Link to="/createMeet">
+            {/* <Link to="/createMeet">
               <button>➕</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
@@ -122,3 +165,9 @@ function TopNav(): JSX.Element {
 }
 
 export default TopNav;
+
+const StyleFaUser = styled(GiHamburgerMenu)`
+  width: 26px;
+  height: 26px;
+  margin: 5px 0px 0 30px;
+`;

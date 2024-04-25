@@ -14,12 +14,37 @@ function SignUp() {
     handleSubmit,
     watch,
     control,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm<IFormInput>();
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [eyeIcon, setEyeIcon] = useState(false);
+  // const [touched, setTouched] = useState({
+  //   nickname: false,
+  //   password1: false,
+  //   password2: false,
+  //   first_name: false,
+  //   last_name: false,
+  //   phone: false,
+  //   date_of_birth: false,
+  //   profession: false,
+  //   profile_image: false,
+  //   email: false,
+  // });
+
+  // const handleBlur = (e) => {
+  //   const { name } = e.target;
+
+  //   const isTouched = touchedFields[name];
+
+  //   if (!isTouched) {
+  //     setTouched({
+  //       ...touched,
+  //       [name]: true,
+  //     });
+  //   }
+  // };
 
   const navigate = useNavigate();
   const handleSignUpSuccess = () => {
@@ -70,6 +95,7 @@ function SignUp() {
               type="email"
               id="email"
               name="email"
+              // onBlur={handleBlur}
             />
             {errors.email && <Message>{errors.email.message}</Message>}
           </div>
