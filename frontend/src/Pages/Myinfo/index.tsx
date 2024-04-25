@@ -5,6 +5,7 @@ import { MdEdit } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import instance from "../../Apis/axios";
+import Deletemember from "../../Components/Deletemember";
 import NationBox from "../../Components/Nationoption/Selectbox";
 import { MyInfoInput } from "../../Type/User";
 import { Message, PasswordInput, PasswordInputContainer } from "../Signup";
@@ -15,6 +16,25 @@ function MyInfo() {
   const [userData, setUserData] = useState<any>({});
   const [showPassword, setShowPassword] = useState(false);
   const [eyeIcon, setEyeIcon] = useState(false);
+  // const [touched, setTouched] = useState({
+  //   nickname: false,
+  //   password1: false,
+  //   password2: false,
+  //   first_name: false,
+  //   last_name: false,
+  //   phone: false,
+  //   date_of_birth: false,
+  //   profession: false,
+  //   profile_image: false,
+  //   date_joined: false,
+  // });
+
+  // const handleBlur = (e) => {
+  //   setTouched({
+  //     ...touched,
+  //     [e.target.name]: true,
+  //   });
+  // };
 
   let { pk } = useParams();
 
@@ -23,13 +43,11 @@ function MyInfo() {
     handleSubmit,
     watch,
     control,
-    formState: { errors },
+    formState: { errors, touchedFields },
     setValue,
   } = useForm<MyInfoInput>();
 
-  const [imgPreview, setImgPreview] = useState(
-    "https://media.discordapp.net/attachments/1224938401825030174/1232584759880847360/KakaoTalk_20240424_155045300.jpg?ex=6629fd83&is=6628ac03&hm=1a96171078ceb912080e67e9fb83aff09dace7faf7ce671927160c841989e408&=&format=webp",
-  );
+  const [imgPreview, setImgPreview] = useState(import.meta.env.VITE_PROFILE);
   const image = watch("profile_image");
 
   const handleImageChange = (e) => {
@@ -135,7 +153,7 @@ function MyInfo() {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       };
-      const response = await instance.get(`api/accounts/user/`, config);
+      const response = await instance.get(`api/accounts/user`, config);
       return response.data;
     } catch (error) {
       console.error("error", error);
@@ -143,10 +161,10 @@ function MyInfo() {
     }
   };
 
+  //정보 가져오기
   useEffect(() => {
     async function getData() {
       try {
-        const token = localStorage.getItem("token");
         const config = {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -167,7 +185,8 @@ function MyInfo() {
           phone: response.data.phone || "",
           date_of_birth: response.data.date_of_birth || "",
           profession: response.data.profession || "",
-          profile_image: response.data.profile_image || "",
+          profile_image:
+            response.data.profile_image || import.meta.env.VITE_PROFILE,
           // 기본값은 빈 문자열로 설정
           // 다른 필드들도 필요에 따라 설정 가능
         });
@@ -199,7 +218,7 @@ function MyInfo() {
           {pageMode === "VIEW" && (
             <img
               className="myinfoProfileImg"
-              src={imgPreview}
+              src={values.profile_image}
               alt="프로필사진"
             />
           )}
@@ -207,7 +226,7 @@ function MyInfo() {
             <div className="profileImgEdit" onClick={handleImgClick}>
               <img
                 className="myinfoProfileImg"
-                src={imgPreview}
+                src={values.profile_image}
                 alt="프로필사진"
               />
               <input
@@ -225,7 +244,7 @@ function MyInfo() {
         </div>
         <div className="nickName">
           {pageMode === "VIEW" && (
-            <div className="myinfoNickName">{userData.nickname}</div>
+            <div className="myinfoNickName">{values.nickname}</div>
           )}
           {pageMode === "EDIT" && (
             <input
@@ -444,6 +463,7 @@ function MyInfo() {
           </button>
         </div>
       </form>
+      <Deletemember />
     </div>
   );
 }

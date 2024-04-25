@@ -39,7 +39,8 @@ function MemberList() {
       <div className="memberIcon">
         <StyleIoArrowBackOutline onClick={handleShowClub} />
         <div className="memberList">
-          <StyleHiUsers /> 멤버 목록
+          <StyleHiUsers />
+          <div className="memberText">멤버 목록</div>
         </div>
       </div>
       {/* <nav>
@@ -78,10 +79,22 @@ const StyleIoArrowBackOutline = styled(IoArrowBackOutline)`
   width: 25px;
   height: 25px;
   padding-top: 7px;
+
+  @media screen and (max-width: 767px) {
+    width: 24px;
+    height: 24px;
+    padding-top: 7px;
+  }
 `;
 
 const StyleHiUsers = styled(HiUsers)`
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   padding-top: 7px;
+
+  @media screen and (max-width: 767px) {
+    width: 24px;
+    height: 24px;
+    padding-top: 7px;
+  }
 `;
