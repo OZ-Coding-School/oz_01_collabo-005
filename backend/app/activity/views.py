@@ -49,7 +49,7 @@ class JoinClub(generics.CreateAPIView[JoinedClub]):
         serializer = self.get_serializer(data=request.data)
 
         if is_user_already_joined(club, user):
-            return Response({"error": "You are already a member of this club."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "You are already a member of this club."}, status=status.HTTP_409_CONFLICT)
 
         if check_age_condition(age_groups, user_birthdate):
             # if serializer.is_valid():
