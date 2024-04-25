@@ -1,0 +1,39 @@
+.webUserInfo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50px;
+  height: auto;
+  box-sizing: border-box;
+}
+.wrapWrittenBox {
+  padding-left: 10px;
+}
+
+.commentChangeIcons {
+  margin-right: 20px;
+}
+
+.numberOfEvent {
+  display: flex;
+  width: 100%;
+  margin-left: 20px;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.FeedCommentIcon {
+  width: 20px;
+  height: auto;
+}
+.commentForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.commentForm button {
+  display: flex;
+  justify-content: center;
+}

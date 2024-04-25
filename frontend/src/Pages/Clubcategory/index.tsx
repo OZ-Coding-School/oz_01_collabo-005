@@ -92,7 +92,7 @@ function ClubCategory() {
                   ))}
                   <div>대</div>
                 </div>
-                <div>{clubName.updated_at.slice(0, 10)}</div>1
+                <div>{clubName.updated_at.slice(0, 10)}</div>
               </div>
             </Link>
           ))}
