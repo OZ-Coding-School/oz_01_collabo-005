@@ -24,7 +24,7 @@ urlpatterns = [
         path("", include("dj_rest_auth.urls")),  # debug 숫자 빼기
         path("", include("dj_rest_auth.registration.urls")),
         path("", include("allauth.urls")),  # debug 왜 필요한지 잘 모르겠음
-        path("user/", views.DeleteUserView.as_view(), name="user-detail"),
+        path("user/leave/", views.DeleteUserView.as_view(), name="user-detail"),
         # path("<int:pk>", user_detail, name="user_detail"),
         # path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
         # path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
