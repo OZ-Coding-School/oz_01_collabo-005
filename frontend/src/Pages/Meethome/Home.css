@@ -1,7 +1,8 @@
 .meetingHomeScreen {
   width: 95%;
-  height: 200vh;
+  height: auto;
   margin-left: 15px;
+  margin-bottom: 200px;
 }
 .meetingIntroBox {
   height: 140px;
@@ -12,4 +13,12 @@
 .introTitle {
   padding: 0;
   height: 40px;
+}
+.noNotice {
+  padding-top: 20px;
+  padding-bottom: 13px;
+}
+.noScheduleContainer {
+  padding-top: 20px;
+  padding-bottom: 13px;
 }

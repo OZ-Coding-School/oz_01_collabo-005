@@ -6,6 +6,7 @@
   display: flex;
   padding-bottom: 22px;
   box-sizing: content-box;
+  z-index: 999;
 }
 .Logo {
   width: 120px;
@@ -126,6 +127,7 @@
   width: 25%;
   top: 42px;
   right: 10px;
+  z-index: 900;
 }
 .logoutButton {
   border: 0;

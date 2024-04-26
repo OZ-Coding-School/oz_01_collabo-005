@@ -30,6 +30,6 @@
   border-bottom-right-radius: 10px;
 }
 
-.buttonList:first-child:hover {
+.buttonList:hover {
   border-bottom: 1.6px solid #b22222;
 }

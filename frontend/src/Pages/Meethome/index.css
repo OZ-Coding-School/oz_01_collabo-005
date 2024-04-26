@@ -3,23 +3,26 @@
   height: auto;
   margin: 0 15%;
   background-color: #fffdf8;
-  padding-top: 30px;
+}
+.meethomeTop {
+  position: relative;
 }
 .repMeetImgBox {
-  display: flex;
-  justify-content: center;
-  height: 267px;
-  margin-bottom: 30px;
+  height: 400px;
+  padding-top: 250px;
 }
 .changePageIconBox {
-  width: 90%;
+  width: 12%;
   height: 48px;
   display: flex;
   flex-direction: row-reverse;
+  position: absolute;
+  bottom: 10px;
+  right: 6px;
 }
 .changePageIconBox > .meetHomeIcons {
-  width: 14%;
-  height: 100%;
+  width: 100%;
+  height: 60px;
   display: flex;
   justify-content: space-around;
 }
@@ -43,17 +46,17 @@
 .aboutUserNumber {
   display: flex;
   padding-left: 49px;
-  width: 20%;
+  width: 18%;
   justify-content: space-between;
 }
 .createPost {
-  position: fixed;
-  bottom: 70px;
-  right: 280px;
-  background-color: #b22222;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 150px;
+  background-color: #5f5e5e;
+  width: 100px;
+  height: 36px;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +65,8 @@
 .createPostBtn {
   border: 0;
   background-color: transparent;
+  color: white;
+  font-weight: 700;
 }
 .enterMeet {
   box-shadow: 2px 2px 5px #999;
@@ -81,31 +86,31 @@
   font-weight: 560;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1240px) {
   .aboutUserNumber {
     display: flex;
     padding-left: 49px;
-    width: 23%;
+    width: 27%;
     justify-content: space-between;
     font-size: 13px;
   }
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1024px) {
   .aboutUserNumber {
     display: flex;
     padding-left: 49px;
-    width: 23%;
+    width: 20%;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 @media screen and (max-width: 920px) {
   .aboutUserNumber {
     display: flex;
     padding-left: 49px;
-    width: 30%;
+    width: 20%;
     justify-content: space-between;
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
@@ -119,5 +124,33 @@
   .meetScreenContainer {
     width: 100%;
     margin: 0;
+  }
+}
+
+@media (max-width: 755px) {
+  .changePageIconBox {
+    width: 90%;
+    height: 48px;
+    display: flex;
+    flex-direction: row-reverse;
+    position: absolute;
+    bottom: 6px;
+  }
+  .changePageIconBox > .meetHomeIcons {
+    width: 20%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .personIconBtn,
+  .meetOutBtn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
   }
 }

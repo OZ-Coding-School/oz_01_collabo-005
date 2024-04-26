@@ -38,14 +38,6 @@ function Schedule({ scheduleData }) {
         </div>
         <div></div>{" "}
       </div>{" "}
-      <div className="divisionScheduleBox">
-        <div className="expectedSchedule">
-          <button className="expectScheduleBtn">예정된 일정</button>
-        </div>
-        <div className="closedSchedule">
-          <button className="closeScheduleBtn">종료된 일정</button>
-        </div>
-      </div>
       {scheduleData.results.map((item, index) => (
         <ScheduleBox key={index} item={item} />
       ))}
