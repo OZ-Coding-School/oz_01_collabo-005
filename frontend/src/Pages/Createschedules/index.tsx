@@ -49,8 +49,9 @@ function CreateSchedules() {
   // 이벤트타임 설정
   const handleEventTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value; // 사용자가 입력한 값
-    const parsedDate = new Date(inputValue); // 입력한 값을 Date 객체로 변환
-    setFormData({ ...formData, event_time: parsedDate });
+    const localTime = new Date(inputValue); // 입력한 값을 로컬 시간으로 변환
+    const koreanTime = new Date(localTime.getTime() + 9 * 60 * 60 * 1000); // 한국 시간으로 변환 (시차 9시간)
+    setFormData({ ...formData, event_time: koreanTime });
   };
   //장소 설정
   const handlePlaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {

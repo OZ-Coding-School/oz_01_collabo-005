@@ -25,7 +25,6 @@ function CommentFunc() {
     fetchComments();
     window.scrollTo(0, 0);
   }, []);
-  // console.log(writtenComments);
 
   //댓글입력 핸들러
   const handleCommentChange = (e) => {
@@ -43,6 +42,8 @@ function CommentFunc() {
         },
       );
       setWrittenComments(response.data.results);
+      //fetchComments : 함수가 비동기로 작동하는데
+      //성공시 끝나는게 아니라 다시 시작해서 useEffect로 한번만 나오도록 설정
     } catch (error) {
       console.log("error", error);
     }
