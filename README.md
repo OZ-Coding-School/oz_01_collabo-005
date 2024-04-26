@@ -149,7 +149,9 @@
 
 ### Code Convention
 
-> Frontend
+- Frontend  
+<img src="https://img.shields.io/badge/Code Formatter-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white"><img src="https://img.shields.io/badge/3.2.5-515151?style=for-the-badge">  
+<img src="https://img.shields.io/badge/Static Analysis-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"><img src="https://img.shields.io/badge/8.57.0-515151?style=for-the-badge">  
 
 <!--
 >
@@ -161,7 +163,14 @@
 > - 화살표 함수 사용
 -->
 
-> Backend
+- Backend  
+<img src="https://img.shields.io/badge/Code Formatter-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/black-000000?style=for-the-badge"><img src="https://img.shields.io/badge/24.3.0-515151?style=for-the-badge">  
+<img src="https://img.shields.io/badge/Code Formatter-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/isort-EF8336?style=for-the-badge"><img src="https://img.shields.io/badge/5.13.2-515151?style=for-the-badge">  
+<img src="https://img.shields.io/badge/static type checker-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/mypy-2B6CB2?style=for-the-badge"><img src="https://img.shields.io/badge/1.9.0-515151?style=for-the-badge">  
+
+<!--<img width=100px src=https://raw.githubusercontent.com/psf/black/main/docs/_static/logo2-readme.png>
+<img width=100px src=https://raw.githubusercontent.com/pycqa/isort/main/art/logo_large.png>
+<img width=100px src=https://mypy.readthedocs.io/en/stable/_static/mypy_light.svg>  -->
 
 <!--
 >
@@ -181,15 +190,10 @@
 
 ## Documents
 
-> - [요구사항 정의서](https://docs.google.com/spreadsheets/d/1be1TDIpxr_Kjk7v9rfqTnj_8sH4f4jD01O6pGit6s_Y/edit?usp=sharing)
->
-> - [API 명세서](https://docs.google.com/spreadsheets/d/14GwYdqyGNHh2GkVFptzgHubhoPr3haO4bWUgFQyMkKM/edit?usp=sharing)
->
-> - [테이블 명세서](https://docs.google.com/spreadsheets/d/11D4EEy8Oy5MrYh_OndeYyN7W8z9GbwujwlcFPVT79LM/edit?usp=sharing)
->
-> - [ERD](https://docs.google.com/spreadsheets/d/1GjCDd1ndROob25uLLDHBcY6Q3wNZMkd5m23wZzpHWU8/edit?usp=sharing)
->
-> - [화면 정의서](https://docs.google.com/spreadsheets/d/1nqQYPSeRgn2Ciq1PrAGTaPrB6K3m1i-321Rh4ZSez5U/edit?usp=sharing)
->
-> - Interactive API Documentation
-> <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
+- [요구사항 정의서](https://docs.google.com/spreadsheets/d/1be1TDIpxr_Kjk7v9rfqTnj_8sH4f4jD01O6pGit6s_Y/edit?usp=sharing)
+- [API 명세서](https://docs.google.com/spreadsheets/d/14GwYdqyGNHh2GkVFptzgHubhoPr3haO4bWUgFQyMkKM/edit?usp=sharing)
+- [테이블 명세서](https://docs.google.com/spreadsheets/d/11D4EEy8Oy5MrYh_OndeYyN7W8z9GbwujwlcFPVT79LM/edit?usp=sharing)
+- [ERD](https://docs.google.com/spreadsheets/d/1GjCDd1ndROob25uLLDHBcY6Q3wNZMkd5m23wZzpHWU8/edit?usp=sharing)
+- [화면 정의서](https://docs.google.com/spreadsheets/d/1nqQYPSeRgn2Ciq1PrAGTaPrB6K3m1i-321Rh4ZSez5U/edit?usp=sharing)
+- Interactive API Documentation
+- <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
