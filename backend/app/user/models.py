@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from app.common.models import BaseModel
+from app.user.utils import user_image_upload_path
 
 
 class UserManager(BaseUserManager["User"]):
@@ -63,8 +64,11 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
     profession = models.CharField(_("profession"), max_length=10, null=True, blank=True)
+    # profile_image = models.ImageField(
+    #     _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
+    # )
     profile_image = models.ImageField(
-        _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
+        _("profile image"), upload_to=user_image_upload_path, editable=True, null=True, blank=True
     )
     is_staff = models.BooleanField(
         _("staff status"), default=False, help_text=_("whether the user can log into this admin site.")
