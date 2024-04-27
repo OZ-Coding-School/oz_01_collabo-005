@@ -209,4 +209,5 @@
 - [ERD](https://docs.google.com/spreadsheets/d/1GjCDd1ndROob25uLLDHBcY6Q3wNZMkd5m23wZzpHWU8/edit?usp=sharing)
 - [화면 정의서](https://docs.google.com/spreadsheets/d/1nqQYPSeRgn2Ciq1PrAGTaPrB6K3m1i-321Rh4ZSez5U/edit?usp=sharing)
 - Interactive API Documentation
+
   <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
