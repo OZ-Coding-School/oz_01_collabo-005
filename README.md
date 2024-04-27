@@ -46,7 +46,9 @@
 ## 4. 사용 스택
 
 ### System Architecture
-<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/4eaa88c6-ce0a-4fa3-bf7d-70ff8f4f7f7f></div>
+<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/baa99a79-66e5-497e-a1db-60d458ea25cf></div>
+<!-- <div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/4eaa88c6-ce0a-4fa3-bf7d-70ff8f4f7f7f></div>
+-->
 
 <!-- <img src="https://user-images.githubusercontent.com/90237119/215304129-d8006105-cf1c-49c7-a819-4f819dfac523.png"/> -->
 
@@ -210,4 +212,4 @@
 - [화면 정의서](https://docs.google.com/spreadsheets/d/1nqQYPSeRgn2Ciq1PrAGTaPrB6K3m1i-321Rh4ZSez5U/edit?usp=sharing)
 - Interactive API Documentation
 
-  <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
+<div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
