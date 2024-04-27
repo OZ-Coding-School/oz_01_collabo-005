@@ -46,7 +46,8 @@
 ## 4. 사용 스택
 
 ### System Architecture
-<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/baa99a79-66e5-497e-a1db-60d458ea25cf></div>
+<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/d8e4f1b8-b5a3-4439-9c65-9527f9fb6fdf></div>
+<!--<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/baa99a79-66e5-497e-a1db-60d458ea25cf></div> -->
 <!-- <div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/4eaa88c6-ce0a-4fa3-bf7d-70ff8f4f7f7f></div>
 -->
 
