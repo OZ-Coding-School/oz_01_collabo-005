@@ -1,16 +1,16 @@
 # Landing
 
-## 프로젝트 소개
+## 1. 프로젝트 소개
 
-> 커뮤니티 사이트
+    커뮤니티 사이트
 
-## 배포 링크
+### 배포 링크
 
-> 비밀
+    비밀
 
-## 프로젝트 기간
+## 2. 프로젝트 기간
 
-> ### 2024.03.26 - 2024.04.30
+    2024.03.26 - 2024.04.30
 
 <!--
 ## 발표
@@ -20,7 +20,7 @@
 > ### [발표 문서]()
 -->
 
-## 서비스 화면
+## 3. 서비스 화면
 
 | 메인 | 카테고리 별 모임 목록 |
 | :--: | :-------------------: |
@@ -42,9 +42,11 @@
 | :---------: | :-------: | :---------: |
 | <img width="230px" alt="rm-createpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/80151729-ca6c-4d78-af97-986f895210e4"> | <img width="230px" alt="rm-createschedule" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/b8e8f210-1896-4eab-a873-97988f4a060e"> | <img width="230px" alt="rm-viewpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9e01d4aa-38f9-4972-97a9-68de5b98090b"> |
 
-## 사용 스택
+
+## 4. 사용 스택
 
 ### System Architecture
+<div align=center><img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/4eaa88c6-ce0a-4fa3-bf7d-70ff8f4f7f7f></div>
 
 <!-- <img src="https://user-images.githubusercontent.com/90237119/215304129-d8006105-cf1c-49c7-a819-4f819dfac523.png"/> -->
 
@@ -74,7 +76,8 @@
 <img src="https://img.shields.io/badge/CICD-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"><img src="https://img.shields.io/badge/2.440.2-515151?style=for-the-badge">  
 <img src="https://img.shields.io/badge/LOGGING-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/amazoncloudwatch-F24E1E?style=for-the-badge&logo=amazoncloudwatch&logoColor=white"><img src="https://img.shields.io/badge/log-515151?style=for-the-badge">
 
-## 팀 동료
+
+## 5. 팀 동료
 
 ### BD
 
@@ -94,20 +97,21 @@
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                                                                           이예솔하                                                                           |                                                                              김도현                                                                               |                                                                           박치환                                                                           |
 
-## 프로젝트 규칙
+## 6. 프로젝트 규칙
 
 ### Branch Strategy
+  Git-flow 브랜치 전략
 
-    Git-flow
+  <div align=center>
+    <img src=https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/3c01ca29-2108-44e4-90d9-29136d05c6df>
+  </div>
 
-<!--
-> - main / dev 브랜치 기본 생성
-> - main과 dev로 직접 push 제한
-> - PR 전 최소 1인 이상 승인 필수
--->
+    - main / develop 브랜치 기본 생성
+    - main과 develop으로 직접 push 제한
+    - PR 전 최소 1인 이상 승인 필수
+
 
 ### Git Commit Convention
-
 > 1. 적절한 커밋 타입 작성
 > 2. 커밋 메시지 내용 작성
 > 3. (선택)내용 뒤에 이슈 (#이슈 번호)와 같이 작성하여 이슈 연결
@@ -121,8 +125,8 @@
 >    | Chore : | 기타 작업 |
 >    | Remove : | 파일 삭제 |
 
-### Pull Request
 
+### Pull Request
 > ### Title
 >
 > - 제목은 '[브랜치명] 변경 내용 요약'과 같이 작성합니다.
@@ -141,11 +145,20 @@
 > ### Description
 >
 > - 구체적인 작업 내용을 작성해주세요.
-> - 이미지를 별도로 첨부하면 더 좋습니다 👍
 >
 > ### Discussion
 >
 > - 추후 논의할 점에 대해 작성해주세요.
+
+
+### Issue
+> ### Describe  
+>
+> ### Todo
+> - [ ] 
+> - [ ] 
+> - [ ]
+
 
 ### Code Convention
 
@@ -184,11 +197,11 @@
 -->
 
 ### Communication Rules
+    - Discord 활용
+    - 정기 회의
 
-> - Discord 활용
-> - 정기 회의
 
-## Documents
+## 7. Documents
 
 - [요구사항 정의서](https://docs.google.com/spreadsheets/d/1be1TDIpxr_Kjk7v9rfqTnj_8sH4f4jD01O6pGit6s_Y/edit?usp=sharing)
 - [API 명세서](https://docs.google.com/spreadsheets/d/14GwYdqyGNHh2GkVFptzgHubhoPr3haO4bWUgFQyMkKM/edit?usp=sharing)
@@ -196,4 +209,4 @@
 - [ERD](https://docs.google.com/spreadsheets/d/1GjCDd1ndROob25uLLDHBcY6Q3wNZMkd5m23wZzpHWU8/edit?usp=sharing)
 - [화면 정의서](https://docs.google.com/spreadsheets/d/1nqQYPSeRgn2Ciq1PrAGTaPrB6K3m1i-321Rh4ZSez5U/edit?usp=sharing)
 - Interactive API Documentation
-- <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
+  <div align="center"> <img width="700" alt="api-swagger" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9abcfe21-dad5-4a01-8d36-468e9e917339"></div>
