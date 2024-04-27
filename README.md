@@ -77,7 +77,7 @@
 <img src="https://img.shields.io/badge/container-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"><img src="https://img.shields.io/badge/24.0.5-515151?style=for-the-badge">  
 <img src="https://img.shields.io/badge/server-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"><img src="https://img.shields.io/badge/Amazon Linux 2023-515151?style=for-the-badge">  
 <img src="https://img.shields.io/badge/CICD-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"><img src="https://img.shields.io/badge/2.440.2-515151?style=for-the-badge">  
-<img src="https://img.shields.io/badge/LOGGING-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/amazoncloudwatch-F24E1E?style=for-the-badge&logo=amazoncloudwatch&logoColor=white"><img src="https://img.shields.io/badge/log-515151?style=for-the-badge">
+<img src="https://img.shields.io/badge/LOGGING-2b2226?style=for-the-badge"><img src="https://img.shields.io/badge/amazoncloudwatch-FF4F8B?style=for-the-badge&logo=amazoncloudwatch&logoColor=white"><img src="https://img.shields.io/badge/logs-515151?style=for-the-badge">
 
 
 ## 5. 팀 동료
