@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from "react";
-import { BsPencil } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,7 +17,7 @@ function MeetHome() {
   const { id }: any = useParams();
   const [feedCount, setFeedCount] = useState();
   const [feedData, setFeedData] = useState([]);
-  const [isMember, setIsMember] = useState(false);
+  const [scheduleCount, setScheduleCount] = useState();
 
   interface ScheduleData {
     results: Array<{
@@ -41,7 +40,7 @@ function MeetHome() {
           },
         });
         setScheduleData(response.data);
-        setFeedCount(response.data.count);
+        setScheduleCount(response.data.count);
         console.log(response.data);
       } catch (error) {
         console.log("error", error);
@@ -55,7 +54,7 @@ function MeetHome() {
       try {
         const response = await instance.get(`api/clubs/${id}/posts/`);
         setFeedData(response.data);
-        // console.log(response.data); // 이 위치에 둬서 데이터가 업데이트된 후에 찍히도록 함
+        setFeedCount(response.data.count);
       } catch (error) {
         console.log("error", error);
       }
@@ -80,7 +79,6 @@ function MeetHome() {
         });
         setGetCount(response.data);
         setMemberCount(response.data.count);
-        setIsMember(true);
       } catch (error) {
         console.error("Error fetching members:", error);
       }
@@ -145,84 +143,46 @@ function MeetHome() {
     }
   };
 
-  let icon;
-  if (
-    selectedTab === "홈" ||
-    selectedTab === "게시판" ||
-    selectedTab === "앨범"
-  ) {
-    if (isMember) {
-      icon = (
-        <div className="createPost">
-          <button className="createPostBtn" onClick={handleCreateFeed}>
-            <BsPencil
-              size={25}
-              style={{
-                color: "#ffffff",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "1px 0px 0 1px",
-              }}
-              //버튼 클릭 -> 글쓰기 페이지로 이동
-            />
-          </button>
-        </div>
-      );
-    } else {
-      icon = (
-        <div className="createPost">
-          <button
-            className="createPostBtn"
-            disabled
-            onClick={() => alert("모임에 가입하세요.")}
-          >
-            <BsPencil
-              size={25}
-              style={{
-                color: "#ffffff",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "1px 0px 0 1px",
-              }}
-              //버튼 클릭 -> 글쓰기 페이지로 이동
-            />
-          </button>
-        </div>
-      );
-    }
-  } else {
-    icon = null;
-  }
-
   return (
     <div className="meetScreenContainer">
-      <div className="repMeetImgBox">
-        <img
-          src={getData.image ? getData.image : import.meta.env.VITE_ICON}
-          alt="모임대표이미지"
-          width={700}
-        />
-      </div>
-      <div className="changePageIconBox">
-        <div className="meetHomeIcons">
-          <button className="personIconBtn" onClick={handleShowMemberList}>
-            <HiUsers size={23} style={{ color: "#000" }} />
-          </button>
-          <button className="meetOutBtn">
-            <IoSettingsOutline size={23} style={{ color: "#000" }} />
+      <div className="meethomeTop">
+        <div
+          className="repMeetImgBox"
+          style={{
+            backgroundImage: `url(${getData.image ? getData.image : import.meta.env.VITE_ICON})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {" "}
+        </div>
+        <div className="nameOfMeeting">
+          <h3 className="meetingTitleName">{getData.name}</h3>{" "}
+        </div>
+        <div className="aboutUserNumber">
+          <span>멤버</span>
+          <span>{memberCount}</span>
+          <span>게시글</span>
+          <span>{feedCount}</span>
+          <span>일정</span>
+          <span>{scheduleCount}</span>
+        </div>{" "}
+        <div className="createPost">
+          <button className="createPostBtn" onClick={handleCreateFeed}>
+            글쓰기 ✏️
           </button>
         </div>
-      </div>
-      <div className="nameOfMeeting">
-        <h3 className="meetingTitleName">{getData.name}</h3>
-      </div>
-      <div className="aboutUserNumber">
-        <span>멤버</span>
-        <span>{memberCount}</span>
-        <span>게시글</span>
-        <span>{feedCount}</span>
-        <span>일정</span>
-        <span>15</span>
+        <div className="changePageIconBox">
+          <div className="meetHomeIcons">
+            <button className="personIconBtn" onClick={handleShowMemberList}>
+              <HiUsers size={23} style={{ color: "#000" }} />
+            </button>
+            <button className="meetOutBtn">
+              <IoSettingsOutline size={23} style={{ color: "#000" }} />
+            </button>
+          </div>
+        </div>
       </div>
       <div className="tabs">
         <TabButton title="홈" onSelect={() => handleClick("홈")} />
@@ -232,18 +192,15 @@ function MeetHome() {
       </div>
       {selectedTab === "홈" && (
         <Home
-          button={icon}
           getData={getData}
           memberCount={memberCount}
           feedData={feedData}
           scheduleData={scheduleData}
         />
       )}
-      {selectedTab === "게시판" && (
-        <NoticeBoard button={icon} feedData={feedData} />
-      )}
+      {selectedTab === "게시판" && <NoticeBoard feedData={feedData} />}
       {selectedTab === "일정" && <Schedule scheduleData={scheduleData} />}
-      {selectedTab === "앨범" && <Album button={icon} />}
+      {selectedTab === "앨범" && <Album />}
       <form className="enterMeet" onSubmit={handleJoinClub}>
         <input type="submit" className="submit" value={"모임 가입"} />
       </form>

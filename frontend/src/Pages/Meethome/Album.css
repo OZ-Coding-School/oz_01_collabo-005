@@ -30,11 +30,12 @@
     minmax(200px, 1fr)
   ); /* 반응형으로 열의 크기 조정 */
   grid-gap: 20px;
-  border: 5px solid rgb(191, 191, 191);
+
   box-sizing: content-box;
+  padding-bottom: 500px;
 }
 
-@media screen and (max-width: 859px) and (min-width: 545px) {
+@media screen and (max-width: 1300px) and (min-width: 545px) {
   .wrapAlbum {
     grid-template-columns: repeat(3, minmax(148px, 1fr));
   }

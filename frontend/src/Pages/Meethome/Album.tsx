@@ -11,7 +11,7 @@ function AlbumBox({ imageUrl }: { imageUrl: string }) {
   );
 }
 
-function Album({ button }: { button: React.ReactNode }) {
+function Album() {
   const { id } = useParams();
   const [album, setAlbum] = useState<any[]>([]); // album의 타입을 명시
 
@@ -35,8 +35,6 @@ function Album({ button }: { button: React.ReactNode }) {
           <AlbumBox key={index} imageUrl={item.image} />
         ))}
       </div>
-
-      {button}
     </div>
   );
 }
