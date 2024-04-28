@@ -22,25 +22,25 @@
 
 ## 3. 서비스 화면
 
-| 메인 | 카테고리 별 모임 목록 |
-| :--: | :-------------------: |
-| <img width="230px" alt="rm-main" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/8baa56c1-9128-425d-8a73-7a2ae9d05076"> | <img width="230px" alt="rm-category" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/3f9a64e2-4d3e-4d42-8efd-f1b9b09a7a0c"> |
-
 | 회원가입 | 로그인 | 회원 정보 수정 |
 | :------: | :----: | :------------: |
-| <img width="230px" alt="rm-register1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/5684ee66-4de4-4a7b-a77a-219071cb8799"> | <img width="230px" alt="rm-login1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/b81b3c0d-00bb-4b9f-93aa-7c65268c3d7b"> | <img width="230px" alt="rm-userinfo" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/24644c57-403a-470e-8b7e-8f319f9f8b1e"> |
+| <img width="230px" alt="register1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/5684ee66-4de4-4a7b-a77a-219071cb8799"> | <img width="230px" alt="login1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/b81b3c0d-00bb-4b9f-93aa-7c65268c3d7b"> | <img width="230px" alt="userinfo" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/24644c57-403a-470e-8b7e-8f319f9f8b1e"> |
 
-| 모임 생성 | 가입한 모임 | 모임 홈 |
+| 메인 | 카테고리 별 모임 목록 | 모임 생성 |
+| :--: | :-------------------: | :-------: |
+| <img width="230px" alt="main" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/8baa56c1-9128-425d-8a73-7a2ae9d05076"> | <img width="230px" alt="category" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/3f9a64e2-4d3e-4d42-8efd-f1b9b09a7a0c"> | <img width="230px" alt="createclub" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/081346ea-4063-4671-b506-21e9511b60e3"> |
+
+| 가입한 모임 | 모임 홈 | 모임 멤버 |
 | :-------: | :---------: | :-----: |
-| <img width="230px" alt="rm-createclub" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/b9d89056-9083-4816-8bc8-89b1e2632024"> | <img width="230px" alt="rm-myclub1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/a4cd7500-3800-4356-bbf0-bfd6b7d8457b"> | <img width="230px" alt="rm-clubhome" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/8df4744b-9b85-4d1e-9801-01287856b68e"> |
+| <img width="230px" alt="myclub1" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/a4cd7500-3800-4356-bbf0-bfd6b7d8457b"> | <img width="230px" alt="clubhome" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/6e321d72-7287-4a83-ae67-a844f4233dde"> | <img width="230px" alt="clubmembers" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/a5f421f3-2a2b-4b20-b409-fb62d566064c">
 
 | 모임 게시판 | 모임 일정 게시판 | 모임 앨범 |
 | :---------: | :--------------: | :-------: |
-| <img width="230px" alt="rm-clubboard" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/fb31260b-417f-4e14-ae5d-9eda04668fdd"> | <img width="230px" alt="rm-clubschedule" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/54795d6c-8c21-4519-9e8d-64fffa8c205c"> | <img width="230px" alt="rm-clubalbum" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/2f92151c-527c-4daa-b9df-321f92258656"> |
+| <img width="230px" alt="clubboard" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9a2b0018-bbd8-442a-8e6b-ddc3ef66ca90"> | <img width="230px" alt="clubschedule" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/749f4c8b-bdde-458f-9965-7e3cfa6e6652"> | <img width="230px" alt="clubalbum" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/4595e10a-efaf-4007-9dd4-338ddf32b1ec"> |
 
 | 게시글 등록 | 일정 등록 | 게시글 보기 |
 | :---------: | :-------: | :---------: |
-| <img width="230px" alt="rm-createpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/80151729-ca6c-4d78-af97-986f895210e4"> | <img width="230px" alt="rm-createschedule" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/b8e8f210-1896-4eab-a873-97988f4a060e"> | <img width="230px" alt="rm-viewpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9e01d4aa-38f9-4972-97a9-68de5b98090b"> |
+| <img width="230px" alt="createpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/5efc3c44-3998-418a-a41d-e16a9e177bba"> | <img width="230px" alt="createschedule" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/7aebb140-c0ca-4551-bf6c-81dd3d5924ee"> | <img width="230px" alt="viewpost" src="https://github.com/OZ-Coding-School/oz_01_collabo-005/assets/70841430/9e01d4aa-38f9-4972-97a9-68de5b98090b"> |
 
 
 ## 4. 사용 스택
