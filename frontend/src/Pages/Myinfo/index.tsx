@@ -16,7 +16,7 @@ function MyInfo() {
   const [userData, setUserData] = useState<any>({});
   const [showPassword, setShowPassword] = useState(false);
   const [eyeIcon, setEyeIcon] = useState(false);
-  const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState<string | null>(null);
   const [putUserImage, setPutUserImage] = useState(null);
 
   // const [touched, setTouched] = useState({
