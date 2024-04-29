@@ -55,6 +55,5 @@ export interface MyInfoInput {
   phone: string;
   date_of_birth: string;
   profession: string;
-  profile_image: null;
   date_joined: string;
 }

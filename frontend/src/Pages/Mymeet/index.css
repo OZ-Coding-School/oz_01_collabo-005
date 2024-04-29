@@ -97,3 +97,12 @@
   margin-bottom: 7px;
   margin-top: 0;
 }
+
+@media screen and (max-width: 1024px) {
+  .meet {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background-color: #fffdf8;
+  }
+}

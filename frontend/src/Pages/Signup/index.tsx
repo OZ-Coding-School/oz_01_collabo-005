@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -54,7 +54,6 @@ function SignUp() {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
-    setEyeIcon(!eyeIcon);
   };
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -69,14 +68,6 @@ function SignUp() {
     }
     setLoading(false);
   };
-
-  const isSignUpSuccess = (data) => {
-    return true;
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="signup">
