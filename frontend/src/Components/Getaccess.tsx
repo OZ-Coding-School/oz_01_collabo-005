@@ -21,7 +21,7 @@ const getAccessToken = async (error) => {
 
       localStorage.setItem("accessToken", newAccessToken);
       error.config.headers.Authorization = `Bearer ${newAccessToken}`;
-      console.log("access 재발급 성공");
+      // console.log("access 재발급 성공");
       return axios.request(error.config);
     } catch (error) {
       console.error("Failed to refresh access token:", error);

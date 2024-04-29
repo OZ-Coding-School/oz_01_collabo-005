@@ -20,7 +20,6 @@ function HomeMember() {
           },
         };
         const response = await instance.get(`api/clubs/${id}/members/`, config);
-        console.log(response.data.results); // Log the response data to see its content
         setUserData(response.data.results);
         setIsLoading(false);
       } catch (error) {

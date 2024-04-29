@@ -41,7 +41,6 @@ function MeetHome() {
         });
         setScheduleData(response.data);
         setScheduleCount(response.data.count);
-        console.log(response.data);
       } catch (error) {
         console.log("error", error);
       }
@@ -129,8 +128,6 @@ function MeetHome() {
         },
       );
       alert("모임에 가입되었습니다.");
-
-      console.log(response.data);
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
         alert("이미 모임에 가입되어 있습니다."); // 이미 가입되어 있는 경우
