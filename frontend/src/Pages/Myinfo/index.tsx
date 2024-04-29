@@ -16,6 +16,9 @@ function MyInfo() {
   const [userData, setUserData] = useState<any>({});
   const [showPassword, setShowPassword] = useState(false);
   const [eyeIcon, setEyeIcon] = useState(false);
+  const [userImage, setUserImage] = useState<string | null>(null);
+  const [putUserImage, setPutUserImage] = useState(null);
+
   // const [touched, setTouched] = useState({
   //   nickname: false,
   //   password1: false,
@@ -47,30 +50,29 @@ function MyInfo() {
     setValue,
   } = useForm<MyInfoInput>();
 
-  const [imgPreview, setImgPreview] = useState(import.meta.env.VITE_PROFILE);
-  const image = watch("profile_image");
-
+  //이미지 바꿔주기
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+
+    setPutUserImage(file);
     if (file) {
-      setImgPreview(URL.createObjectURL(file));
-      setValues({
-        ...values,
-        profile_image: file, // 파일 객체로 profile_image 필드를 업데이트
-      });
-    } else {
-      setValues({
-        ...values,
-        profile_image: null,
-      });
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result === "string") {
+          localStorage.setItem("profile_image", reader.result);
+          setUserImage(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   useEffect(() => {
     // Retrieve image URL from local storage upon component mount
-    const storedImage = localStorage.getItem("profileImage");
+    const storedImage = localStorage.getItem("profile_image");
     if (storedImage) {
-      setImgPreview(storedImage);
+      // 만약 로컬 스토리지에 이미지 URL이 존재한다면, 그 URL을 상태에 반영하거나 필요한 처리를 수행할 수 있습니다.
+      setUserImage(storedImage);
     }
   }, []);
 
@@ -108,7 +110,6 @@ function MyInfo() {
     phone: "",
     date_of_birth: "",
     profession: "",
-    profile_image: null,
     date_joined: "",
   });
 
@@ -120,18 +121,19 @@ function MyInfo() {
     try {
       data.date_of_birth = data.date_of_birth.toString();
 
-      const token = localStorage.getItem("token");
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           "Content-Type": "multipart/form-data",
         },
       };
-
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, value);
       });
+      if (putUserImage) {
+        formData.append("profile_image", putUserImage);
+      }
 
       const response = await instance.patch(
         `api/accounts/user/`,
@@ -140,7 +142,6 @@ function MyInfo() {
       );
 
       // 수정된 정보에 따라 화면 갱신 또는 다른 작업 수행
-
       //수정된 데이터를 다시 가져와서 화면에 반영
       const updateUserData = await getUserData();
       setUserData(updateUserData);
@@ -153,7 +154,6 @@ function MyInfo() {
   // 사용자 데이터를 가져오는 함수
   const getUserData = async () => {
     try {
-      const token = localStorage.getItem("token");
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -192,8 +192,6 @@ function MyInfo() {
           phone: response.data.phone || "",
           date_of_birth: response.data.date_of_birth || "",
           profession: response.data.profession || "",
-          profile_image:
-            response.data.profile_image || import.meta.env.VITE_PROFILE,
           // 기본값은 빈 문자열로 설정
           // 다른 필드들도 필요에 따라 설정 가능
         });
@@ -214,7 +212,6 @@ function MyInfo() {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
-    setEyeIcon(!eyeIcon);
   };
 
   return (
@@ -222,29 +219,22 @@ function MyInfo() {
       <h1 className="myinfoTitle">내 정보수정</h1>
       <form className="myinfoForm" encType="multipart/form-data">
         <div className="myinfoImgEdit">
-          {pageMode === "VIEW" &&
-            values.profile_image &&
-            typeof values.profile_image === "string" && (
-              <img
-                className="myinfoProfileImg"
-                src={values.profile_image || import.meta.env.VITE_PROFIE}
-                alt="프로필사진"
-              />
-            )}
-          {pageMode === "EDIT" && values.profile_image && (
+          {pageMode === "VIEW" && (
+            <img
+              className="myinfoProfileImg"
+              src={userImage ? userImage : import.meta.env.VITE_PROFILE}
+              alt="프로필사진"
+            />
+          )}
+          {pageMode === "EDIT" && (
             <div className="profileImgEdit" onClick={handleImgClick}>
               <img
                 className="myinfoProfileImg"
-                src={
-                  typeof values.profile_image === "string"
-                    ? values.profile_image
-                    : URL.createObjectURL(values.profile_image)
-                }
+                src={userImage ? userImage : import.meta.env.VITE_PROFILE}
                 alt="프로필사진"
               />
               <input
                 type="file"
-                {...register("profile_image")}
                 name="profile_image"
                 id="profileImageInput"
                 onChange={handleImageChange}

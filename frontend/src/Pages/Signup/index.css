@@ -92,7 +92,7 @@
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .signup {
     width: 100%;
-    height: auto;
+    height: 200vh;
     margin: 0;
     padding-top: 5%;
     display: flex;
@@ -189,7 +189,7 @@
 @media screen and (max-width: 767px) {
   .signup {
     width: 100%;
-    height: auto;
+    height: 200vh;
     margin: 0;
     padding-top: 5%;
     display: flex;
