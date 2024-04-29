@@ -24,11 +24,20 @@ function NoticeBox({ result }) {
       <div className="noticeBoardBox">
         <div className="writerBox">
           <div className="writerInfo">
-            <img
-              className="writerPicture"
-              src="https://api.nudge-community.com/attachments/35176"
-              width={46}
-            />
+            {result.writer_image ? (
+              <img
+                className="writerPicture"
+                src={result.writer_image}
+                width={46}
+              />
+            ) : (
+              <img
+                className="noneWriterPicture"
+                src={import.meta.env.VITE_PROFILE}
+                alt="프로필 이미지"
+              />
+            )}
+
             <div className="userFeedInfo">
               <div>{result.writer}</div>
               {/* 작성 시간을 표시 */}

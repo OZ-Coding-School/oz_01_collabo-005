@@ -84,11 +84,19 @@ function Home({
                   >
                     <div className="writerBox">
                       <div className="writerInfo">
-                        <img
-                          className="writerPicture"
-                          src="https://api.nudge-community.com/attachments/35176"
-                          width={46}
-                        />
+                        {item.writer_image ? (
+                          <img
+                            className="writerPicture"
+                            src={item.writer_image}
+                            width={46}
+                          />
+                        ) : (
+                          <img
+                            className="noWriterPicture"
+                            src={import.meta.env.VITE_PROFILE}
+                            alt="프로필 이미지"
+                          />
+                        )}
                         <div className="userFeedInfo">
                           <div>{item.writer}</div>
                           <ul className="divisionInfo">
