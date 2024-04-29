@@ -3,7 +3,7 @@ import { CiCircleCheck } from "react-icons/ci";
 import { FaRegComment } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 import { LuPencilLine } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
+import { MdCancel, MdDelete } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../Apis/axios";
 import "./Commentfunc.css";
@@ -17,8 +17,8 @@ function CommentFunc() {
   const [comment, setComment] = useState("");
   const [commentCount, setCommentCount] = useState("");
   const [writtenComments, setWrittenComments] = useState("");
-  const [editing, setEditing] = useState<boolean>(false);
-  const [editedContent, setEditedContent] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedCommentContent, setEditedCommentContent] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,13 +42,14 @@ function CommentFunc() {
         },
       );
       setWrittenComments(response.data.results);
-      //fetchComments : 함수가 비동기로 작동하는데
-      //성공시 끝나는게 아니라 다시 시작해서 useEffect로 한번만 나오도록 설정
+      setCommentCount(response.data.count);
     } catch (error) {
       console.log("error", error);
     }
   };
 
+  // console.log(editedCommentContent);
+  // console.log(editingCommentId);
   //댓글 보내는 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,9 +63,9 @@ function CommentFunc() {
           },
         },
       );
-
       setComment(""); // 댓글 입력란 초기화
       alert("댓글이 등록되었습니다.");
+      window.location.reload();
       navigate(``);
     } catch (error) {
       alert("글작성 실패");
@@ -72,13 +73,56 @@ function CommentFunc() {
     }
   };
 
-  //댓글 수정함수
-  const handleEdit = async () => {
+  //수정 아이콘 클릭 시 해당 댓글의 ID를 저장
+  const handleEditClick = (commentId, content) => {
+    setEditingCommentId(commentId); // 수정할 댓글의 ID 저장
+    setEditedCommentContent(content); // 수정할 댓글의 내용 저장
+  };
+
+  //수정한 댓글 서버에 보내는 함수
+  const handleEditConfirm = async (editingCommentId) => {
     try {
       const response = await instance.put(
-        `/api/clubs/${id}/posts/${postId}/comments`,
+        `api/clubs/${id}/posts/${postId}/comments/${editingCommentId}/`,
+        { content: editedCommentContent },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        },
       );
-    } catch {}
+      fetchComments();
+      alert("댓글이 수정되었습니다.");
+      setEditingCommentId(null);
+      setEditedCommentContent("");
+      window.location.reload();
+    } catch (error) {
+      alert("글수정 실패");
+      console.log(error);
+    }
+  };
+
+  //댓글 수정취소 함수
+  const handleEditCancel = () => {
+    setEditingCommentId(null);
+    setEditedCommentContent("");
+  };
+  //삭제하는함수
+  const handleDeleteConfirm = async (editingCommentId) => {
+    try {
+      const response = await instance.delete(
+        `api/clubs/${id}/posts/${postId}/comments/${editingCommentId}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        },
+      );
+      alert("댓글이 삭제되었습니다");
+      window.location.reload();
+    } catch (error) {
+      alert("글 삭제 실패");
+    }
   };
 
   return (
@@ -108,19 +152,53 @@ function CommentFunc() {
                   <p>{comment.user}</p>
                 </div>
               </div>
-              <p>{comment.content}</p>
+              {editingCommentId === comment.id ? (
+                // 수정 상태인 경우
+                <input
+                  type="text"
+                  value={editedCommentContent}
+                  onChange={(e) => setEditedCommentContent(e.target.value)}
+                />
+              ) : (
+                // 수정 상태가 아닌 경우
+                <p>{comment.content}</p>
+              )}
 
               <div className="commentChangeIcons">
                 <p>{comment.created_at.slice(0, 16)}</p>
-                <button>
-                  <LuPencilLine />
-                </button>
-                <button>
-                  <CiCircleCheck />
-                </button>
-                <button>
-                  <MdDelete />
-                </button>
+                {editingCommentId !== comment.id && (
+                  <button>
+                    <LuPencilLine
+                      onClick={() =>
+                        handleEditClick(comment.id, comment.content)
+                      }
+                    />
+                  </button>
+                )}
+                {/* 수정 중인 댓글일 경우에만 CiCircleCheck 아이콘을 표시 */}
+                {editingCommentId === comment.id && (
+                  <button onClick={() => handleEditConfirm(comment.id)}>
+                    <CiCircleCheck />
+                  </button>
+                )}
+                {editingCommentId === comment.id && (
+                  <button
+                    onClick={() => {
+                      handleEditCancel();
+                    }}
+                  >
+                    <MdCancel />
+                  </button>
+                )}
+                {editingCommentId === comment.id && (
+                  <button>
+                    <MdDelete
+                      onClick={() => {
+                        handleDeleteConfirm(comment.id);
+                      }}
+                    />
+                  </button>
+                )}
               </div>
             </div>
           ))}
