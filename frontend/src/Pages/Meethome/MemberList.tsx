@@ -26,7 +26,6 @@ function MemberList() {
           },
         };
         const response = await instance.get(`api/clubs/${id}/members/`, config);
-        console.log(response.data.results); // Log the response data to see its content
         setUserData(response.data.results);
       } catch (error) {
         console.error("error", error);

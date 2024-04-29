@@ -20,7 +20,6 @@ function Album() {
       try {
         const response = await instance.get(`api/clubs/${id}/album/`);
         setAlbum(response.data.results); // results 배열을 album에 설정
-        console.log(response.data); // 이 위치에 둬서 데이터가 업데이트된 후에 찍히도록 함
       } catch (error) {
         console.log("error", error);
       }
