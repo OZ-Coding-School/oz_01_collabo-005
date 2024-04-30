@@ -11,7 +11,6 @@ class PostModelTests(TestCase):
         email = "user@test.com"
         password = "aejflslefjla"
         self.user = User.objects.create(email=email, password=password)
-        # self.client.login(email=email, password=password)
         self.client.force_login(self.user)
         self.category = Category.objects.create(name="category")
         self.club = Club.objects.create(name="club", category=self.category, leader=self.user)
@@ -38,7 +37,6 @@ class ScheduleModelTests(TestCase):
         email = "user1@test.com"
         password = "aelsfjkflefjla"
         self.user = User.objects.create(email=email, password=password)
-        # self.client.login(email=email, password=password)
         self.client.force_login(self.user)
         self.category = Category.objects.create(name="category")
         self.club = Club.objects.create(name="club", category=self.category, leader=self.user)

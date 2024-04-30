@@ -1,14 +1,6 @@
-from typing import Any
-
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import UserDetailsSerializer
-from django.contrib.auth import get_user_model
-from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from rest_framework.authtoken.models import Token
-from rest_framework.request import Request
-from rest_framework.validators import UniqueValidator
-from rest_framework_simplejwt.settings import api_settings
 
 from app.user.models import User
 
@@ -24,47 +16,23 @@ class SignupSerializer(RegisterSerializer):  # type: ignore
 
     class Meta:
         model = User
-        # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
-        fields = ("email", "nickname", "password1", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
-
-    # def get_cleaned_data(self) -> Any:
-    #     # return {
-    #     #     "nickname": self.validated_data.get("nickname", ""),
-    #     #     "nationality": self.validated_data.get("nationality", ""),
-    #     #     "first_name": self.validated_data.get("first_name", ""),
-    #     #     "last_name": self.validated_data.get("last_name", ""),
-    #     #     "phone": self.validated_data.get("phone", ""),
-    #     #     "date_of_birth": self.validated_data.get("date_of_birth", ""),
-    #     #     "profession": self.validated_data.get("profession", "")
-    #     # }
-    #     cleaned_data = super().get_cleaned_data()
-    #     cleaned_data["nickname"] = self.validated_data.get("nickname", "")
-    #     cleaned_data["nationality"] = self.validated_data.get("nationality", "")
-    #     cleaned_data["first_name"] = self.validated_data.get("first_name", "")
-    #     cleaned_data["last_name"] = self.validated_data.get("last_name", "")
-    #     cleaned_data["phone"] = self.validated_data.get("phone", "")
-    #     cleaned_data["date_of_birth"] = self.validated_data.get("date_of_birth")
-    #     cleaned_data["profession"] = self.validated_data.get("profession", "")
-    #     return cleaned_data
-
-    # def save(self, request: Request) -> Any:
-    # def save(self, **kwargs) -> Any:
-    #     user = super().save(**kwargs)
-    #     user.nickname = self.data.get("nickname")
-    #     user.nationality = self.data.get("nationality")
-    #     user.first_name = self.data.get("first_name")
-    #     user.last_name = self.data.get("last_name")
-    #     user.phone = self.data.get("phone")
-    #     user.date_of_birth = self.data.get("date_of_birth")
-    #     user.profession = self.data.get("profession")
-    #     return user
+        fields = (
+            "email",
+            "nickname",
+            "password1",
+            "password2",
+            "nationality",
+            "first_name",
+            "last_name",
+            "phone",
+            "date_of_birth",
+            "profession",
+        )
 
 
 class CustomUserDetail(UserDetailsSerializer):
     nickname = serializers.CharField()
     nationality = serializers.CharField()
-    # first_name = serializers.CharField()
-    # last_name = serializers.CharField()
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
     phone = serializers.CharField()
@@ -75,9 +43,18 @@ class CustomUserDetail(UserDetailsSerializer):
 
     class Meta:
         model = User
-        fields = UserDetailsSerializer.Meta.fields + ("nickname", "nationality", "password1", "password2", "phone", "date_of_birth", "profession", "profile_image", "date_joined")
+        fields = UserDetailsSerializer.Meta.fields + (
+            "nickname",
+            "nationality",
+            "password1",
+            "password2",
+            "phone",
+            "date_of_birth",
+            "profession",
+            "profile_image",
+            "date_joined",
+        )
         read_only_fields = ("date_joined",)
-        # write_only_fields = ("password1", "password2")
 
     def update(self, instance, validated_data):
         if "password1" in validated_data and "password2" in validated_data:
@@ -88,55 +65,6 @@ class CustomUserDetail(UserDetailsSerializer):
             else:
                 raise serializers.ValidationError("Passwords don't match")
         return super().update(instance, validated_data)
-
-
-    # def save(self, request: Request) -> Any:
-    #     user = super().save(request=request)
-    #     user.nickname = self.data.get("nickname")
-    #     user.nationality = self.data.get("nationality")
-    #     # user.first_name = self.data.get("first_name")
-    #     # user.last_name = self.data.get("last_name")
-    #     user.phone = self.data.get("phone")
-    #     user.date_of_birth = self.data.get("date_of_birth")
-    #     user.profession = self.data.get("profession")
-    #
-    #     password1 = self.data.get("password1")
-    #     password2 = self.data.get("password2")
-    #     if password1 and password2 and password1 == password2:
-    #         user.set_password(password1)
-    #     raise serializers.ValidationError(_("Passwords do not match."))
-    #
-    #     # user.save()
-    #     return user
-
-
-# class SignupSerializer(serializers.ModelSerializer):
-#     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
-#     password = serializers.CharField(required=True, validators=[validate_password])
-#     password2 = serializers.CharField(required=True, write_only=True)
-#
-#     class Meta:
-#         model = User
-#         # fields = ("email", "nickname", "password", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
-#         fields = ("email", "nickname", "password", "password2", "nationality", "first_name", "last_name", "phone", "date_of_birth", "profession")
-#
-#     def validate(self, data):
-#         if data["password"] != data["password2"]:
-#             raise serializers.ValidationError({"password": "Passwords didn't match."})
-#         return data
-#
-#     def create(self, validated_data):
-#         # return User.objects.create_user(**validated_data)
-#         user = User.objects.create_user(email=validated_data["email"], password=validated_data["password"])
-#         # user.set_password(validated_data["password"])
-#         # Token.objects.create(user=user)
-#         return user
-
-
-# class LoginSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ("email", "password")
 
 
 class UserSerializer(serializers.ModelSerializer[User]):

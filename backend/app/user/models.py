@@ -4,7 +4,6 @@ from typing import Any
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
-from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -44,29 +43,16 @@ class UserManager(BaseUserManager["User"]):
             raise ValueError(_("Superuser must have is_superuser=True."))
         return self.create_user(email, password, **extra_fields)
 
-        # user = self.create_user(email, password, **extra_fields)
-        # user.is_staff = True
-        # user.is_superuser = True
-        # user.is_active = True
-        # user.save(using=self._db)
-        # return user
-
 
 class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     email = models.EmailField(_("email_address"), max_length=255, unique=True, null=False, blank=False)
-    # nickname = models.CharField(_("nickname"), max_length=10, unique=True)
     nickname = models.CharField(_("nickname"), max_length=10)
-    # password = models.CharField(_("password"), max_length=50)
     nationality = models.CharField(_("nationality"), max_length=50)
     first_name = models.CharField(_("first name"), max_length=10)
     last_name = models.CharField(_("last name"), max_length=10)
     phone = models.CharField(_("phone"), max_length=30)
-    # birthday = models.DateField(_("birthday"), null=True, blank=True)
     date_of_birth = models.DateField(_("date of birth"), null=True, blank=True)
     profession = models.CharField(_("profession"), max_length=10, null=True, blank=True)
-    # profile_image = models.ImageField(
-    #     _("profile image"), upload_to="images/user/", editable=True, null=True, blank=True
-    # )
     profile_image = models.ImageField(
         _("profile image"), upload_to=user_image_upload_path, editable=True, null=True, blank=True
     )
@@ -80,14 +66,6 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     USERNAME_FIELD = "email"
     objects = UserManager()
 
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(
-    #             fields=["email", "nickname"],
-    #             name="unique user"
-    #         )
-    #     ]
-
     def __str__(self) -> str:
         return self.email
 
@@ -97,18 +75,6 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         """
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
-
-    # def get_short_name(self) -> str:
-    #     """
-    #     Returns the short name for the user.
-    #     """
-    #     return self.first_name
-
-    # def email_user(self, subject: str, message: str, from_email: str | None = None, **kwargs: dict[str, Any]) -> None:
-    #     """
-    #     Sends an email to this User.
-    #     """
-    #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Nationality(BaseModel):

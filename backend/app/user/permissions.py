@@ -9,6 +9,4 @@ class IsUserOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request: Request, view: APIView, obj: Any) -> bool:
         if request.method in permissions.SAFE_METHODS:
             return True
-        # return request.user == obj.leader
-        # print(type(request.user), type(obj.email), request.user == obj.email)
         return str(request.user) == getattr(obj, "email", None)
