@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from django.shortcuts import render
 from rest_framework import permissions, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.serializers import BaseSerializer

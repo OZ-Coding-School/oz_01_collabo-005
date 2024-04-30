@@ -4,10 +4,9 @@ from rest_framework.relations import SlugRelatedField
 
 from app.activity.models import JoinedClub
 from app.club.models import Club
-from app.user.serializers import UserSerializer, CustomUserDetail
+from app.user.serializers import CustomUserDetail
 
 
-# class ClubSerializer(serializers.HyperlinkedModelSerializer):
 class ClubSerializer(serializers.ModelSerializer[Club]):
     leader: SlugRelatedField[Model | Model] = serializers.SlugRelatedField(read_only=True, slug_field="nickname")
 
@@ -30,7 +29,6 @@ class ClubSerializer(serializers.ModelSerializer[Club]):
 
 
 class ClubMemberSerializer(serializers.ModelSerializer[JoinedClub]):
-    # user = UserSerializer(read_only=True)
     user = CustomUserDetail(read_only=True)
     members_count = serializers.SerializerMethodField()
 

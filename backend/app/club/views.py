@@ -6,8 +6,6 @@ from app.club.models import Club
 from app.club.permissions import IsLeaderOrReadOnly
 from app.club.serializers import ClubMemberSerializer, ClubSerializer
 
-# _MT = TypeVar("_MT", bound=Model)
-
 
 class ClubViewSet(viewsets.ModelViewSet[Club]):
     # queryset = Club.objects.all()
@@ -15,7 +13,7 @@ class ClubViewSet(viewsets.ModelViewSet[Club]):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsLeaderOrReadOnly]
 
     def get_queryset(self):
-        return Club.objects.all().order_by('-created_at')
+        return Club.objects.all().order_by("-created_at")
 
     def perform_create(self, serializer: BaseSerializer[Club]) -> None:
         club = serializer.save(leader=self.request.user)
@@ -23,7 +21,6 @@ class ClubViewSet(viewsets.ModelViewSet[Club]):
 
 
 class ClubMemberView(generics.ListAPIView[JoinedClub]):
-    # queryset = JoinedClub.objects.all()
     serializer_class = ClubMemberSerializer
     permission_classes = [permissions.IsAuthenticated]
 

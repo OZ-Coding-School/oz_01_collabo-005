@@ -10,7 +10,6 @@ class CategoryModelTests(TestCase):
         email = "category@test.com"
         password = "aelsfselfflefjla"
         self.user = User.objects.create(email=email, password=password)
-        # self.client.login(email=email, password=password)
         self.client.force_login(self.user)
         self.category = Category.objects.create(name="category")
 

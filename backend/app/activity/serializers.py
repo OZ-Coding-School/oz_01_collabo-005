@@ -2,24 +2,16 @@ from rest_framework import serializers
 
 from app.activity.models import JoinedClub
 from app.board.models import Post
-from app.club.models import Club
 from app.club.serializers import ClubSerializer
 from app.comment.models import Comment
 
 
 class JoinedClubListSerializer(serializers.ModelSerializer[JoinedClub]):
-    # club = serializers.SlugRelatedField(many=False, read_only=True, slug_field='name')
-    # club = serializers.HyperlinkedRelatedField(view_name='club-detail', read_only=True)
     club = ClubSerializer(read_only=True)
 
     class Meta:
         model = JoinedClub
         fields = ("id", "club")
-
-    # def validate(self, attrs):
-    #     if JoinedClub.objects.filter(user=attrs["user"], club=attrs["club"]).exists():
-    #         raise serializers.ValidationError("You are already joined this club")
-    #     return attrs
 
 
 class JoinClubSerializer(serializers.ModelSerializer[JoinedClub]):
@@ -53,8 +45,6 @@ class MyCommentSerializer(serializers.ModelSerializer[Comment]):
 
 
 class FeedSerializer(serializers.ModelSerializer):
-    # club = serializers.HyperlinkedRelatedField(many=True, view_name="club-detail", read_only=True)
-    # club = serializers.PrimaryKeyRelatedField(queryset=Club.objects.all())
     club = serializers.ReadOnlyField(source="club.name")
     writer = serializers.ReadOnlyField(source="writer.nickname")
 
