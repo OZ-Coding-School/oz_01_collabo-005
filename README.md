@@ -4,9 +4,11 @@
 
     한국 거주 외국인들과 함께 모임을 가질 수 있는 커뮤니티 플랫폼
 
+<!--
 ### 배포 링크
 
 > http://oz-landing-kr.s3-website.kr.object.ncloudstorage.com/
+-->
 
 ## 2. 프로젝트 기간
 
